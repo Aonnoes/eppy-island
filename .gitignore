@@ -28,3 +28,11 @@ Thumbs.db
 .idea/
 .vscode/*
 !.vscode/launch.json
+
+# Others
+.metadata
+/macos/
+/web/
+/windows/
+/linux/
+/ios/
