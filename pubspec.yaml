@@ -28,5 +28,15 @@ flutter:
   uses-material-design: true
   # Put images, fonts and sounds in assets/ and list them here, for example:
   assets:
+    - assets/images/
+
+    - assets/images/tilesets/
+    - assets/images/tilesets/Hills.png
+    - assets/images/tilesets/Water.png
+    - assets/images/characters/
+    - assets/images/characters/Teemo/
+
     - assets/tiles/
-    - assets/images/SproutLands - Basic Pack/Tilesets/
+    - assets/tiles/Level-01.tmx
+    - assets/tiles/Hills.tsx
+    - assets/tiles/Water.tsx
