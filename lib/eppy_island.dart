@@ -1,25 +1,47 @@
 import 'dart:async';
+import 'dart:math' as math;
 
+import 'package:flame/camera.dart';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:eppy_island/levels/level.dart';
 
-class EppyIsland extends FlameGame {
-  late final CameraComponent cam;
-  final world = Level();
+class EppyIsland extends FlameGame<Level> {
+  static const double gameWidth = 440;
+  static const double gameHeight = 283;
+
+  EppyIsland()
+    : super(
+        world: Level(),
+        camera: CameraComponent(
+          viewport: FixedSizeViewport(gameWidth, gameHeight),
+        ),
+      );
+
+  @override
+  Color backgroundColor() => const Color(0xFF000000); // letterbox bars
 
   @override
   FutureOr<void> onLoad() async {
-    // Load all images into cache
     await images.loadAllImages();
+    camera.viewfinder.anchor = Anchor.topLeft;
+  }
 
-    cam = CameraComponent.withFixedResolution(
-      world: world,
-      width: 440,
-      height: 283,
+  @override
+  void onGameResize(Vector2 size) {
+    super.onGameResize(size);
+
+    // Largest whole-number scale that fits, never below 1.
+    final scale = math.max(
+      1,
+      math.min(size.x ~/ gameWidth, size.y ~/ gameHeight),
     );
-    cam.viewfinder.anchor = Anchor.topLeft;
-    addAll([cam, world]);
-    return super.onLoad();
+
+    final viewport = camera.viewport;
+    viewport.size = Vector2(gameWidth * scale, gameHeight * scale);
+    viewport.anchor = Anchor.center;
+    viewport.position = size / 2;
+
+    camera.viewfinder.zoom = scale.toDouble();
   }
 }
