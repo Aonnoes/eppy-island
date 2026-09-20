@@ -6,14 +6,14 @@
   New here? Read START-HERE.md first. Delete this comment when you are done.
 -->
 
-# App Name
+# Eppy Island
 
-> One sentence: what this app does, and who it is for.
+> a simple farming game
 
-**Live demo:** https://YOURUSERNAME.github.io/YOUR-REPO/ <!-- GitHub Pages is set up already; replace if you host elsewhere -->
+**Live demo:** https://aonnoes.github.io/eppy-island/
 **Demo video:** `docs/demo.mp4` (link it here once it exists)
 **Course:** Applications Development and Emerging Technologies (6ADET), Holy Angel University
-**Author:** Your Name
+**Author:** Aaron Noel
 
 This repository lives in the author's own GitHub account and is public on
 purpose. There is no `student.json` here and there should not be one: see
@@ -35,13 +35,13 @@ this paragraph with them:
 
 A repo without screenshots reads as abandoned, whatever the code says.
 
-## What it does
+## What you do
 
 Three to five bullets. What can a user actually do?
 
-- ...
-- ...
-- ...
+- farm for crops
+- tell your mother you love her
+- play rock-paper-scissors
 
 ## Built with
 
@@ -104,9 +104,11 @@ seconds.
 
 ## Credits
 
+- **Sprout Lands** — a simple cute 16-bit pixel art farming asset pack with animals and farming, along with farming GUI asset pack with icons, buttons, character expresions, and many other tiles in pastel colors.
+  - Source: [Asset Pack](https://cupnooble.itch.io/sprout-lands-asset-pack) and [UI Expansion](https://cupnooble.itch.io/sprout-lands-ui-pack)
+  - Artist: [Cup Nooble](https://itch.io/profile/cupnooble)
+
 - Packages: see `pubspec.yaml`
-- Assets, icons, 3D models, sounds: name the author and the licence for each
-- People who helped, and how
 
 ## AI use
 
@@ -116,4 +118,9 @@ it.
 
 ## Licence
 
-MIT, see [LICENSE](LICENSE). Change it if you want different terms.
+The source code of this project is licensed under the MIT License.
+See the [LICENSE](LICENSE) file for details.
+
+Third-party assets, including artwork, music, sound effects, fonts, and
+other resources, are subject to their respective licenses and are not
+necessarily covered by the MIT License.

@@ -1,11 +1,11 @@
 {
-  "name": "My Final Project",
-  "short_name": "Final Project",
+  "name": "Eppy Island",
+  "short_name": "Island",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#FFFFFF",
   "theme_color": "#6750A4",
-  "description": "My 6ADET final project.",
-  "orientation": "portrait-primary",
+  "description": "a simple farming game",
+  "orientation": "landscape-primary",
   "prefer_related_applications": false
 }
