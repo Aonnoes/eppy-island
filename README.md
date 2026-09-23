@@ -15,9 +15,9 @@
 Put two or three real screenshots at phone size in `docs/assets/`, then replace
 this paragraph with them:
 
-| Progress | Mockup #1 | Mockup #2 |
-| --- | --- | --- |
-| ![Week 1](assets/week1.png) | ![Home Island](assets/home_mockup.png) | ![Inventory Menu](assets/inventory_mockup.png) |
+| Week #1 | Mockup Reference |
+| --- | --- |
+| ![Week 1](assets/week1.png) | ![Home Island](assets/home_mockup.png) |
 
 ## What you do
 
