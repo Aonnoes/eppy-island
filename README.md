@@ -15,11 +15,9 @@
 Put two or three real screenshots at phone size in `docs/assets/`, then replace
 this paragraph with them:
 
-```markdown
-| Home | Detail | Add |
+| Progress | Mockup #1 | Mockup #2 |
 | --- | --- | --- |
-| ![Home](assets/week1.png) |  |  |
-```
+| ![Week 1](assets/week1.png) | ![Home Island](assets/home_mockup.png) | ![Inventory Menu](assets/inventory_mockup.png) |
 
 ## What you do
 
