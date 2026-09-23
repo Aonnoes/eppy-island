@@ -25,9 +25,10 @@ this paragraph with them:
 
 Three to five bullets. What can a user actually do?
 
-- farm for crops
-- tell your mother you love her
-- play rock-paper-scissors
+- defeat enemies through gambling
+- till the soil and plant crops
+- shop for upgrades, increase your luck
+- sell your crops for a sustainable income
 
 <!-- TODO: at the end of week 2 -->
 ## Built with Flame
@@ -42,13 +43,14 @@ Three to five bullets. What can a user actually do?
 <!-- TODO: at the end of week 2, it should run on any device -->
 ## Running it yourself, on the web
 
+Requirement: Flutter
+
+The game should be perfectly fine to run on any device once its done. If you want to try it out now, clone the repository then run the commands:
+
 ```bash
 flutter pub get
-flutter run -d web-server --web-port 8080
+flutter run -d chrome
 ```
-
-Then open http://localhost:8080. Requires Flutter (run `flutter --version` and
-put yours here).
 
 <!-- TODO: at the end of week 2 -->
 ### Environment variables
