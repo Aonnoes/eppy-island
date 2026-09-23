@@ -18,7 +18,7 @@ this paragraph with them:
 ```markdown
 | Home | Detail | Add |
 | --- | --- | --- |
-| ![Home](docs/assets/week1.png) | ![Detail](docs/assets/screen-detail.png) | ![Add](docs/assets/screen-add.png) |
+| ![Home](assets/week1.png) |  |  |
 ```
 
 ## What you do
