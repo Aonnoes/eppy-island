@@ -14,6 +14,7 @@
 | Week #1 Progress | Mockup Reference |
 | --- | --- |
 | ![Home Island v1](assets/week1.png) | ![Home Island](assets/home_mockup.png) |
+
 | Week #2 Progress | Mockup Reference |
 | --- | --- |
 | ![Home Island v2](assets/week2a.png) | ![Home Island](assets/home_mockup.png) |
@@ -47,7 +48,6 @@ Follow the official Flutter installation guide:
 
 The game should be perfectly fine to run on any device once its done. If you want to try it out now, install Flutter on your device, clone the repository, then run the commands:
 
-
 ```bash
 flutter pub get
 flutter create
@@ -59,7 +59,6 @@ flutter run -d  chrome // linux // windows // macos
 | Variable | What it is | Where to get one |
 | --- | --- | --- |
 | `EXAMPLE_API_KEY` | ... | ... |
-
 
 ## Privacy and secret - N/A || TODO
 
@@ -109,7 +108,6 @@ The player moves and the framework for collisions work. The town map exists but 
 
 - **Spellthorn** — a YouTube channel that served as a major guide and reference throughout the development of Eppy's Island. Their videos were extremely helpful in learning game development concepts, workflows, and techniques, and I am genuinely very grateful for the guidance and inspiration they provided.
   - Creator: [Spellthorn](https://www.youtube.com/@Spellthorn)
-
 
 - Packages: see `pubspec.yaml`
 
