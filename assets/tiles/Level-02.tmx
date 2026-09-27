@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="18" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="2">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="18" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="6">
  <tileset firstgid="1" source="Water.tsx"/>
  <tileset firstgid="5" source="Hills.tsx"/>
  <tileset firstgid="104" source="Paths.tsx"/>
@@ -140,6 +140,12 @@
 </data>
  </layer>
  <objectgroup id="10" name="Spawnpoints">
-  <object id="1" name="Player" type="Player" x="151.875" y="24.125"/>
+  <object id="1" name="Player" type="Player" x="152" y="0"/>
+ </objectgroup>
+ <objectgroup id="12" name="Collisions">
+  <object id="2" x="112" y="0" width="16" height="112"/>
+  <object id="3" x="176" y="0" width="176" height="32"/>
+  <object id="4" x="352" y="0" width="16" height="112"/>
+  <object id="5" x="128" y="96" width="224" height="16"/>
  </objectgroup>
 </map>

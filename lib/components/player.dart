@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:eppy_island/components/collision_block.dart';
+import 'package:eppy_island/components/utils.dart';
 import 'package:eppy_island/eppy_island.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
@@ -23,6 +25,7 @@ class Player extends SpriteAnimationGroupComponent
   late final SpriteAnimation SEAnimation;
 
   final double stepTime = 0.1;
+  List<CollisionBlock> collisionBlocks = [];
 
   PlayerDirection playerDirection = PlayerDirection.none;
   double moveSpeed = 35;
@@ -31,6 +34,7 @@ class Player extends SpriteAnimationGroupComponent
   @override
   FutureOr<void> onLoad() {
     _loadAllAnimations();
+    debugMode = true;
     return super.onLoad();
   }
 
@@ -148,10 +152,41 @@ class Player extends SpriteAnimationGroupComponent
       case PlayerDirection.none:
         break;
     }
+
     velocity = Vector2(dirX, dirY);
     if (velocity.length2 > 0) {
       velocity.normalize();
     }
-    position += velocity * moveSpeed * dt;
+
+    // Resolve movement one axis at a time to avoid corner-clipping/snagging.
+    position.x += velocity.x * moveSpeed * dt;
+    _checkHorizontalCollisions();
+
+    position.y += velocity.y * moveSpeed * dt;
+    _checkVerticalCollisions();
+  }
+
+  void _checkHorizontalCollisions() {
+    for (final block in collisionBlocks) {
+      if (checkCollision(this, block)) {
+        if (velocity.x > 0) {
+          position.x = block.x - width;
+        } else if (velocity.x < 0) {
+          position.x = block.x + block.width;
+        }
+      }
+    }
+  }
+
+  void _checkVerticalCollisions() {
+    for (final block in collisionBlocks) {
+      if (checkCollision(this, block)) {
+        if (velocity.y > 0) {
+          position.y = block.y - height;
+        } else if (velocity.y < 0) {
+          position.y = block.y + block.height;
+        }
+      }
+    }
   }
 }

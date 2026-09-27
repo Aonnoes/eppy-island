@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:eppy_island/components/collision_block.dart';
 import 'package:eppy_island/components/player.dart';
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
@@ -9,7 +10,9 @@ class Level extends World {
   final Player player;
 
   Level({required this.levelName, required this.player});
+
   late TiledComponent level;
+  final List<CollisionBlock> collisionBlocks = [];
 
   @override
   FutureOr<void> onLoad() async {
@@ -23,12 +26,38 @@ class Level extends World {
         switch (spawnPoint.class_) {
           case 'Player':
             player.position = Vector2(spawnPoint.x, spawnPoint.y);
-            add(player);
             break;
           default:
+            break;
         }
       }
     }
+
+    final collisionsLayer = level.tileMap.getLayer<ObjectGroup>("Collisions");
+
+    if (collisionsLayer != null) {
+      for (final collision in collisionsLayer.objects) {
+        switch (collision.class_) {
+          case 'Warp':
+            break;
+
+          default:
+            final block = CollisionBlock(
+              position: Vector2(collision.x, collision.y),
+              size: Vector2(collision.width, collision.height),
+            );
+
+            collisionBlocks.add(block);
+            add(block);
+            break;
+        }
+      }
+    }
+
+    player.collisionBlocks = collisionBlocks;
+
+    add(player);
+
     return super.onLoad();
   }
 }
