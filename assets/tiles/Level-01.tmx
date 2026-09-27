@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="18" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="32">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="18" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="33">
  <tileset firstgid="1" source="Hills.tsx"/>
  <tileset firstgid="100" source="Water.tsx"/>
  <tileset firstgid="104" source="Fences.tsx"/>
@@ -120,20 +120,19 @@
 </data>
  </layer>
  <objectgroup id="3" name="Spawnpoints">
-  <object id="1" name="Player" type="Player" x="240" y="104"/>
+  <object id="1" name="Player" type="Player" x="304" y="64" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="13" name="Collisions">
-  <object id="6" x="128" y="32" width="16" height="144"/>
-  <object id="7" x="336" y="32" width="16" height="144"/>
+  <object id="6" x="127" y="32" width="16" height="128"/>
+  <object id="7" x="337" y="32" width="16" height="160"/>
   <object id="8" x="144" y="32" width="192" height="16"/>
-  <object id="9" x="160" y="160" width="176" height="16"/>
+  <object id="9" x="161" y="160" width="175" height="32"/>
   <object id="10" x="112" y="192" width="16" height="96"/>
   <object id="11" x="176" y="192" width="176" height="16"/>
   <object id="13" x="352" y="192" width="16" height="96"/>
-  <object id="14" x="128" y="176" width="16" height="32"/>
-  <object id="15" x="160" y="176" width="16" height="32"/>
   <object id="22" x="200" y="48" width="80" height="44"/>
   <object id="24" x="176" y="256" width="176" height="32"/>
-  <object id="25" type="Warp" x="128" y="280" width="48" height="8"/>
+  <object id="25" type="Warp" x="128" y="284" width="48" height="8"/>
+  <object id="32" x="127" y="160" width="16" height="32"/>
  </objectgroup>
 </map>

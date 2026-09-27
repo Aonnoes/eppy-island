@@ -140,7 +140,7 @@
 </data>
  </layer>
  <objectgroup id="10" name="Spawnpoints">
-  <object id="1" name="Player" type="Player" x="152" y="0"/>
+  <object id="1" name="Player" type="Player" x="152" y="24"/>
  </objectgroup>
  <objectgroup id="12" name="Collisions">
   <object id="2" x="112" y="0" width="16" height="112"/>

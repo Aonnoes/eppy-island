@@ -34,7 +34,7 @@ class Player extends SpriteAnimationGroupComponent
   @override
   FutureOr<void> onLoad() {
     _loadAllAnimations();
-    debugMode = true;
+    debugMode = false; // show player collisions
     return super.onLoad();
   }
 
