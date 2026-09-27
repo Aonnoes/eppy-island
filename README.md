@@ -1,79 +1,76 @@
 # Eppy Island
 
-> a simple farming game
+> silly game
 
 - **Live demo:** https://aonnoes.github.io/eppy-island/
-- **Demo video:** `docs/demo.mp4` <!-- TODO: at the finals submission -->
+- **Demo video:**
 - **Course:** Applications Development and Emerging Technologies (6ADET), Holy Angel University
 - **Author:** Aaron Noel
 
 ---
 
-<!-- TODO: at the end of week 2 -->
-## Screenshots
-
-Put two or three real screenshots at phone size in `docs/assets/`, then replace
-this paragraph with them:
+## Screenshots - PERIODIC UPDATES
 
 | Week #1 Progress | Mockup Reference |
 | --- | --- |
-| ![Week 1](assets/week1.png) | ![Home Island](assets/home_mockup.png) |
+| ![Home Island v1](assets/week1.png) | ![Home Island](assets/home_mockup.png) |
+| Week #2 Progress | Mockup Reference |
+| --- | --- |
+| ![Home Island v2](assets/week2a.png) | ![Home Island](assets/home_mockup.png) |
+| ![Town Island v1](assets/week2b.png) | ![Town Island](assets/town_mockup.png) |
 
-## What you do
+## Description
 
-Three to five bullets. What can a user actually do?
+A silly and unserious dungeon-farming game where players venture underground to gamble against monsters, collect seeds, and bring their winnings back home. Players can buy seeds, equipment, and useful items, sell things they no longer need, and grow crops to build a stable source of income for their next ridiculous dungeon run.
 
-- defeat enemies through gambling
-- till the soil and plant crops
-- shop for upgrades, increase your luck
-- sell your crops for a sustainable income
+- Farm Seeds — Plant seeds and grow crops to create a steady source of income.
+- Enter the Dungeon — Venture underground and gamble against monsters for rewards and valuable items.
+- Buy Supplies — Spend your money on seeds, equipment, and useful items from the shop.
+- Sell Your Extras — Sell items you no longer need to earn extra money and keep your resources flowing.
+- Build Your Income — Use your farm profits to fund more dungeon runs and keep the cycle going.
 
-<!-- TODO: at the end of week 2 -->
 ## Built with Flame
 
 | | |
 | --- | --- |
-| Framework | Flutter (Dart) |
-| State | `setState` / provider / riverpod (say which) |
-| Storage | shared_preferences / Hive / Drift / Firebase / Supabase / other |
-| Other packages | list the ones that matter, with a word on why |
+| Framework | Flutter (Dart) + Flame |
+| State | Flame component state; no external state-management package |
+| Storage | None currently; game data is loaded from assets/Tiled maps |
+| Other packages | flame_tiled — loads and renders Tiled .tmx maps and their object layers |
 
-<!-- TODO: at the end of week 2, it should run on any device -->
-## Running it yourself, on the web
+## Running it yourself
 
 Requirement: Flutter
 
-The game should be perfectly fine to run on any device once its done. If you want to try it out now, clone the repository then run the commands:
+Follow the official Flutter installation guide:
+[Flutter Install Guide](https://docs.flutter.dev/install)
+
+The game should be perfectly fine to run on any device once its done. If you want to try it out now, install Flutter on your device, clone the repository, then run the commands:
+
 
 ```bash
 flutter pub get
-flutter run -d chrome
+flutter create
+flutter run -d  chrome // linux // windows // macos
 ```
 
-<!-- TODO: at the end of week 2 -->
-### Environment variables
-
-This project reads its configuration from a `.env` file that is **not** in the
-repository. Copy `.env.example`, fill in your own values, and never commit the
-result.
+### Environment variables - N/A || TODO
 
 | Variable | What it is | Where to get one |
 | --- | --- | --- |
 | `EXAMPLE_API_KEY` | ... | ... |
 
 
-## Privacy and secret
+## Privacy and secret - N/A || TODO
 
 - What personal data this app stores, if any, and where it goes.
   - The app doesn't store any personal information and it doesn't have any way to.
 - Where the secrets live
   - The secrets live on my local computer and none of them leave it.
 - Confirm that all sample data, screenshots and the video contain
-  - <!-- TODO: at the final submission -->
 
-## Project documentation
+## Project documentation - TODO
 
-<!-- TODO: at the end of week 2 -->
 | Document | |
 | --- | --- |
 | [Proposal](docs/01-proposal.md) | the problem, the users, the scope |
@@ -81,28 +78,42 @@ result.
 | [Design system](docs/03-design-system.md) | colors, type, spacing, components |
 | [Weekly reports](docs/04-weekly-reports.md) | what happened each week |
 | [Demo video](docs/05-demo-video.md) | the recording and what it shows |
-| [Start here](START-HERE.md) | how this repo works (delete once you have read it) |
 | [Security and privacy](docs/06-security-and-privacy.md) | the checklist, filled in |
 
-## Status and what is next
+## Status and what is next - PERIODIC UPDATES
 
-Nothing works at the moment. It's just a map with an animated character in the middle. Will work on:
-- Player controls
-- Camera
-- Shop mechanics
-- Inventory
-- Main gameplay: the dungeon
+The player moves and the framework for collisions work. The town map exists but there's no way to get there yet.
 
-## Credits
+- Warps
+- User Interface
+- Player
+  - Statistics
+  - Money & Luck
+- Inventory System
+  - Equipments (Upgrades)
+  - Items (Sellable, Ingredients, Useables)
+- Shop System
+  - Buying
+  - Selling
+- Dungeon Games
+  - Rock-paper-scissors
+  - Roll the dice
+  - High Low
+  - (more if time allows)
+
+## Credits - PERIODIC UPDATES
 
 - **Sprout Lands** — a simple cute 16-bit pixel art farming asset pack with animals and farming, along with farming GUI asset pack with icons, buttons, character expresions, and many other tiles in pastel colors.
   - Source: [Asset Pack](https://cupnooble.itch.io/sprout-lands-asset-pack) and [UI Expansion](https://cupnooble.itch.io/sprout-lands-ui-pack)
   - Artist: [Cup Nooble](https://itch.io/profile/cupnooble)
 
+- **Spellthorn** — a YouTube channel that served as a major guide and reference throughout the development of Eppy's Island. Their videos were extremely helpful in learning game development concepts, workflows, and techniques, and I am genuinely very grateful for the guidance and inspiration they provided.
+  - Creator: [Spellthorn](https://www.youtube.com/@Spellthorn)
+
+
 - Packages: see `pubspec.yaml`
 
-<!-- TODO: at the end of week 2 -->
-## AI use
+## AI use - TODO
 
 If you used AI tools while building this, say so in a sentence or two and say
 where. Honest disclosure is the standard in this course and increasingly outside
