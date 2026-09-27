@@ -1,49 +1,91 @@
 import 'dart:async';
-import 'dart:math' as math;
 import 'dart:ui';
 
-import 'package:flame/camera.dart';
+import 'package:eppy_island/actors/player.dart';
 import 'package:flame/components.dart';
+import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:eppy_island/levels/level.dart';
 import 'package:flame/input.dart';
+import 'package:flutter/cupertino.dart';
 
-class EppyIsland extends FlameGame with HasKeyboardHandlerComponents {
-  static const double gameWidth = 440;
-  static const double gameHeight = 283;
-
-  EppyIsland()
-    : super(
-        world: Level(levelName: 'Level-01'),
-        camera: CameraComponent(
-          viewport: FixedSizeViewport(gameWidth, gameHeight),
-        ),
-      );
-
+class EppyIsland extends FlameGame
+    with HasKeyboardHandlerComponents, DragCallbacks {
   @override
-  Color backgroundColor() => const Color(0xFF000000); // letterbox bars
+  Color backgroundColor() => const Color(0xFF000000);
+  late final CameraComponent cam;
+  Player player = Player(character: "Teemo");
+  late JoystickComponent joystick;
+  bool showJoystic = true;
 
   @override
   FutureOr<void> onLoad() async {
     await images.loadAllImages();
-    camera.viewfinder.anchor = Anchor.topLeft;
+
+    final world = Level(player: player, levelName: 'Level-01');
+
+    cam = CameraComponent.withFixedResolution(
+      world: world,
+      width: 440,
+      height: 283,
+    );
+    cam.viewfinder.anchor = Anchor.topLeft;
+
+    addAll([cam, world]);
+
+    if (showJoystic) {
+      addJoystick();
+    }
+
+    return super.onLoad();
   }
 
-  @override
-  void onGameResize(Vector2 size) {
-    super.onGameResize(size);
+  void update(double dt) {
+    if (showJoystic) {
+      updateJoystick(dt);
+    }
+    super.update(dt);
+  }
 
-    // Largest whole-number scale that fits, never below 1.
-    final scale = math.max(
-      1,
-      math.min(size.x ~/ gameWidth, size.y ~/ gameHeight),
+  void addJoystick() {
+    joystick = JoystickComponent(
+      knob: SpriteComponent(sprite: Sprite(images.fromCache('hud/Knob.png'))),
+      background: SpriteComponent(
+        sprite: Sprite(images.fromCache('hud/Joystick.png')),
+      ),
+      margin: const EdgeInsets.only(left: 32, bottom: 32),
     );
+    add(joystick);
+  }
 
-    final viewport = camera.viewport;
-    viewport.size = Vector2(gameWidth * scale, gameHeight * scale);
-    viewport.anchor = Anchor.center;
-    viewport.position = size / 2;
-
-    camera.viewfinder.zoom = scale.toDouble();
+  void updateJoystick(double dt) {
+    switch (joystick.direction) {
+      case JoystickDirection.up:
+        player.playerDirection = PlayerDirection.N;
+        break;
+      case JoystickDirection.down:
+        player.playerDirection = PlayerDirection.S;
+        break;
+      case JoystickDirection.left:
+        player.playerDirection = PlayerDirection.W;
+        break;
+      case JoystickDirection.right:
+        player.playerDirection = PlayerDirection.E;
+        break;
+      case JoystickDirection.downLeft:
+        player.playerDirection = PlayerDirection.SW;
+        break;
+      case JoystickDirection.downRight:
+        player.playerDirection = PlayerDirection.SE;
+        break;
+      case JoystickDirection.upLeft:
+        player.playerDirection = PlayerDirection.NW;
+        break;
+      case JoystickDirection.upRight:
+        player.playerDirection = PlayerDirection.NE;
+        break;
+      default:
+        player.playerDirection = PlayerDirection.none;
+    }
   }
 }

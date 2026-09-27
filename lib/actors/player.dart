@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:eppy_island/eppy_island.dart';
 import 'package:flame/components.dart';
@@ -12,7 +11,7 @@ enum PlayerDirection { N, W, E, S, NW, NE, SW, SE, none }
 class Player extends SpriteAnimationGroupComponent
     with HasGameRef<EppyIsland>, KeyboardHandler {
   String character;
-  Player({position, required this.character}) : super(position: position);
+  Player({position, this.character = 'Teemo'}) : super(position: position);
 
   late final SpriteAnimation NAnimation;
   late final SpriteAnimation WAnimation;

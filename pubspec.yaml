@@ -30,6 +30,7 @@ flutter:
   assets:
     - assets/images/
 
+    - assets/images/hud/
     - assets/images/tilesets/
     - assets/images/characters/
     - assets/images/characters/Teemo/
