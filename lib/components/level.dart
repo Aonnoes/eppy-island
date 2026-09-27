@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:eppy_island/components/collision_block.dart';
 import 'package:eppy_island/components/player.dart';
@@ -16,7 +17,15 @@ class Level extends World {
 
   @override
   FutureOr<void> onLoad() async {
-    level = await TiledComponent.load('$levelName.tmx', Vector2.all(16));
+    level = await TiledComponent.load(
+      '$levelName.tmx',
+      Vector2.all(16),
+      layerPaintFactory: (opacity) => Paint()
+        ..filterQuality = FilterQuality.none
+        ..isAntiAlias = false
+        ..color = Color.fromRGBO(255, 255, 255, opacity),
+      useAtlas: false,
+    );
     add(level);
 
     final spawnPointsLayer = level.tileMap.getLayer<ObjectGroup>("Spawnpoints");
@@ -53,11 +62,8 @@ class Level extends World {
         }
       }
     }
-
     player.collisionBlocks = collisionBlocks;
-
     add(player);
-
     return super.onLoad();
   }
 }

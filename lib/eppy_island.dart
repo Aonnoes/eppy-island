@@ -21,7 +21,6 @@ class EppyIsland extends FlameGame
   @override
   FutureOr<void> onLoad() async {
     await images.loadAllImages();
-
     final world = Level(player: player, levelName: 'Level-01');
 
     cam = CameraComponent.withFixedResolution(
@@ -29,14 +28,13 @@ class EppyIsland extends FlameGame
       width: 440,
       height: 283,
     );
-    cam.viewfinder.anchor = Anchor.topLeft;
 
+    cam.viewfinder.anchor = Anchor.topLeft;
     addAll([cam, world]);
 
     if (showJoystick) {
       addJoystick();
     }
-
     return super.onLoad();
   }
 

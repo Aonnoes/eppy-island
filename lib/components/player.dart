@@ -24,11 +24,11 @@ class Player extends SpriteAnimationGroupComponent
   late final SpriteAnimation SWAnimation;
   late final SpriteAnimation SEAnimation;
 
-  final double stepTime = 0.1;
+  final double stepTime = 0.2;
   List<CollisionBlock> collisionBlocks = [];
 
   PlayerDirection playerDirection = PlayerDirection.none;
-  double moveSpeed = 35;
+  double moveSpeed = 50;
   Vector2 velocity = Vector2.zero();
 
   @override
