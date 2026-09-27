@@ -128,29 +128,29 @@ class Player extends SpriteAnimationGroupComponent
       case PlayerDirection.NW:
         current = PlayerState.NW;
         dirX = -1;
-        dirY = -1; // was 1
+        dirY = -1;
         break;
       case PlayerDirection.NE:
         current = PlayerState.NE;
         dirX = 1;
-        dirY = -1; // was 1
+        dirY = -1;
         break;
       case PlayerDirection.SW:
         current = PlayerState.SW;
         dirX = -1;
-        dirY = 1; // was -1
+        dirY = 1;
         break;
       case PlayerDirection.SE:
         current = PlayerState.SE;
         dirX = 1;
-        dirY = 1; // was -1
+        dirY = 1;
         break;
       case PlayerDirection.none:
         break;
     }
     velocity = Vector2(dirX, dirY);
     if (velocity.length2 > 0) {
-      velocity.normalize(); // so diagonals aren't faster than cardinals
+      velocity.normalize();
     }
     position += velocity * moveSpeed * dt;
   }

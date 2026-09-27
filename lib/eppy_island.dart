@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:eppy_island/actors/player.dart';
+import 'package:eppy_island/components/level.dart';
+import 'package:eppy_island/components/player.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
-import 'package:eppy_island/levels/level.dart';
 import 'package:flame/input.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -16,7 +16,7 @@ class EppyIsland extends FlameGame
   late final CameraComponent cam;
   Player player = Player(character: "Teemo");
   late JoystickComponent joystick;
-  bool showJoystic = true;
+  bool showJoystic = false;
 
   @override
   FutureOr<void> onLoad() async {
