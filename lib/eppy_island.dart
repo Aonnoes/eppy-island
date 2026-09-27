@@ -13,7 +13,7 @@ class EppyIsland extends FlameGame<Level> {
 
   EppyIsland()
     : super(
-        world: Level(),
+        world: Level(levelName: 'Level-01'),
         camera: CameraComponent(
           viewport: FixedSizeViewport(gameWidth, gameHeight),
         ),
