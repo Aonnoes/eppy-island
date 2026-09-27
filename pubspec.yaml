@@ -31,12 +31,7 @@ flutter:
     - assets/images/
 
     - assets/images/tilesets/
-    - assets/images/tilesets/Hills.png
-    - assets/images/tilesets/Water.png
     - assets/images/characters/
     - assets/images/characters/Teemo/
 
     - assets/tiles/
-    - assets/tiles/Level-01.tmx
-    - assets/tiles/Hills.tsx
-    - assets/tiles/Water.tsx
