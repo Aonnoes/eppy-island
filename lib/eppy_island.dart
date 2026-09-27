@@ -16,7 +16,7 @@ class EppyIsland extends FlameGame
   late final CameraComponent cam;
   Player player = Player(character: "Teemo");
   late JoystickComponent joystick;
-  bool showJoystick = false;
+  bool showJoystic = false;
 
   @override
   FutureOr<void> onLoad() async {
@@ -26,14 +26,14 @@ class EppyIsland extends FlameGame
 
     cam = CameraComponent.withFixedResolution(
       world: world,
-      width: 320,
-      height: 180,
+      width: 440,
+      height: 283,
     );
     cam.viewfinder.anchor = Anchor.topLeft;
 
     addAll([cam, world]);
 
-    if (showJoystick) {
+    if (showJoystic) {
       addJoystick();
     }
 
@@ -41,7 +41,7 @@ class EppyIsland extends FlameGame
   }
 
   void update(double dt) {
-    if (showJoystick) {
+    if (showJoystic) {
       updateJoystick(dt);
     }
     super.update(dt);
