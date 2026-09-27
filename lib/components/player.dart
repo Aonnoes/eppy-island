@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:eppy_island/components/collision_block.dart';
 import 'package:eppy_island/components/utils.dart';
@@ -99,7 +100,7 @@ class Player extends SpriteAnimationGroupComponent
   }
 
   SpriteAnimation _spriteAnimation(String state, int amount) {
-    return SpriteAnimation.fromFrameData(
+    final animation = SpriteAnimation.fromFrameData(
       game.images.fromCache('characters/$character/$character $state.png'),
       SpriteAnimationData.sequenced(
         amount: amount,
@@ -107,6 +108,14 @@ class Player extends SpriteAnimationGroupComponent
         textureSize: Vector2.all(16),
       ),
     );
+
+    for (final frame in animation.frames) {
+      frame.sprite.paint
+        ..filterQuality = FilterQuality.none
+        ..isAntiAlias = false;
+    }
+
+    return animation;
   }
 
   void _updatePlayerMovement(double dt) {
