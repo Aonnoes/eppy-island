@@ -6,8 +6,9 @@ import 'package:flame/camera.dart';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:eppy_island/levels/level.dart';
+import 'package:flame/input.dart';
 
-class EppyIsland extends FlameGame<Level> {
+class EppyIsland extends FlameGame with HasKeyboardHandlerComponents {
   static const double gameWidth = 440;
   static const double gameHeight = 283;
 

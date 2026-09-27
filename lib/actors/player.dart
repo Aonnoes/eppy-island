@@ -3,12 +3,14 @@ import 'dart:ui';
 
 import 'package:eppy_island/eppy_island.dart';
 import 'package:flame/components.dart';
+import 'package:flutter/services.dart';
 
 enum PlayerState { N, W, E, S, NW, NE, SW, SE }
 
 enum PlayerDirection { N, W, E, S, NW, NE, SW, SE, none }
 
-class Player extends SpriteAnimationGroupComponent with HasGameRef<EppyIsland> {
+class Player extends SpriteAnimationGroupComponent
+    with HasGameRef<EppyIsland>, KeyboardHandler {
   String character;
   Player({position, required this.character}) : super(position: position);
 
@@ -21,10 +23,10 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<EppyIsland> {
   late final SpriteAnimation SWAnimation;
   late final SpriteAnimation SEAnimation;
 
-  final double stepTime = 0.2;
+  final double stepTime = 0.1;
 
-  PlayerDirection playerDirection = PlayerDirection.W;
-  double moveSpeed = 5;
+  PlayerDirection playerDirection = PlayerDirection.none;
+  double moveSpeed = 35;
   Vector2 velocity = Vector2.zero();
 
   @override
@@ -40,7 +42,34 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<EppyIsland> {
   }
 
   @override
-  void onKeyEvent(event, keysPressed) {}
+  bool onKeyEvent(KeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
+    final isLeftKeyPressed = keysPressed.contains(LogicalKeyboardKey.keyA);
+    final isRightKeyPressed = keysPressed.contains(LogicalKeyboardKey.keyD);
+    final isUpKeyPressed = keysPressed.contains(LogicalKeyboardKey.keyW);
+    final isDownKeyPressed = keysPressed.contains(LogicalKeyboardKey.keyS);
+
+    if (isLeftKeyPressed && isUpKeyPressed) {
+      playerDirection = PlayerDirection.NW;
+    } else if (isLeftKeyPressed && isDownKeyPressed) {
+      playerDirection = PlayerDirection.SW;
+    } else if (isRightKeyPressed && isUpKeyPressed) {
+      playerDirection = PlayerDirection.NE;
+    } else if (isRightKeyPressed && isDownKeyPressed) {
+      playerDirection = PlayerDirection.SE;
+    } else if (isLeftKeyPressed) {
+      playerDirection = PlayerDirection.W;
+    } else if (isRightKeyPressed) {
+      playerDirection = PlayerDirection.E;
+    } else if (isUpKeyPressed) {
+      playerDirection = PlayerDirection.N;
+    } else if (isDownKeyPressed) {
+      playerDirection = PlayerDirection.S;
+    } else {
+      playerDirection = PlayerDirection.none;
+    }
+
+    return super.onKeyEvent(event, keysPressed);
+  }
 
   void _loadAllAnimations() {
     NAnimation = _spriteAnimation('N', 3);
@@ -83,49 +112,47 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<EppyIsland> {
     switch (playerDirection) {
       case PlayerDirection.N:
         current = PlayerState.N;
-        dirY = moveSpeed;
+        dirY = -1;
         break;
       case PlayerDirection.S:
         current = PlayerState.S;
-        dirY = -moveSpeed;
+        dirY = 1;
         break;
       case PlayerDirection.W:
         current = PlayerState.W;
-        dirX = -moveSpeed;
+        dirX = -1;
         break;
       case PlayerDirection.E:
         current = PlayerState.E;
-        dirX = moveSpeed;
+        dirX = 1;
         break;
       case PlayerDirection.NW:
         current = PlayerState.NW;
-        dirX = -moveSpeed;
-        dirY = moveSpeed;
+        dirX = -1;
+        dirY = -1; // was 1
         break;
       case PlayerDirection.NE:
         current = PlayerState.NE;
-        dirX = moveSpeed;
-        dirY = moveSpeed;
+        dirX = 1;
+        dirY = -1; // was 1
         break;
       case PlayerDirection.SW:
         current = PlayerState.SW;
-        dirX = -moveSpeed;
-        dirY = -moveSpeed;
+        dirX = -1;
+        dirY = 1; // was -1
         break;
       case PlayerDirection.SE:
         current = PlayerState.SE;
-        dirX = moveSpeed;
-        dirY = -moveSpeed;
+        dirX = 1;
+        dirY = 1; // was -1
         break;
       case PlayerDirection.none:
         break;
-      default:
-        dirX = 0.0;
-        dirY = 0.0;
-        break;
     }
-    velocity.x = dirX * moveSpeed;
-    velocity.y = dirY * moveSpeed;
-    position += velocity * dt;
+    velocity = Vector2(dirX, dirY);
+    if (velocity.length2 > 0) {
+      velocity.normalize(); // so diagonals aren't faster than cardinals
+    }
+    position += velocity * moveSpeed * dt;
   }
 }
