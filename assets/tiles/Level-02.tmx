@@ -141,7 +141,7 @@
  </layer>
  <objectgroup id="10" name="Spawnpoints">
   <object id="1" name="Player" type="Player" x="327.25" y="55.75"/>
-  <object id="7" name="home-town" x="152.25" y="7.75"/>
+  <object id="7" name="home-town" x="151.25" y="7.75"/>
  </objectgroup>
  <objectgroup id="12" name="Collisions">
   <object id="2" x="112" y="-24.9091" width="16" height="136.909"/>
