@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="18" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="6">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="18" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="8">
  <tileset firstgid="1" source="Water.tsx"/>
  <tileset firstgid="5" source="Hills.tsx"/>
  <tileset firstgid="104" source="Paths.tsx"/>
@@ -140,12 +140,19 @@
 </data>
  </layer>
  <objectgroup id="10" name="Spawnpoints">
-  <object id="1" name="Player" type="Player" x="152" y="24"/>
+  <object id="1" name="Player" type="Player" x="327.25" y="55.75"/>
+  <object id="7" name="home-town" x="152.25" y="7.75"/>
  </objectgroup>
  <objectgroup id="12" name="Collisions">
-  <object id="2" x="112" y="0" width="16" height="112"/>
-  <object id="3" x="176" y="0" width="176" height="32"/>
+  <object id="2" x="112" y="-24.9091" width="16" height="136.909"/>
+  <object id="3" x="176" y="-24.5" width="176" height="56.5"/>
   <object id="4" x="352" y="0" width="16" height="112"/>
   <object id="5" x="128" y="96" width="224" height="16"/>
+  <object id="6" name="Warp" type="Warp" x="128" y="-25" width="47.4773" height="12.6797">
+   <properties>
+    <property name="targetLevel" value="Level-01"/>
+    <property name="targetSpawn" value="home-town"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

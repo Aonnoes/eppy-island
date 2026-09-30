@@ -23,6 +23,9 @@ class Player extends SpriteAnimationGroupComponent<Direction>
 
   double moveSpeed = 50;
 
+  /// Set to false to freeze the player (e.g. during a level transition).
+  bool canMove = true;
+
   Vector2 _velocity = Vector2.zero();
   List<CollisionBlock> _collisionBlocks = const [];
 
@@ -84,6 +87,8 @@ class Player extends SpriteAnimationGroupComponent<Direction>
   // ----------------------------------------------------------------- movement
 
   void _updateMovement(double dt) {
+    if (!canMove) return;
+
     if (direction.isMoving) {
       current = direction;
     }
