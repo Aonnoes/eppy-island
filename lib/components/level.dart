@@ -7,63 +7,75 @@ import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 
 class Level extends World {
+  Level({required this.levelName, required this.player});
+
+  static const double _tileSize = 16;
+  static const String _spawnLayer = 'Spawnpoints';
+  static const String _collisionLayer = 'Collisions';
+
   final String levelName;
   final Player player;
 
-  Level({required this.levelName, required this.player});
-
-  late TiledComponent level;
-  final List<CollisionBlock> collisionBlocks = [];
+  late final TiledComponent _map;
+  final List<CollisionBlock> _collisionBlocks = [];
 
   @override
   FutureOr<void> onLoad() async {
-    level = await TiledComponent.load(
+    await _loadMap();
+    _placeSpawnPoints();
+    _buildCollisionBlocks();
+
+    player.bindCollisionBlocks(_collisionBlocks);
+    add(player);
+
+    return super.onLoad();
+  }
+
+  Future<void> _loadMap() async {
+    _map = await TiledComponent.load(
       '$levelName.tmx',
-      Vector2.all(16),
+      Vector2.all(_tileSize),
       layerPaintFactory: (opacity) => Paint()
         ..filterQuality = FilterQuality.none
         ..isAntiAlias = false
         ..color = Color.fromRGBO(255, 255, 255, opacity),
       useAtlas: false,
     );
-    add(level);
+    add(_map);
+  }
 
-    final spawnPointsLayer = level.tileMap.getLayer<ObjectGroup>("Spawnpoints");
+  void _placeSpawnPoints() {
+    final layer = _map.tileMap.getLayer<ObjectGroup>(_spawnLayer);
+    if (layer == null) return;
 
-    if (spawnPointsLayer != null) {
-      for (final spawnPoint in spawnPointsLayer.objects) {
-        switch (spawnPoint.class_) {
-          case 'Player':
-            player.position = Vector2(spawnPoint.x, spawnPoint.y);
-            break;
-          default:
-            break;
-        }
+    for (final spawnPoint in layer.objects) {
+      switch (spawnPoint.class_) {
+        case 'Player':
+          player.position = Vector2(spawnPoint.x, spawnPoint.y);
+          break;
+        default:
+          break;
       }
     }
+  }
 
-    final collisionsLayer = level.tileMap.getLayer<ObjectGroup>("Collisions");
+  void _buildCollisionBlocks() {
+    final layer = _map.tileMap.getLayer<ObjectGroup>(_collisionLayer);
+    if (layer == null) return;
 
-    if (collisionsLayer != null) {
-      for (final collision in collisionsLayer.objects) {
-        switch (collision.class_) {
-          case 'Warp':
-            break;
-
-          default:
-            final block = CollisionBlock(
-              position: Vector2(collision.x, collision.y),
-              size: Vector2(collision.width, collision.height),
-            );
-
-            collisionBlocks.add(block);
-            add(block);
-            break;
-        }
+    for (final collision in layer.objects) {
+      switch (collision.class_) {
+        case 'Warp':
+          break;
+        default:
+          final block = CollisionBlock(
+            position: Vector2(collision.x, collision.y),
+            size: Vector2(collision.width, collision.height),
+          );
+          _collisionBlocks.add(block);
+          add(block);
+          break;
       }
     }
-    player.collisionBlocks = collisionBlocks;
-    add(player);
-    return super.onLoad();
   }
 }

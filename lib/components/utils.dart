@@ -1,16 +1,9 @@
-bool checkCollision(player, block) {
-  final playerX = player.position.x;
-  final playerY = player.position.y;
-  final blockX = block.position.x;
-  final blockY = block.position.y;
+import 'package:flame/components.dart';
 
-  final playerWidth = player.width;
-  final playerHeight = player.height;
-  final blockWidth = block.width;
-  final blockHeight = block.height;
-
-  return (playerX < blockX + blockWidth &&
-      playerX + playerWidth > blockX &&
-      playerY < blockY + blockHeight &&
-      playerY + playerHeight > blockY);
+/// Axis-aligned bounding box overlap test between two components.
+bool checkCollision(PositionComponent a, PositionComponent b) {
+  return a.x < b.x + b.width &&
+      a.x + a.width > b.x &&
+      a.y < b.y + b.height &&
+      a.y + a.height > b.y;
 }

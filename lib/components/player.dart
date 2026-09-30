@@ -2,110 +2,73 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:eppy_island/components/collision_block.dart';
-import 'package:eppy_island/components/utils.dart';
+import 'package:eppy_island/components/direction.dart';
 import 'package:eppy_island/eppy_island.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
 
-enum PlayerState { N, W, E, S, NW, NE, SW, SE }
-
-enum PlayerDirection { N, W, E, S, NW, NE, SW, SE, none }
-
-class Player extends SpriteAnimationGroupComponent
+class Player extends SpriteAnimationGroupComponent<Direction>
     with HasGameRef<EppyIsland>, KeyboardHandler {
-  String character;
-  Player({position, this.character = 'Teemo'}) : super(position: position);
+  Player({super.position, this.character = 'Teemo'});
 
-  late final SpriteAnimation NAnimation;
-  late final SpriteAnimation WAnimation;
-  late final SpriteAnimation EAnimation;
-  late final SpriteAnimation SAnimation;
-  late final SpriteAnimation NWAnimation;
-  late final SpriteAnimation NEAnimation;
-  late final SpriteAnimation SWAnimation;
-  late final SpriteAnimation SEAnimation;
+  static const int _framesPerAnimation = 3;
+  static const double _stepTime = 0.2;
+  static const double _textureSize = 16;
 
-  final double stepTime = 0.2;
-  List<CollisionBlock> collisionBlocks = [];
+  final String character;
 
-  PlayerDirection playerDirection = PlayerDirection.none;
+  /// Direction the player is currently trying to move in. Set by keyboard
+  /// input here, or by the game when using the on-screen joystick.
+  Direction direction = Direction.none;
+
   double moveSpeed = 50;
-  Vector2 velocity = Vector2.zero();
+
+  Vector2 _velocity = Vector2.zero();
+  List<CollisionBlock> _collisionBlocks = const [];
+
+  /// Tells the player which blocks it must not walk through.
+  void bindCollisionBlocks(List<CollisionBlock> blocks) {
+    _collisionBlocks = blocks;
+  }
 
   @override
   FutureOr<void> onLoad() {
-    _loadAllAnimations();
-    debugMode = false; // show player collisions
+    _loadAnimations();
+    debugMode = false; // set to true to show player collisions
     return super.onLoad();
   }
 
   @override
   void update(double dt) {
-    _updatePlayerMovement(dt);
+    _updateMovement(dt);
     super.update(dt);
   }
 
   @override
   bool onKeyEvent(KeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
-    final isLeftKeyPressed = keysPressed.contains(LogicalKeyboardKey.keyA);
-    final isRightKeyPressed = keysPressed.contains(LogicalKeyboardKey.keyD);
-    final isUpKeyPressed = keysPressed.contains(LogicalKeyboardKey.keyW);
-    final isDownKeyPressed = keysPressed.contains(LogicalKeyboardKey.keyS);
-
-    if (isLeftKeyPressed && isUpKeyPressed) {
-      playerDirection = PlayerDirection.NW;
-    } else if (isLeftKeyPressed && isDownKeyPressed) {
-      playerDirection = PlayerDirection.SW;
-    } else if (isRightKeyPressed && isUpKeyPressed) {
-      playerDirection = PlayerDirection.NE;
-    } else if (isRightKeyPressed && isDownKeyPressed) {
-      playerDirection = PlayerDirection.SE;
-    } else if (isLeftKeyPressed) {
-      playerDirection = PlayerDirection.W;
-    } else if (isRightKeyPressed) {
-      playerDirection = PlayerDirection.E;
-    } else if (isUpKeyPressed) {
-      playerDirection = PlayerDirection.N;
-    } else if (isDownKeyPressed) {
-      playerDirection = PlayerDirection.S;
-    } else {
-      playerDirection = PlayerDirection.none;
-    }
-
+    direction = Direction.fromKeys(keysPressed);
     return super.onKeyEvent(event, keysPressed);
   }
 
-  void _loadAllAnimations() {
-    NAnimation = _spriteAnimation('N', 3);
-    WAnimation = _spriteAnimation('W', 3);
-    EAnimation = _spriteAnimation('E', 3);
-    SAnimation = _spriteAnimation('S', 3);
-    NWAnimation = _spriteAnimation('NW', 3);
-    NEAnimation = _spriteAnimation('NE', 3);
-    SWAnimation = _spriteAnimation('SW', 3);
-    SEAnimation = _spriteAnimation('SE', 3);
+  // ---------------------------------------------------------------- animation
 
+  void _loadAnimations() {
     animations = {
-      PlayerState.N: NAnimation,
-      PlayerState.W: WAnimation,
-      PlayerState.E: EAnimation,
-      PlayerState.S: SAnimation,
-      PlayerState.NW: NWAnimation,
-      PlayerState.NE: NEAnimation,
-      PlayerState.SW: SWAnimation,
-      PlayerState.SE: SEAnimation,
+      for (final dir in Direction.values)
+        if (dir.isMoving) dir: _buildAnimation(dir),
     };
-
-    current = PlayerState.S;
+    current = Direction.s;
   }
 
-  SpriteAnimation _spriteAnimation(String state, int amount) {
+  SpriteAnimation _buildAnimation(Direction dir) {
     final animation = SpriteAnimation.fromFrameData(
-      game.images.fromCache('characters/$character/$character $state.png'),
+      game.images.fromCache(
+        'characters/$character/$character ${dir.spriteSuffix}.png',
+      ),
       SpriteAnimationData.sequenced(
-        amount: amount,
-        stepTime: stepTime,
-        textureSize: Vector2.all(16),
+        amount: _framesPerAnimation,
+        stepTime: _stepTime,
+        textureSize: Vector2.all(_textureSize),
       ),
     );
 
@@ -118,84 +81,24 @@ class Player extends SpriteAnimationGroupComponent
     return animation;
   }
 
-  void _updatePlayerMovement(double dt) {
-    double dirX = 0.0;
-    double dirY = 0.0;
-    switch (playerDirection) {
-      case PlayerDirection.N:
-        current = PlayerState.N;
-        dirY = -1;
-        break;
-      case PlayerDirection.S:
-        current = PlayerState.S;
-        dirY = 1;
-        break;
-      case PlayerDirection.W:
-        current = PlayerState.W;
-        dirX = -1;
-        break;
-      case PlayerDirection.E:
-        current = PlayerState.E;
-        dirX = 1;
-        break;
-      case PlayerDirection.NW:
-        current = PlayerState.NW;
-        dirX = -1;
-        dirY = -1;
-        break;
-      case PlayerDirection.NE:
-        current = PlayerState.NE;
-        dirX = 1;
-        dirY = -1;
-        break;
-      case PlayerDirection.SW:
-        current = PlayerState.SW;
-        dirX = -1;
-        dirY = 1;
-        break;
-      case PlayerDirection.SE:
-        current = PlayerState.SE;
-        dirX = 1;
-        dirY = 1;
-        break;
-      case PlayerDirection.none:
-        break;
+  // ----------------------------------------------------------------- movement
+
+  void _updateMovement(double dt) {
+    if (direction.isMoving) {
+      current = direction;
     }
 
-    velocity = Vector2(dirX, dirY);
-    if (velocity.length2 > 0) {
-      velocity.normalize();
-    }
+    _velocity = direction.vector;
 
     // Resolve movement one axis at a time to avoid corner-clipping/snagging.
-    position.x += velocity.x * moveSpeed * dt;
-    _checkHorizontalCollisions();
-
-    position.y += velocity.y * moveSpeed * dt;
-    _checkVerticalCollisions();
-  }
-
-  void _checkHorizontalCollisions() {
-    for (final block in collisionBlocks) {
-      if (checkCollision(this, block)) {
-        if (velocity.x > 0) {
-          position.x = block.x - width;
-        } else if (velocity.x < 0) {
-          position.x = block.x + block.width;
-        }
-      }
+    position.x += _velocity.x * moveSpeed * dt;
+    for (final block in _collisionBlocks) {
+      block.resolveHorizontal(this, _velocity.x);
     }
-  }
 
-  void _checkVerticalCollisions() {
-    for (final block in collisionBlocks) {
-      if (checkCollision(this, block)) {
-        if (velocity.y > 0) {
-          position.y = block.y - height;
-        } else if (velocity.y < 0) {
-          position.y = block.y + block.height;
-        }
-      }
+    position.y += _velocity.y * moveSpeed * dt;
+    for (final block in _collisionBlocks) {
+      block.resolveVertical(this, _velocity.y);
     }
   }
 }

@@ -1,89 +1,67 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:eppy_island/components/direction.dart';
 import 'package:eppy_island/components/level.dart';
 import 'package:eppy_island/components/player.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/painting.dart';
 
 class EppyIsland extends FlameGame
     with HasKeyboardHandlerComponents, DragCallbacks {
+  static const double _viewWidth = 440;
+  static const double _viewHeight = 283;
+  static const String _startingLevel = 'Level-01';
+
+  final Player player = Player(character: 'Teemo');
+  final bool showJoystick = false;
+
+  late final CameraComponent cam;
+  late final JoystickComponent _joystick;
+
   @override
   Color backgroundColor() => const Color(0xFF000000);
-  late final CameraComponent cam;
-  Player player = Player(character: "Teemo");
-  late JoystickComponent joystick;
-  bool showJoystick = false;
 
   @override
   FutureOr<void> onLoad() async {
     await images.loadAllImages();
-    final world = Level(player: player, levelName: 'Level-01');
+
+    final world = Level(player: player, levelName: _startingLevel);
 
     cam = CameraComponent.withFixedResolution(
       world: world,
-      width: 440,
-      height: 283,
+      width: _viewWidth,
+      height: _viewHeight,
     );
-
     cam.viewfinder.anchor = Anchor.topLeft;
+
     addAll([cam, world]);
 
     if (showJoystick) {
-      addJoystick();
+      _addJoystick();
     }
     return super.onLoad();
   }
 
+  @override
   void update(double dt) {
     if (showJoystick) {
-      updateJoystick(dt);
+      player.direction = Direction.fromJoystick(_joystick.direction);
     }
     super.update(dt);
   }
 
-  void addJoystick() {
-    joystick = JoystickComponent(
+  void _addJoystick() {
+    _joystick = JoystickComponent(
       knob: SpriteComponent(sprite: Sprite(images.fromCache('hud/Knob.png'))),
       background: SpriteComponent(
         sprite: Sprite(images.fromCache('hud/Joystick.png')),
       ),
       margin: const EdgeInsets.only(left: 32, bottom: 32),
     );
-    add(joystick);
-  }
-
-  void updateJoystick(double dt) {
-    switch (joystick.direction) {
-      case JoystickDirection.up:
-        player.playerDirection = PlayerDirection.N;
-        break;
-      case JoystickDirection.down:
-        player.playerDirection = PlayerDirection.S;
-        break;
-      case JoystickDirection.left:
-        player.playerDirection = PlayerDirection.W;
-        break;
-      case JoystickDirection.right:
-        player.playerDirection = PlayerDirection.E;
-        break;
-      case JoystickDirection.downLeft:
-        player.playerDirection = PlayerDirection.SW;
-        break;
-      case JoystickDirection.downRight:
-        player.playerDirection = PlayerDirection.SE;
-        break;
-      case JoystickDirection.upLeft:
-        player.playerDirection = PlayerDirection.NW;
-        break;
-      case JoystickDirection.upRight:
-        player.playerDirection = PlayerDirection.NE;
-        break;
-      default:
-        player.playerDirection = PlayerDirection.none;
-    }
+    add(_joystick);
   }
 }
