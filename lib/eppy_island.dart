@@ -22,7 +22,7 @@ class EppyIsland extends FlameGame
   static const Duration _fadeDuration = Duration(milliseconds: 500);
 
   /// How long the screen stays fully black once the new level is ready.
-  static const Duration _blackHold = Duration(milliseconds: 500);
+  static const Duration _blackHold = Duration(milliseconds: 200);
 
   Player player = Player(character: 'Teemo');
   final bool showJoystick = false;
