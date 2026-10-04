@@ -1,0 +1,706 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="18" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="321">
+ <objectgroup id="2" name="Hud">
+  <properties>
+   <property name="freeze_game" type="bool" value="false"/>
+   <property name="hotkey" value=""/>
+   <property name="modal" type="bool" value="false"/>
+   <property name="persistent" type="bool" value="true"/>
+  </properties>
+  <object id="1" name="pause" type="Button" x="448" y="0" width="32" height="32">
+   <properties>
+    <property name="action" value="open_screen"/>
+    <property name="enabled" type="bool" value="true"/>
+    <property name="sprite" value="pause"/>
+    <property name="target" value="Paused"/>
+   </properties>
+  </object>
+  <object id="2" name="inventory" type="Button" x="416" y="0" width="32" height="32">
+   <properties>
+    <property name="action" value="open_screen"/>
+    <property name="enabled" type="bool" value="true"/>
+    <property name="sprite" value="panel"/>
+    <property name="target" value="Inventory"/>
+   </properties>
+  </object>
+  <object id="7" name="coins" type="Label" x="228" y="4" width="48" height="16">
+   <properties>
+    <property name="align" value="center"/>
+    <property name="bind" value="coins"/>
+    <property name="color" value="#FFFFFF"/>
+    <property name="size" type="int" value="10"/>
+    <property name="text" value=""/>
+   </properties>
+  </object>
+  <object id="39" name="coin" type="Image" x="208" y="4" width="16" height="16">
+   <properties>
+    <property name="sprite" value="coin"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="3" name="Paused">
+  <properties>
+   <property name="freeze_game" type="bool" value="true"/>
+   <property name="hotkey" value="P"/>
+   <property name="modal" type="bool" value="true"/>
+   <property name="persistent" type="bool" value="false"/>
+  </properties>
+  <object id="3" name="settings" type="Button" x="192" y="144" width="96" height="32">
+   <properties>
+    <property name="action" value="open_screen"/>
+    <property name="enabled" type="bool" value="false"/>
+    <property name="sprite" value="settings"/>
+    <property name="target" value="Settings"/>
+   </properties>
+  </object>
+  <object id="4" name="resume" type="Button" x="192" y="112" width="96" height="32">
+   <properties>
+    <property name="action" value="close_screen"/>
+    <property name="enabled" type="bool" value="true"/>
+    <property name="sprite" value="resume"/>
+    <property name="target" value=""/>
+   </properties>
+  </object>
+  <object id="5" name="exit" type="Button" x="192" y="176" width="96" height="32">
+   <properties>
+    <property name="action" value="exit_game"/>
+    <property name="enabled" type="bool" value="true"/>
+    <property name="sprite" value="exit"/>
+    <property name="target" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="4" name="Settings">
+  <properties>
+   <property name="freeze_game" type="bool" value="true"/>
+   <property name="hotkey" value=""/>
+   <property name="modal" type="bool" value="true"/>
+   <property name="persistent" type="bool" value="false"/>
+  </properties>
+ </objectgroup>
+ <objectgroup id="10" name="Profile">
+  <properties>
+   <property name="freeze_game" type="bool" value="true"/>
+   <property name="hotkey" value=""/>
+   <property name="modal" type="bool" value="false"/>
+   <property name="persistent" type="bool" value="false"/>
+  </properties>
+  <object id="19" name="panel" type="Panel" x="16" y="16" width="176" height="64">
+   <properties>
+    <property name="sprite" value="profile_panel"/>
+   </properties>
+  </object>
+  <object id="32" name="username" type="Label" x="80" y="21.6364" width="96" height="12">
+   <properties>
+    <property name="align" value="left"/>
+    <property name="bind" value="username"/>
+    <property name="color" value="#63452c"/>
+    <property name="size" type="int" value="10"/>
+    <property name="text" value="username"/>
+   </properties>
+  </object>
+  <object id="33" name="userimage" type="Image" x="32" y="32" width="31.2727" height="30.3636">
+   <properties>
+    <property name="bind" value="user_image"/>
+    <property name="sprite" value="userimage"/>
+   </properties>
+  </object>
+  <object id="35" name="star1" type="Image" x="96" y="44" width="16" height="16">
+   <properties>
+    <property name="bind" value="star1"/>
+    <property name="sprite" value="star_empty"/>
+   </properties>
+  </object>
+  <object id="36" name="star2" type="Image" x="112" y="44" width="16" height="16">
+   <properties>
+    <property name="bind" value="star2"/>
+    <property name="sprite" value="star_empty"/>
+   </properties>
+  </object>
+  <object id="37" name="star3" type="Image" x="128" y="44" width="16" height="16">
+   <properties>
+    <property name="bind" value="star3"/>
+    <property name="sprite" value="star_empty"/>
+   </properties>
+  </object>
+  <object id="38" name="star4" type="Image" x="144" y="44" width="16" height="16">
+   <properties>
+    <property name="bind" value="star4"/>
+    <property name="sprite" value="star_empty"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="5" name="Inventory">
+  <properties>
+   <property name="freeze_game" type="bool" value="true"/>
+   <property name="hotkey" value="E"/>
+   <property name="include" value="Profile,Details,Message"/>
+   <property name="modal" type="bool" value="false"/>
+   <property name="persistent" type="bool" value="false"/>
+  </properties>
+  <object id="17" name="panel" type="Panel" x="16" y="80" width="176" height="208">
+   <properties>
+    <property name="sprite" value="main_panel"/>
+   </properties>
+  </object>
+  <object id="20" name="previous" type="Button" x="32" y="96" width="32" height="32">
+   <properties>
+    <property name="action" value="switch_screen"/>
+    <property name="enabled" type="bool" value="false"/>
+    <property name="sprite" value="previous"/>
+    <property name="target" value=""/>
+   </properties>
+  </object>
+  <object id="21" name="next" type="Button" x="144" y="96" width="32" height="32">
+   <properties>
+    <property name="action" value="switch_screen"/>
+    <property name="enabled" type="bool" value="true"/>
+    <property name="sprite" value="next"/>
+    <property name="target" value="Equipment"/>
+   </properties>
+  </object>
+  <object id="22" name="title" type="Label" x="64" y="96" width="80" height="32">
+   <properties>
+    <property name="align" value="center"/>
+    <property name="color" value="#63452c"/>
+    <property name="size" type="int" value="10"/>
+    <property name="text" value="Inventory"/>
+   </properties>
+  </object>
+  <object id="23" name="slot0" type="Slot" x="32" y="128" width="48" height="48">
+   <properties>
+    <property name="kind" value="item"/>
+    <property name="slot" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="24" name="slot1" type="Slot" x="80" y="128" width="48" height="48">
+   <properties>
+    <property name="kind" value="item"/>
+    <property name="slot" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="25" name="slot2" type="Slot" x="128" y="128" width="48" height="48">
+   <properties>
+    <property name="kind" value="item"/>
+    <property name="slot" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="26" name="slot3" type="Slot" x="32" y="176" width="48" height="48">
+   <properties>
+    <property name="kind" value="item"/>
+    <property name="slot" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="27" name="slot4" type="Slot" x="80" y="176" width="48" height="48">
+   <properties>
+    <property name="kind" value="item"/>
+    <property name="slot" type="int" value="4"/>
+   </properties>
+  </object>
+  <object id="28" name="slot5" type="Slot" x="128" y="176" width="48" height="48">
+   <properties>
+    <property name="kind" value="item"/>
+    <property name="slot" type="int" value="5"/>
+   </properties>
+  </object>
+  <object id="29" name="slot6" type="Slot" x="32" y="224" width="48" height="48">
+   <properties>
+    <property name="kind" value="item"/>
+    <property name="slot" type="int" value="6"/>
+   </properties>
+  </object>
+  <object id="30" name="slot7" type="Slot" x="80" y="224" width="48" height="48">
+   <properties>
+    <property name="kind" value="item"/>
+    <property name="slot" type="int" value="7"/>
+   </properties>
+  </object>
+  <object id="31" name="slot8" type="Slot" x="128" y="224" width="48" height="48">
+   <properties>
+    <property name="kind" value="item"/>
+    <property name="slot" type="int" value="8"/>
+   </properties>
+  </object>
+  <object id="198" name="close" type="Button" x="171" y="85" width="16" height="16">
+   <properties>
+    <property name="action" value="close_screen"/>
+    <property name="enabled" type="bool" value="true"/>
+    <property name="sprite" value="close"/>
+    <property name="target" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="7" name="Equipment">
+  <properties>
+   <property name="freeze_game" type="bool" value="true"/>
+   <property name="hotkey" value=""/>
+   <property name="include" value="Profile,Details,Message"/>
+   <property name="modal" type="bool" value="false"/>
+   <property name="persistent" type="bool" value="false"/>
+  </properties>
+  <object id="217" name="panel" type="Panel" x="16" y="80" width="176" height="208">
+   <properties>
+    <property name="sprite" value="main_panel"/>
+   </properties>
+  </object>
+  <object id="218" name="previous" type="Button" x="32" y="96" width="32" height="32">
+   <properties>
+    <property name="action" value="switch_screen"/>
+    <property name="enabled" type="bool" value="true"/>
+    <property name="sprite" value="previous"/>
+    <property name="target" value="Inventory"/>
+   </properties>
+  </object>
+  <object id="219" name="next" type="Button" x="144" y="96" width="32" height="32">
+   <properties>
+    <property name="action" value="switch_screen"/>
+    <property name="enabled" type="bool" value="true"/>
+    <property name="sprite" value="next"/>
+    <property name="target" value="Buy"/>
+   </properties>
+  </object>
+  <object id="220" name="title" type="Label" x="64" y="96" width="80" height="32">
+   <properties>
+    <property name="align" value="center"/>
+    <property name="color" value="#63452c"/>
+    <property name="size" type="int" value="10"/>
+    <property name="text" value="Equipment"/>
+   </properties>
+  </object>
+  <object id="221" name="slot0" type="Slot" x="32" y="128" width="48" height="48">
+   <properties>
+    <property name="kind" value="equipment"/>
+    <property name="slot" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="222" name="slot1" type="Slot" x="80" y="128" width="48" height="48">
+   <properties>
+    <property name="kind" value="equipment"/>
+    <property name="slot" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="223" name="slot2" type="Slot" x="128" y="128" width="48" height="48">
+   <properties>
+    <property name="kind" value="equipment"/>
+    <property name="slot" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="224" name="slot3" type="Slot" x="32" y="176" width="48" height="48">
+   <properties>
+    <property name="kind" value="equipment"/>
+    <property name="slot" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="225" name="slot4" type="Slot" x="80" y="176" width="48" height="48">
+   <properties>
+    <property name="kind" value="equipment"/>
+    <property name="slot" type="int" value="4"/>
+   </properties>
+  </object>
+  <object id="226" name="slot5" type="Slot" x="128" y="176" width="48" height="48">
+   <properties>
+    <property name="kind" value="equipment"/>
+    <property name="slot" type="int" value="5"/>
+   </properties>
+  </object>
+  <object id="227" name="slot6" type="Slot" x="32" y="224" width="48" height="48">
+   <properties>
+    <property name="kind" value="equipment"/>
+    <property name="slot" type="int" value="6"/>
+   </properties>
+  </object>
+  <object id="228" name="slot7" type="Slot" x="80" y="224" width="48" height="48">
+   <properties>
+    <property name="kind" value="equipment"/>
+    <property name="slot" type="int" value="7"/>
+   </properties>
+  </object>
+  <object id="229" name="slot8" type="Slot" x="128" y="224" width="48" height="48">
+   <properties>
+    <property name="kind" value="equipment"/>
+    <property name="slot" type="int" value="8"/>
+   </properties>
+  </object>
+  <object id="230" name="close" type="Button" x="171" y="85" width="16" height="16">
+   <properties>
+    <property name="action" value="close_screen"/>
+    <property name="enabled" type="bool" value="true"/>
+    <property name="sprite" value="close"/>
+    <property name="target" value=""/>
+   </properties>
+  </object>
+  <object id="316" name="equipped_bg" type="Box" x="200" y="156" width="272" height="28">
+   <properties>
+    <property name="color" value="#99000000"/>
+   </properties>
+  </object>
+  <object id="317" name="equipped_label" type="Label" x="206" y="156" width="60" height="28">
+   <properties>
+    <property name="align" value="left"/>
+    <property name="color" value="#ffffff"/>
+    <property name="size" type="int" value="10"/>
+    <property name="text" value="Wearing:"/>
+   </properties>
+  </object>
+  <object id="318" name="equipped_name" type="Label" x="270" y="156" width="196" height="28">
+   <properties>
+    <property name="align" value="left"/>
+    <property name="bind" value="equipped_name"/>
+    <property name="color" value="#ffd54f"/>
+    <property name="size" type="int" value="10"/>
+    <property name="text" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="9" name="Buy">
+  <properties>
+   <property name="freeze_game" type="bool" value="true"/>
+   <property name="hotkey" value=""/>
+   <property name="include" value="Profile,Details,Message,Trade"/>
+   <property name="modal" type="bool" value="false"/>
+   <property name="persistent" type="bool" value="false"/>
+  </properties>
+  <object id="259" name="panel" type="Panel" x="16" y="80" width="176" height="208">
+   <properties>
+    <property name="sprite" value="main_panel"/>
+   </properties>
+  </object>
+  <object id="260" name="previous" type="Button" x="32" y="96" width="32" height="32">
+   <properties>
+    <property name="action" value="switch_screen"/>
+    <property name="enabled" type="bool" value="true"/>
+    <property name="sprite" value="previous"/>
+    <property name="target" value="Equipment"/>
+   </properties>
+  </object>
+  <object id="261" name="next" type="Button" x="144" y="96" width="32" height="32">
+   <properties>
+    <property name="action" value="switch_screen"/>
+    <property name="enabled" type="bool" value="true"/>
+    <property name="sprite" value="next"/>
+    <property name="target" value="Sell"/>
+   </properties>
+  </object>
+  <object id="262" name="title" type="Label" x="64" y="96" width="80" height="32">
+   <properties>
+    <property name="align" value="center"/>
+    <property name="color" value="#63452c"/>
+    <property name="size" type="int" value="10"/>
+    <property name="text" value="Buy"/>
+   </properties>
+  </object>
+  <object id="263" name="slot0" type="Slot" x="32" y="128" width="48" height="48">
+   <properties>
+    <property name="kind" value="buy"/>
+    <property name="slot" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="264" name="slot1" type="Slot" x="80" y="128" width="48" height="48">
+   <properties>
+    <property name="kind" value="buy"/>
+    <property name="slot" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="265" name="slot2" type="Slot" x="128" y="128" width="48" height="48">
+   <properties>
+    <property name="kind" value="buy"/>
+    <property name="slot" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="266" name="slot3" type="Slot" x="32" y="176" width="48" height="48">
+   <properties>
+    <property name="kind" value="buy"/>
+    <property name="slot" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="267" name="slot4" type="Slot" x="80" y="176" width="48" height="48">
+   <properties>
+    <property name="kind" value="buy"/>
+    <property name="slot" type="int" value="4"/>
+   </properties>
+  </object>
+  <object id="268" name="slot5" type="Slot" x="128" y="176" width="48" height="48">
+   <properties>
+    <property name="kind" value="buy"/>
+    <property name="slot" type="int" value="5"/>
+   </properties>
+  </object>
+  <object id="269" name="slot6" type="Slot" x="32" y="224" width="48" height="48">
+   <properties>
+    <property name="kind" value="buy"/>
+    <property name="slot" type="int" value="6"/>
+   </properties>
+  </object>
+  <object id="270" name="slot7" type="Slot" x="80" y="224" width="48" height="48">
+   <properties>
+    <property name="kind" value="buy"/>
+    <property name="slot" type="int" value="7"/>
+   </properties>
+  </object>
+  <object id="271" name="slot8" type="Slot" x="128" y="224" width="48" height="48">
+   <properties>
+    <property name="kind" value="buy"/>
+    <property name="slot" type="int" value="8"/>
+   </properties>
+  </object>
+  <object id="272" name="close" type="Button" x="171" y="85" width="16" height="16">
+   <properties>
+    <property name="action" value="close_screen"/>
+    <property name="enabled" type="bool" value="true"/>
+    <property name="sprite" value="close"/>
+    <property name="target" value=""/>
+   </properties>
+  </object>
+  <object id="319" name="restock_bg" type="Box" x="200" y="138" width="272" height="16">
+   <properties>
+    <property name="color" value="#99000000"/>
+   </properties>
+  </object>
+  <object id="320" name="restock" type="Label" x="206" y="138" width="262" height="16">
+   <properties>
+    <property name="align" value="left"/>
+    <property name="bind" value="restock"/>
+    <property name="color" value="#ffd54f"/>
+    <property name="size" type="int" value="8"/>
+    <property name="text" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="8" name="Sell">
+  <properties>
+   <property name="freeze_game" type="bool" value="true"/>
+   <property name="hotkey" value=""/>
+   <property name="include" value="Profile,Details,Message,Trade"/>
+   <property name="modal" type="bool" value="false"/>
+   <property name="persistent" type="bool" value="false"/>
+  </properties>
+  <object id="287" name="panel" type="Panel" x="16" y="80" width="176" height="208">
+   <properties>
+    <property name="sprite" value="main_panel"/>
+   </properties>
+  </object>
+  <object id="288" name="previous" type="Button" x="32" y="96" width="32" height="32">
+   <properties>
+    <property name="action" value="switch_screen"/>
+    <property name="enabled" type="bool" value="true"/>
+    <property name="sprite" value="previous"/>
+    <property name="target" value="Buy"/>
+   </properties>
+  </object>
+  <object id="289" name="next" type="Button" x="144" y="96" width="32" height="32">
+   <properties>
+    <property name="action" value="switch_screen"/>
+    <property name="enabled" type="bool" value="false"/>
+    <property name="sprite" value="next"/>
+    <property name="target" value=""/>
+   </properties>
+  </object>
+  <object id="290" name="title" type="Label" x="64" y="96" width="80" height="32">
+   <properties>
+    <property name="align" value="center"/>
+    <property name="color" value="#63452c"/>
+    <property name="size" type="int" value="10"/>
+    <property name="text" value="Sell"/>
+   </properties>
+  </object>
+  <object id="291" name="slot0" type="Slot" x="32" y="128" width="48" height="48">
+   <properties>
+    <property name="kind" value="sell"/>
+    <property name="slot" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="292" name="slot1" type="Slot" x="80" y="128" width="48" height="48">
+   <properties>
+    <property name="kind" value="sell"/>
+    <property name="slot" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="293" name="slot2" type="Slot" x="128" y="128" width="48" height="48">
+   <properties>
+    <property name="kind" value="sell"/>
+    <property name="slot" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="294" name="slot3" type="Slot" x="32" y="176" width="48" height="48">
+   <properties>
+    <property name="kind" value="sell"/>
+    <property name="slot" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="295" name="slot4" type="Slot" x="80" y="176" width="48" height="48">
+   <properties>
+    <property name="kind" value="sell"/>
+    <property name="slot" type="int" value="4"/>
+   </properties>
+  </object>
+  <object id="296" name="slot5" type="Slot" x="128" y="176" width="48" height="48">
+   <properties>
+    <property name="kind" value="sell"/>
+    <property name="slot" type="int" value="5"/>
+   </properties>
+  </object>
+  <object id="297" name="slot6" type="Slot" x="32" y="224" width="48" height="48">
+   <properties>
+    <property name="kind" value="sell"/>
+    <property name="slot" type="int" value="6"/>
+   </properties>
+  </object>
+  <object id="298" name="slot7" type="Slot" x="80" y="224" width="48" height="48">
+   <properties>
+    <property name="kind" value="sell"/>
+    <property name="slot" type="int" value="7"/>
+   </properties>
+  </object>
+  <object id="299" name="slot8" type="Slot" x="128" y="224" width="48" height="48">
+   <properties>
+    <property name="kind" value="sell"/>
+    <property name="slot" type="int" value="8"/>
+   </properties>
+  </object>
+  <object id="300" name="close" type="Button" x="171" y="85" width="16" height="16">
+   <properties>
+    <property name="action" value="close_screen"/>
+    <property name="enabled" type="bool" value="true"/>
+    <property name="sprite" value="close"/>
+    <property name="target" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="12" name="Details">
+  <properties>
+   <property name="freeze_game" type="bool" value="false"/>
+   <property name="hotkey" value=""/>
+   <property name="modal" type="bool" value="false"/>
+   <property name="persistent" type="bool" value="false"/>
+  </properties>
+  <object id="301" name="card_border" type="Box" x="200" y="204" width="272" height="80">
+   <properties>
+    <property name="color" value="#f063452c"/>
+   </properties>
+  </object>
+  <object id="302" name="card" type="Box" x="202" y="206" width="268" height="76">
+   <properties>
+    <property name="color" value="#f0e3c99a"/>
+   </properties>
+  </object>
+  <object id="303" name="item_icon" type="Image" x="208" y="212" width="32" height="32">
+   <properties>
+    <property name="bind" value="item_sprite"/>
+    <property name="sprite" value=""/>
+   </properties>
+  </object>
+  <object id="304" name="item_name" type="Label" x="248" y="212" width="216" height="12">
+   <properties>
+    <property name="align" value="left"/>
+    <property name="bind" value="item_name"/>
+    <property name="color" value="#63452c"/>
+    <property name="size" type="int" value="10"/>
+    <property name="text" value=""/>
+   </properties>
+  </object>
+  <object id="305" name="item_effect" type="Label" x="248" y="226" width="216" height="10">
+   <properties>
+    <property name="align" value="left"/>
+    <property name="bind" value="item_effect"/>
+    <property name="color" value="#2f6b2f"/>
+    <property name="size" type="int" value="8"/>
+    <property name="text" value=""/>
+   </properties>
+  </object>
+  <object id="306" name="item_description" type="Label" x="208" y="248" width="256" height="32">
+   <properties>
+    <property name="align" value="left"/>
+    <property name="bind" value="item_description"/>
+    <property name="color" value="#63452c"/>
+    <property name="size" type="int" value="8"/>
+    <property name="text" value=""/>
+    <property name="wrap" type="bool" value="true"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="13" name="Message">
+  <properties>
+   <property name="freeze_game" type="bool" value="false"/>
+   <property name="hotkey" value=""/>
+   <property name="modal" type="bool" value="false"/>
+   <property name="persistent" type="bool" value="false"/>
+  </properties>
+  <object id="307" name="message_bg" type="Box" x="200" y="186" width="272" height="16">
+   <properties>
+    <property name="color" value="#99000000"/>
+   </properties>
+  </object>
+  <object id="308" name="message" type="Label" x="204" y="186" width="264" height="16">
+   <properties>
+    <property name="align" value="left"/>
+    <property name="bind" value="message"/>
+    <property name="color" value="#ffffff"/>
+    <property name="size" type="int" value="8"/>
+    <property name="text" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="14" name="Trade">
+  <properties>
+   <property name="freeze_game" type="bool" value="false"/>
+   <property name="hotkey" value=""/>
+   <property name="modal" type="bool" value="false"/>
+   <property name="persistent" type="bool" value="false"/>
+  </properties>
+  <object id="309" name="trade_bg" type="Box" x="200" y="156" width="272" height="28">
+   <properties>
+    <property name="color" value="#99000000"/>
+   </properties>
+  </object>
+  <object id="310" name="qty_down" type="Button" x="206" y="159" width="24" height="22">
+   <properties>
+    <property name="action" value="qty_down"/>
+    <property name="enabled" type="bool" value="true"/>
+    <property name="sprite" value="qty_down"/>
+    <property name="target" value=""/>
+    <property name="text" value="-"/>
+   </properties>
+  </object>
+  <object id="311" name="quantity" type="Label" x="232" y="159" width="32" height="22">
+   <properties>
+    <property name="align" value="center"/>
+    <property name="bind" value="quantity"/>
+    <property name="color" value="#ffffff"/>
+    <property name="size" type="int" value="10"/>
+    <property name="text" value=""/>
+   </properties>
+  </object>
+  <object id="312" name="qty_up" type="Button" x="266" y="159" width="24" height="22">
+   <properties>
+    <property name="action" value="qty_up"/>
+    <property name="enabled" type="bool" value="true"/>
+    <property name="sprite" value="qty_up"/>
+    <property name="target" value=""/>
+    <property name="text" value="+"/>
+   </properties>
+  </object>
+  <object id="313" name="total_coin" type="Image" x="304" y="162" width="16" height="16">
+   <properties>
+    <property name="sprite" value="coin"/>
+   </properties>
+  </object>
+  <object id="314" name="total_price" type="Label" x="324" y="159" width="56" height="22">
+   <properties>
+    <property name="align" value="left"/>
+    <property name="bind" value="total_price"/>
+    <property name="color" value="#ffffff"/>
+    <property name="size" type="int" value="10"/>
+    <property name="text" value=""/>
+   </properties>
+  </object>
+  <object id="315" name="confirm" type="Button" x="400" y="159" width="66" height="22">
+   <properties>
+    <property name="action" value="confirm"/>
+    <property name="enabled" type="bool" value="true"/>
+    <property name="sprite" value="confirm"/>
+    <property name="target" value=""/>
+    <property name="text" value="Confirm"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

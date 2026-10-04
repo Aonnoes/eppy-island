@@ -1,17 +1,20 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:eppy_island/components/collision_block.dart';
+import 'package:eppy_island/components/blocks.dart';
 import 'package:eppy_island/components/player.dart';
-import 'package:eppy_island/components/utils.dart';
-import 'package:eppy_island/components/warp_block.dart';
 import 'package:eppy_island/eppy_island.dart';
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/foundation.dart';
 
 class Level extends World with HasGameRef<EppyIsland> {
-  Level({required this.levelName, required this.player, this.spawnName});
+  Level({
+    required this.levelName,
+    required this.player,
+    this.spawnName,
+    this.startPosition,
+  });
 
   static const double _tileSize = 16;
   static const String _spawnLayer = 'Spawnpoints';
@@ -28,6 +31,10 @@ class Level extends World with HasGameRef<EppyIsland> {
   /// found), the level's default 'Player' spawn is used.
   final String? spawnName;
 
+  /// Exact position to start at (used when loading a save). Wins over the
+  /// spawn points.
+  final Vector2? startPosition;
+
   late final TiledComponent _map;
   final List<CollisionBlock> _collisionBlocks = [];
   final List<WarpBlock> _warpBlocks = [];
@@ -42,6 +49,7 @@ class Level extends World with HasGameRef<EppyIsland> {
   FutureOr<void> onLoad() async {
     await _loadMap();
     _placeSpawnPoints();
+    if (startPosition != null) player.position = startPosition!.clone();
     _buildCollisionBlocksAndWarps();
 
     player.bindCollisionBlocks(_collisionBlocks);

@@ -1,0 +1,37 @@
+{
+  "slots": 9,
+  "refreshMinutes": 60,
+  "pool": [
+    { "id": "carrot_seed", "weight": 12 },
+    { "id": "radish_seed", "weight": 12 },
+    { "id": "wheat_seed", "weight": 11 },
+    { "id": "corn_seed", "weight": 10 },
+    { "id": "potato_seed", "weight": 9 },
+    { "id": "beet_seed", "weight": 9 },
+    { "id": "tomato_seed", "weight": 8 },
+    { "id": "cabbage_seed", "weight": 8 },
+
+    { "id": "lettuce_seed", "weight": 7 },
+    { "id": "pea_seed", "weight": 7 },
+    { "id": "cauliflower_seed", "weight": 6 },
+    { "id": "cucumber_seed", "weight": 6 },
+    { "id": "eggplant_seed", "weight": 6 },
+    { "id": "broccoli_seed", "weight": 5 },
+    { "id": "mushroom_seed", "weight": 5 },
+
+    { "id": "blueberry_seed", "weight": 4 },
+    { "id": "raspberry_seed", "weight": 4 },
+    { "id": "grape_seed", "weight": 4 },
+    { "id": "peach_seed", "weight": 3 },
+    { "id": "plum_seed", "weight": 3 },
+
+    { "id": "sweet_potato_seed", "weight": 3 },
+    { "id": "sunflower_seed", "weight": 3 },
+    { "id": "pineapple_seed", "weight": 2 },
+    { "id": "watermelon_seed", "weight": 2 },
+    { "id": "blue_melon_seed", "weight": 2 },
+    { "id": "starfruit_seed", "weight": 1 },
+    { "id": "blue_starfruit_seed", "weight": 1 },
+    { "id": "blue_berry_seed", "weight": 1 }
+  ]
+}

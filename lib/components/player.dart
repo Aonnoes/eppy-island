@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:eppy_island/components/collision_block.dart';
+import 'package:eppy_island/components/blocks.dart';
 import 'package:eppy_island/components/direction.dart';
 import 'package:eppy_island/eppy_island.dart';
 import 'package:flame/components.dart';

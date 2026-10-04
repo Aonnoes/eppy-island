@@ -1,0 +1,441 @@
+{
+  "source": "Farming_Plants_Items_v2.png",
+  "sprite_size": "16x16",
+  "items": [
+    {
+      "id": "corn_seed",
+      "row": 1,
+      "column": 1,
+      "type": "seed",
+      "file": "corn_seed.png"
+    },
+    {
+      "id": "corn_plant",
+      "row": 1,
+      "column": 2,
+      "type": "plant",
+      "file": "corn_plant.png"
+    },
+    {
+      "id": "sunflower_seed",
+      "row": 1,
+      "column": 3,
+      "type": "seed",
+      "file": "sunflower_seed.png"
+    },
+    {
+      "id": "sunflower",
+      "row": 1,
+      "column": 4,
+      "type": "crop",
+      "file": "sunflower.png"
+    },
+    {
+      "id": "stone",
+      "row": 1,
+      "column": 5,
+      "type": "variant_or_extra",
+      "file": "stone.png"
+    },
+    {
+      "id": "carrot_seed",
+      "row": 2,
+      "column": 1,
+      "type": "seed",
+      "file": "carrot_seed.png"
+    },
+    {
+      "id": "carrot_plant",
+      "row": 2,
+      "column": 2,
+      "type": "plant",
+      "file": "carrot_plant.png"
+    },
+    {
+      "id": "sweet_potato_seed",
+      "row": 2,
+      "column": 3,
+      "type": "seed",
+      "file": "sweet_potato_seed.png"
+    },
+    {
+      "id": "sweet_potato",
+      "row": 2,
+      "column": 4,
+      "type": "crop",
+      "file": "sweet_potato.png"
+    },
+    {
+      "id": "cauliflower_seed",
+      "row": 3,
+      "column": 1,
+      "type": "seed",
+      "file": "cauliflower_seed.png"
+    },
+    {
+      "id": "cauliflower_plant",
+      "row": 3,
+      "column": 2,
+      "type": "plant",
+      "file": "cauliflower_plant.png"
+    },
+    {
+      "id": "potato_seed",
+      "row": 3,
+      "column": 3,
+      "type": "seed",
+      "file": "potato_seed.png"
+    },
+    {
+      "id": "potato",
+      "row": 3,
+      "column": 4,
+      "type": "crop",
+      "file": "potato.png"
+    },
+    {
+      "id": "potato_with_leaves",
+      "row": 3,
+      "column": 5,
+      "type": "variant_or_extra",
+      "file": "potato_with_leaves.png"
+    },
+    {
+      "id": "beet_seed",
+      "row": 4,
+      "column": 1,
+      "type": "seed",
+      "file": "beet_seed.png"
+    },
+    {
+      "id": "beet_plant",
+      "row": 4,
+      "column": 2,
+      "type": "plant",
+      "file": "beet_plant.png"
+    },
+    {
+      "id": "watermelon_seed",
+      "row": 4,
+      "column": 3,
+      "type": "seed",
+      "file": "watermelon_seed.png"
+    },
+    {
+      "id": "watermelon",
+      "row": 4,
+      "column": 4,
+      "type": "crop",
+      "file": "watermelon.png"
+    },
+    {
+      "id": "watermelon_slice",
+      "row": 4,
+      "column": 5,
+      "type": "variant_or_extra",
+      "file": "watermelon_slice.png"
+    },
+    {
+      "id": "plum_seed",
+      "row": 5,
+      "column": 1,
+      "type": "seed",
+      "file": "plum_seed.png"
+    },
+    {
+      "id": "plum_plant",
+      "row": 5,
+      "column": 2,
+      "type": "plant",
+      "file": "plum_plant.png"
+    },
+    {
+      "id": "eggplant_seed",
+      "row": 5,
+      "column": 3,
+      "type": "seed",
+      "file": "eggplant_seed.png"
+    },
+    {
+      "id": "eggplant",
+      "row": 5,
+      "column": 4,
+      "type": "crop",
+      "file": "eggplant.png"
+    },
+    {
+      "id": "eggplant_with_leaves",
+      "row": 5,
+      "column": 5,
+      "type": "variant_or_extra",
+      "file": "eggplant_with_leaves.png"
+    },
+    {
+      "id": "blue_berry_seed",
+      "row": 6,
+      "column": 1,
+      "type": "seed",
+      "file": "blue_berry_seed.png"
+    },
+    {
+      "id": "blue_berry_plant",
+      "row": 6,
+      "column": 2,
+      "type": "plant",
+      "file": "blue_berry_plant.png"
+    },
+    {
+      "id": "blue_melon_seed",
+      "row": 6,
+      "column": 3,
+      "type": "seed",
+      "file": "blue_melon_seed.png"
+    },
+    {
+      "id": "blue_melon",
+      "row": 6,
+      "column": 4,
+      "type": "crop",
+      "file": "blue_melon.png"
+    },
+    {
+      "id": "lettuce_seed",
+      "row": 7,
+      "column": 1,
+      "type": "seed",
+      "file": "lettuce_seed.png"
+    },
+    {
+      "id": "lettuce_plant",
+      "row": 7,
+      "column": 2,
+      "type": "plant",
+      "file": "lettuce_plant.png"
+    },
+    {
+      "id": "cucumber_seed",
+      "row": 7,
+      "column": 3,
+      "type": "seed",
+      "file": "cucumber_seed.png"
+    },
+    {
+      "id": "cucumber",
+      "row": 7,
+      "column": 4,
+      "type": "crop",
+      "file": "cucumber.png"
+    },
+    {
+      "id": "cucumber_with_leaves",
+      "row": 7,
+      "column": 5,
+      "type": "variant_or_extra",
+      "file": "cucumber_with_leaves.png"
+    },
+    {
+      "id": "wheat_seed",
+      "row": 8,
+      "column": 1,
+      "type": "seed",
+      "file": "wheat_seed.png"
+    },
+    {
+      "id": "wheat_plant",
+      "row": 8,
+      "column": 2,
+      "type": "plant",
+      "file": "wheat_plant.png"
+    },
+    {
+      "id": "pineapple_seed",
+      "row": 8,
+      "column": 3,
+      "type": "seed",
+      "file": "pineapple_seed.png"
+    },
+    {
+      "id": "pineapple",
+      "row": 8,
+      "column": 4,
+      "type": "crop",
+      "file": "pineapple.png"
+    },
+    {
+      "id": "tomato_seed",
+      "row": 9,
+      "column": 1,
+      "type": "seed",
+      "file": "tomato_seed.png"
+    },
+    {
+      "id": "tomato_plant",
+      "row": 9,
+      "column": 2,
+      "type": "plant",
+      "file": "tomato_plant.png"
+    },
+    {
+      "id": "pumpkin_seed",
+      "row": 9,
+      "column": 3,
+      "type": "seed",
+      "file": "pumpkin_seed.png"
+    },
+    {
+      "id": "pumpkin",
+      "row": 9,
+      "column": 4,
+      "type": "crop",
+      "file": "pumpkin.png"
+    },
+    {
+      "id": "pear_slice",
+      "row": 9,
+      "column": 5,
+      "type": "variant_or_extra",
+      "file": "pear_slice.png"
+    },
+    {
+      "id": "radish_seed",
+      "row": 10,
+      "column": 1,
+      "type": "seed",
+      "file": "radish_seed.png"
+    },
+    {
+      "id": "radish_plant",
+      "row": 10,
+      "column": 2,
+      "type": "plant",
+      "file": "radish_plant.png"
+    },
+    {
+      "id": "mushroom_seed",
+      "row": 10,
+      "column": 3,
+      "type": "seed",
+      "file": "mushroom_seed.png"
+    },
+    {
+      "id": "mushroom",
+      "row": 10,
+      "column": 4,
+      "type": "crop",
+      "file": "mushroom.png"
+    },
+    {
+      "id": "raspberry_seed",
+      "row": 11,
+      "column": 1,
+      "type": "seed",
+      "file": "raspberry_seed.png"
+    },
+    {
+      "id": "raspberry_plant",
+      "row": 11,
+      "column": 2,
+      "type": "plant",
+      "file": "raspberry_plant.png"
+    },
+    {
+      "id": "peach_seed",
+      "row": 11,
+      "column": 3,
+      "type": "seed",
+      "file": "peach_seed.png"
+    },
+    {
+      "id": "peach",
+      "row": 11,
+      "column": 4,
+      "type": "crop",
+      "file": "peach.png"
+    },
+    {
+      "id": "grape_seed",
+      "row": 12,
+      "column": 1,
+      "type": "seed",
+      "file": "grape_seed.png"
+    },
+    {
+      "id": "grape_plant",
+      "row": 12,
+      "column": 2,
+      "type": "plant",
+      "file": "grape_plant.png"
+    },
+    {
+      "id": "blueberry_seed",
+      "row": 12,
+      "column": 3,
+      "type": "seed",
+      "file": "blueberry_seed.png"
+    },
+    {
+      "id": "blueberry",
+      "row": 12,
+      "column": 4,
+      "type": "crop",
+      "file": "blueberry.png"
+    },
+    {
+      "id": "starfruit_seed",
+      "row": 13,
+      "column": 1,
+      "type": "seed",
+      "file": "starfruit_seed.png"
+    },
+    {
+      "id": "starfruit_plant",
+      "row": 13,
+      "column": 2,
+      "type": "plant",
+      "file": "starfruit_plant.png"
+    },
+    {
+      "id": "blue_starfruit_seed",
+      "row": 13,
+      "column": 3,
+      "type": "seed",
+      "file": "blue_starfruit_seed.png"
+    },
+    {
+      "id": "blue_starfruit",
+      "row": 13,
+      "column": 4,
+      "type": "crop",
+      "file": "blue_starfruit.png"
+    },
+    {
+      "id": "pea_seed",
+      "row": 14,
+      "column": 1,
+      "type": "seed",
+      "file": "pea_seed.png"
+    },
+    {
+      "id": "pea_plant",
+      "row": 14,
+      "column": 2,
+      "type": "plant",
+      "file": "pea_plant.png"
+    },
+    {
+      "id": "broccoli_seed",
+      "row": 14,
+      "column": 3,
+      "type": "seed",
+      "file": "broccoli_seed.png"
+    },
+    {
+      "id": "broccoli",
+      "row": 14,
+      "column": 4,
+      "type": "crop",
+      "file": "broccoli.png"
+    }
+  ],
+  "note": "Names are best-effort visual identifications from the supplied sprite sheet; a few unusual blue/purple/red crops are intentionally descriptive."
+}

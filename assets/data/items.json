@@ -1,0 +1,591 @@
+{
+  "items": [
+    {
+      "id": "corn_seed",
+      "type": "seed",
+      "name": "Corn Seed",
+      "sprite": "corn_seed",
+      "buyPrice": 10,
+      "sellPrice": 5,
+      "effect": "Plant in tilled dirt",
+      "description": "A sturdy little seed that grows into golden corn."
+    },
+    {
+      "id": "corn_plant",
+      "type": "crop",
+      "name": "Corn",
+      "sprite": "corn_plant",
+      "buyPrice": 0,
+      "sellPrice": 25,
+      "effect": "A fresh crop",
+      "description": "Golden, sweet, and surprisingly filling."
+    },
+
+    {
+      "id": "sunflower_seed",
+      "type": "seed",
+      "name": "Sunflower Seed",
+      "sprite": "sunflower_seed",
+      "buyPrice": 15,
+      "sellPrice": 7,
+      "effect": "Plant in tilled dirt",
+      "description": "A cheerful seed that grows toward the sun."
+    },
+    {
+      "id": "sunflower",
+      "type": "crop",
+      "name": "Sunflower",
+      "sprite": "sunflower",
+      "buyPrice": 0,
+      "sellPrice": 35,
+      "effect": "A fresh crop",
+      "description": "A bright flower with a sunny disposition."
+    },
+
+    {
+      "id": "carrot_seed",
+      "type": "seed",
+      "name": "Carrot Seed",
+      "sprite": "carrot_seed",
+      "buyPrice": 15,
+      "sellPrice": 7,
+      "effect": "Plant in tilled dirt",
+      "description": "A small seed for a crunchy underground crop."
+    },
+    {
+      "id": "carrot_plant",
+      "type": "crop",
+      "name": "Carrot",
+      "sprite": "carrot_plant",
+      "buyPrice": 0,
+      "sellPrice": 35,
+      "effect": "A fresh crop",
+      "description": "Bright orange, crisp, and naturally sweet."
+    },
+
+    {
+      "id": "sweet_potato_seed",
+      "type": "seed",
+      "name": "Sweet Potato Seed",
+      "sprite": "sweet_potato_seed",
+      "buyPrice": 20,
+      "sellPrice": 10,
+      "effect": "Plant in tilled dirt",
+      "description": "A hearty seed that grows into a sweet root."
+    },
+    {
+      "id": "sweet_potato",
+      "type": "crop",
+      "name": "Sweet Potato",
+      "sprite": "sweet_potato",
+      "buyPrice": 0,
+      "sellPrice": 50,
+      "effect": "A fresh crop",
+      "description": "Sweet, filling, and easy to cook."
+    },
+
+    {
+      "id": "cauliflower_seed",
+      "type": "seed",
+      "name": "Cauliflower Seed",
+      "sprite": "cauliflower_seed",
+      "buyPrice": 20,
+      "sellPrice": 10,
+      "effect": "Plant in tilled dirt",
+      "description": "A slow-growing seed with a chunky harvest."
+    },
+    {
+      "id": "cauliflower_plant",
+      "type": "crop",
+      "name": "Cauliflower",
+      "sprite": "cauliflower_plant",
+      "buyPrice": 0,
+      "sellPrice": 55,
+      "effect": "A fresh crop",
+      "description": "A dense white vegetable with a mild flavor."
+    },
+
+    {
+      "id": "potato_seed",
+      "type": "seed",
+      "name": "Potato Seed",
+      "sprite": "potato_seed",
+      "buyPrice": 20,
+      "sellPrice": 10,
+      "effect": "Plant in tilled dirt",
+      "description": "Grows underground. Patience pays off."
+    },
+    {
+      "id": "potato",
+      "type": "crop",
+      "name": "Potato",
+      "sprite": "potato",
+      "buyPrice": 0,
+      "sellPrice": 55,
+      "effect": "A fresh crop",
+      "description": "A humble farm staple."
+    },
+
+    {
+      "id": "beet_seed",
+      "type": "seed",
+      "name": "Beet Seed",
+      "sprite": "beet_seed",
+      "buyPrice": 20,
+      "sellPrice": 10,
+      "effect": "Plant in tilled dirt",
+      "description": "A hardy seed that grows into a deep-red root."
+    },
+    {
+      "id": "beet_plant",
+      "type": "crop",
+      "name": "Beet",
+      "sprite": "beet_plant",
+      "buyPrice": 0,
+      "sellPrice": 60,
+      "effect": "A fresh crop",
+      "description": "A sweet and earthy crimson root."
+    },
+
+    {
+      "id": "watermelon_seed",
+      "type": "seed",
+      "name": "Watermelon Seed",
+      "sprite": "watermelon_seed",
+      "buyPrice": 35,
+      "sellPrice": 17,
+      "effect": "Plant in tilled dirt",
+      "description": "Needs plenty of space to grow."
+    },
+    {
+      "id": "watermelon",
+      "type": "crop",
+      "name": "Watermelon",
+      "sprite": "watermelon",
+      "buyPrice": 0,
+      "sellPrice": 120,
+      "effect": "A fresh crop",
+      "description": "A huge juicy fruit packed with refreshing sweetness."
+    },
+
+    {
+      "id": "plum_seed",
+      "type": "seed",
+      "name": "Plum Seed",
+      "sprite": "plum_seed",
+      "buyPrice": 30,
+      "sellPrice": 15,
+      "effect": "Plant in tilled dirt",
+      "description": "A small seed that grows sweet purple fruit."
+    },
+    {
+      "id": "plum_plant",
+      "type": "crop",
+      "name": "Plum",
+      "sprite": "plum_plant",
+      "buyPrice": 0,
+      "sellPrice": 80,
+      "effect": "A fresh crop",
+      "description": "A soft purple fruit with a sweet, juicy center."
+    },
+
+    {
+      "id": "eggplant_seed",
+      "type": "seed",
+      "name": "Eggplant Seed",
+      "sprite": "eggplant_seed",
+      "buyPrice": 25,
+      "sellPrice": 12,
+      "effect": "Plant in tilled dirt",
+      "description": "A tiny seed that grows into a dark purple vegetable."
+    },
+    {
+      "id": "eggplant",
+      "type": "crop",
+      "name": "Eggplant",
+      "sprite": "eggplant",
+      "buyPrice": 0,
+      "sellPrice": 65,
+      "effect": "A fresh crop",
+      "description": "Smooth, purple, and slightly mysterious."
+    },
+
+    {
+      "id": "blue_berry_seed",
+      "type": "seed",
+      "name": "Blue Berry Seed",
+      "sprite": "blue_berry_seed",
+      "buyPrice": 45,
+      "sellPrice": 22,
+      "effect": "Plant in tilled dirt",
+      "description": "A strange seed that produces clusters of blue berries."
+    },
+    {
+      "id": "blue_berry_plant",
+      "type": "crop",
+      "name": "Blue Berry",
+      "sprite": "blue_berry_plant",
+      "buyPrice": 0,
+      "sellPrice": 110,
+      "effect": "A fresh crop",
+      "description": "An unusually bright blue berry."
+    },
+
+    {
+      "id": "blue_melon_seed",
+      "type": "seed",
+      "name": "Blue Melon Seed",
+      "sprite": "blue_melon_seed",
+      "buyPrice": 60,
+      "sellPrice": 30,
+      "effect": "Plant in tilled dirt",
+      "description": "A rare seed that grows a strange blue melon."
+    },
+    {
+      "id": "blue_melon",
+      "type": "crop",
+      "name": "Blue Melon",
+      "sprite": "blue_melon",
+      "buyPrice": 0,
+      "sellPrice": 180,
+      "effect": "A fresh crop",
+      "description": "A bizarre blue melon that looks almost magical."
+    },
+
+    {
+      "id": "lettuce_seed",
+      "type": "seed",
+      "name": "Lettuce Seed",
+      "sprite": "lettuce_seed",
+      "buyPrice": 20,
+      "sellPrice": 10,
+      "effect": "Plant in tilled dirt",
+      "description": "A simple seed for a leafy green crop."
+    },
+    {
+      "id": "lettuce_plant",
+      "type": "crop",
+      "name": "Lettuce",
+      "sprite": "lettuce_plant",
+      "buyPrice": 0,
+      "sellPrice": 45,
+      "effect": "A fresh crop",
+      "description": "Fresh, leafy, and pleasantly crunchy."
+    },
+
+    {
+      "id": "cucumber_seed",
+      "type": "seed",
+      "name": "Cucumber Seed",
+      "sprite": "cucumber_seed",
+      "buyPrice": 25,
+      "sellPrice": 12,
+      "effect": "Plant in tilled dirt",
+      "description": "A quick-growing seed for a crisp green vegetable."
+    },
+    {
+      "id": "cucumber",
+      "type": "crop",
+      "name": "Cucumber",
+      "sprite": "cucumber",
+      "buyPrice": 0,
+      "sellPrice": 60,
+      "effect": "A fresh crop",
+      "description": "Cool, crisp, and full of crunch."
+    },
+
+    {
+      "id": "wheat_seed",
+      "type": "seed",
+      "name": "Wheat Seed",
+      "sprite": "wheat_seed",
+      "buyPrice": 10,
+      "sellPrice": 5,
+      "effect": "Plant in tilled dirt",
+      "description": "A simple grain seed with a dependable harvest."
+    },
+    {
+      "id": "wheat_plant",
+      "type": "crop",
+      "name": "Wheat",
+      "sprite": "wheat_plant",
+      "buyPrice": 0,
+      "sellPrice": 30,
+      "effect": "A fresh crop",
+      "description": "Golden grain ready for harvest."
+    },
+
+    {
+      "id": "pineapple_seed",
+      "type": "seed",
+      "name": "Pineapple Seed",
+      "sprite": "pineapple_seed",
+      "buyPrice": 50,
+      "sellPrice": 25,
+      "effect": "Plant in tilled dirt",
+      "description": "A rare seed that grows a spiky tropical fruit."
+    },
+    {
+      "id": "pineapple",
+      "type": "crop",
+      "name": "Pineapple",
+      "sprite": "pineapple",
+      "buyPrice": 0,
+      "sellPrice": 160,
+      "effect": "A fresh crop",
+      "description": "Spiky on the outside and sweet inside."
+    },
+
+    {
+      "id": "tomato_seed",
+      "type": "seed",
+      "name": "Tomato Seed",
+      "sprite": "tomato_seed",
+      "buyPrice": 25,
+      "sellPrice": 12,
+      "effect": "Plant in tilled dirt",
+      "description": "A sunny little seed with a juicy harvest."
+    },
+    {
+      "id": "tomato_plant",
+      "type": "crop",
+      "name": "Tomato",
+      "sprite": "tomato_plant",
+      "buyPrice": 0,
+      "sellPrice": 70,
+      "effect": "A fresh crop",
+      "description": "Juicy, bright red, and always useful."
+    },
+
+    {
+      "id": "pumpkin_seed",
+      "type": "seed",
+      "name": "Pumpkin Seed",
+      "sprite": "pumpkin_seed",
+      "buyPrice": 40,
+      "sellPrice": 20,
+      "effect": "Plant in tilled dirt",
+      "description": "Needs plenty of room to spread."
+    },
+    {
+      "id": "pumpkin",
+      "type": "crop",
+      "name": "Pumpkin",
+      "sprite": "pumpkin",
+      "buyPrice": 0,
+      "sellPrice": 130,
+      "effect": "A fresh crop",
+      "description": "Heavy, round, and wonderfully orange."
+    },
+
+    {
+      "id": "radish_seed",
+      "type": "seed",
+      "name": "Radish Seed",
+      "sprite": "radish_seed",
+      "buyPrice": 15,
+      "sellPrice": 7,
+      "effect": "Plant in tilled dirt",
+      "description": "A quick-growing seed with a peppery harvest."
+    },
+    {
+      "id": "radish_plant",
+      "type": "crop",
+      "name": "Radish",
+      "sprite": "radish_plant",
+      "buyPrice": 0,
+      "sellPrice": 40,
+      "effect": "A fresh crop",
+      "description": "A crisp root with a sharp bite."
+    },
+
+    {
+      "id": "mushroom_seed",
+      "type": "seed",
+      "name": "Mushroom Spore",
+      "sprite": "mushroom_seed",
+      "buyPrice": 30,
+      "sellPrice": 15,
+      "effect": "Plant in tilled dirt",
+      "description": "A strange spore that produces a curious mushroom."
+    },
+    {
+      "id": "mushroom",
+      "type": "crop",
+      "name": "Mushroom",
+      "sprite": "mushroom",
+      "buyPrice": 0,
+      "sellPrice": 85,
+      "effect": "A fresh crop",
+      "description": "A soft mushroom with a rather unusual look."
+    },
+
+    {
+      "id": "raspberry_seed",
+      "type": "seed",
+      "name": "Raspberry Seed",
+      "sprite": "raspberry_seed",
+      "buyPrice": 40,
+      "sellPrice": 20,
+      "effect": "Plant in tilled dirt",
+      "description": "A tiny seed that grows clusters of tart red berries."
+    },
+    {
+      "id": "raspberry_plant",
+      "type": "crop",
+      "name": "Raspberry",
+      "sprite": "raspberry_plant",
+      "buyPrice": 0,
+      "sellPrice": 100,
+      "effect": "A fresh crop",
+      "description": "Bright red, sweet, and slightly tart."
+    },
+
+    {
+      "id": "peach_seed",
+      "type": "seed",
+      "name": "Peach Seed",
+      "sprite": "peach_seed",
+      "buyPrice": 35,
+      "sellPrice": 17,
+      "effect": "Plant in tilled dirt",
+      "description": "A seed that grows soft and juicy peach fruit."
+    },
+    {
+      "id": "peach",
+      "type": "crop",
+      "name": "Peach",
+      "sprite": "peach",
+      "buyPrice": 0,
+      "sellPrice": 90,
+      "effect": "A fresh crop",
+      "description": "Soft, sweet, and delightfully juicy."
+    },
+
+    {
+      "id": "grape_seed",
+      "type": "seed",
+      "name": "Grape Seed",
+      "sprite": "grape_seed",
+      "buyPrice": 40,
+      "sellPrice": 20,
+      "effect": "Plant in tilled dirt",
+      "description": "A seed that grows small clusters of juicy grapes."
+    },
+    {
+      "id": "grape_plant",
+      "type": "crop",
+      "name": "Grapes",
+      "sprite": "grape_plant",
+      "buyPrice": 0,
+      "sellPrice": 105,
+      "effect": "A fresh crop",
+      "description": "A bunch of juicy grapes ready to pick."
+    },
+
+    {
+      "id": "blueberry_seed",
+      "type": "seed",
+      "name": "Blueberry Seed",
+      "sprite": "blueberry_seed",
+      "buyPrice": 35,
+      "sellPrice": 17,
+      "effect": "Plant in tilled dirt",
+      "description": "A seed that grows sweet little blue berries."
+    },
+    {
+      "id": "blueberry",
+      "type": "crop",
+      "name": "Blueberry",
+      "sprite": "blueberry",
+      "buyPrice": 0,
+      "sellPrice": 85,
+      "effect": "A fresh crop",
+      "description": "Small, sweet, and packed with flavor."
+    },
+
+    {
+      "id": "starfruit_seed",
+      "type": "seed",
+      "name": "Starfruit Seed",
+      "sprite": "starfruit_seed",
+      "buyPrice": 50,
+      "sellPrice": 25,
+      "effect": "Plant in tilled dirt",
+      "description": "A rare seed with an unusual star-shaped harvest."
+    },
+    {
+      "id": "starfruit_plant",
+      "type": "crop",
+      "name": "Starfruit",
+      "sprite": "starfruit_plant",
+      "buyPrice": 0,
+      "sellPrice": 150,
+      "effect": "A fresh crop",
+      "description": "A strange fruit with a star-shaped form."
+    },
+
+    {
+      "id": "blue_starfruit_seed",
+      "type": "seed",
+      "name": "Blue Starfruit Seed",
+      "sprite": "blue_starfruit_seed",
+      "buyPrice": 70,
+      "sellPrice": 35,
+      "effect": "Plant in tilled dirt",
+      "description": "A mysterious seed that produces an unusual blue fruit."
+    },
+    {
+      "id": "blue_starfruit",
+      "type": "crop",
+      "name": "Blue Starfruit",
+      "sprite": "blue_starfruit",
+      "buyPrice": 0,
+      "sellPrice": 220,
+      "effect": "A fresh crop",
+      "description": "An extremely unusual blue star-shaped fruit."
+    },
+
+    {
+      "id": "pea_seed",
+      "type": "seed",
+      "name": "Pea Seed",
+      "sprite": "pea_seed",
+      "buyPrice": 20,
+      "sellPrice": 10,
+      "effect": "Plant in tilled dirt",
+      "description": "A small seed that grows into a green pod."
+    },
+    {
+      "id": "pea_plant",
+      "type": "crop",
+      "name": "Pea Pod",
+      "sprite": "pea_plant",
+      "buyPrice": 0,
+      "sellPrice": 45,
+      "effect": "A fresh crop",
+      "description": "A fresh green pod filled with tiny peas."
+    },
+
+    {
+      "id": "broccoli_seed",
+      "type": "seed",
+      "name": "Broccoli Seed",
+      "sprite": "broccoli_seed",
+      "buyPrice": 30,
+      "sellPrice": 15,
+      "effect": "Plant in tilled dirt",
+      "description": "A sturdy seed that grows into a leafy green crop."
+    },
+    {
+      "id": "broccoli",
+      "type": "crop",
+      "name": "Broccoli",
+      "sprite": "broccoli",
+      "buyPrice": 0,
+      "sellPrice": 75,
+      "effect": "A fresh crop",
+      "description": "A green vegetable with a dense, leafy crown."
+    }
+  ]
+}
