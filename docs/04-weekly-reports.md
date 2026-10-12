@@ -12,20 +12,19 @@ One entry per week, newest at the top. Reports were due every Sunday. Week 1 beg
 
 **In progress**
 - Weekly reports, demo video, and AI usage document
-- Farming and the dungeon games (not started in code yet)
+- Farming and the dungeon games
 
 **Blocked or stuck on**
-- [fill in]
+- Still figuring out how to approach farming and dungeon mechanics without making the existing code harder to maintain. It is easy to plan features on paper, but turning them into working game systems requires breaking them down into smaller parts first.
 
 **Decisions made, and why**
-- Documented the web demo's save limitation instead of hiding it. The browser cannot write the local save file, so the demo starts from the default save each visit
-- [fill in]
+- Documented the web demo's save limitation. The browser cannot write the local save file, so the demo starts from the default save each visit.
+- Prioritized documenting the current features and limitations before adding more mechanics, so the project stays understandable and easier to continue developing.
 
-**Hours spent, roughly:** [fill in]
+**Hours spent, roughly:** 6–8 hours
 
 **Next week I will:**
-- Start farming: planting, growing, and harvesting crops
-- Start the first dungeon game
+- Do the forreal final revisions
 
 ---
 
@@ -48,18 +47,18 @@ One entry per week, newest at the top. Reports were due every Sunday. Week 1 beg
 - Dungeon games
 
 **Blocked or stuck on**
-- [fill in]. After the refactor on Sep 30, a commit says you would not be touching that code again, so describe what went wrong or felt hard
-- [fill in]. The Oct 4 commit is marked "i dont wanna explain this one", so say what it was
+- The September 30 refactor was harder than expected because changing the structure of several modules at once made it difficult to tell whether a problem came from the original logic or the new implementation. Fixing one issue sometimes exposed another, and I had to spend time understanding how the classes interacted instead of simply adding features.
+- The October 4 changes were another frustrating debugging session. Getting the UI, inventory, shop, and player data to work together meant dealing with small inconsistencies that were not always obvious at first. It was a reminder that a feature can look finished on screen while its underlying logic still needs work.
 
 **Decisions made, and why**
-- Used Claude to refactor the code to be fully object-oriented, so each part of the game (player, level, collisions, warps) is its own class. [fill in your own reason]
-- Moved between maps through warp blocks with a fade, so changing maps feels smooth instead of a hard cut
-- One Tiled map for every screen, with each screen as a layer, so the layout can be changed in Tiled without changing the code
-- Only one piece of equipment can be worn at a time, and each one adds luck, which is the stat the dungeon gambling will use
-- The shop's stock is calculated from the clock instead of being random each time, so everyone gets the same stock in the same hour and nothing about the stock needs to be saved
-- The save file is written to a temporary file and then renamed, so a crash cannot leave a half-written save
+- Used Claude to refactor the code to be fully object-oriented, so each part of the game (player, level, collisions, warps) is its own class. This makes responsibilities easier to separate and should make it easier to add more mechanics without putting everything into one large file.
+- Moved between maps through warp blocks with a fade, so changing maps feels smooth instead of a hard cut.
+- One Tiled map for every screen, with each screen as a layer, so the layout can be changed in Tiled without changing the code.
+- Only one piece of equipment can be worn at a time, and each one adds luck, which is the stat the dungeon gambling will use.
+- The shop's stock is calculated from the clock instead of being random each time, so everyone gets the same stock in the same hour and nothing about the stock needs to be saved.
+- The save file is written to a temporary file and then renamed, so a crash cannot leave a half-written save.
 
-**Hours spent, roughly:** [fill in]
+**Hours spent, roughly:** 15–20 hours
 
 **Next week I will:**
 - Start farming and the dungeon games, the next items in the README
@@ -86,18 +85,16 @@ One entry per week, newest at the top. Reports were due every Sunday. Week 1 beg
 - Moving between maps
 
 **Blocked or stuck on**
-- Collisions took several commits on Sep 27 to get working
-- [fill in]. Early commits include a missing `dart:ui` import and a note about what belongs in `.gitignore`, so say if setup or tooling slowed you down
+- Collisions took several commits on Sep 27 to get working. It was frustrating because the player could appear to move correctly but still pass through objects or get blocked in the wrong places. Aligning collision shapes with the tilemap and understanding how Flame handled movement and collision detection took more trial and error than expected.
+- Initial setup and tooling also slowed things down. Missing imports, figuring out which files belonged in `.gitignore`, and understanding how the different packages worked together were small issues individually, but they interrupted development while I was still getting familiar with the framework.
 
 **Decisions made, and why**
-- Used Flutter with Flame and `flame_tiled`, so the maps can be drawn in Tiled and loaded into the game
-- Used integer scaling and no image smoothing, because blurry or uneven pixels look wrong in pixel art
-- [fill in why you picked the Sprout Lands art pack]
+- Used Flutter with Flame and `flame_tiled`, so the maps can be drawn in Tiled and loaded into the game.
+- Used integer scaling and no image smoothing, because blurry or uneven pixels look wrong in pixel art.
+- Picked the Sprout Lands art pack because its cozy, colorful style fits the farming and exploration concept. Using a consistent asset pack also helped the game look more cohesive without having to create every sprite from scratch.
 
-**Hours spent, roughly:** [fill in]
+**Hours spent, roughly:** 12–16 hours
 
 **Next week I will:**
 - Clean up the code
 - Add transitions between maps
-
----

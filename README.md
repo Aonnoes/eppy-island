@@ -9,16 +9,7 @@
 
 ---
 
-## Screenshots - PERIODIC UPDATES
-
-| Week #1 Progress | Mockup Reference |
-| --- | --- |
-| ![Home Island v1](assets/week1.png) | ![Home Island](assets/home_mockup.png) |
-
-| Week #2 Progress | Mockup Reference |
-| --- | --- |
-| ![Home Island v2](assets/week2a.png) | ![Home Island](assets/home_mockup.png) |
-| ![Town Island v1](assets/week2b.png) | ![Town Island](assets/town_mockup.png) |
+## Screenshots - TODO
 
 ## Description
 
@@ -56,7 +47,7 @@ flutter run -d  chrome // linux // windows // macos
 
 Progress is saved to `eppy_island_save.json` when you run the game on a device. The live web demo cannot write that file, so it starts fresh each visit.
 
-### Environment variables - N/A
+### Environment variables
 
 The game does not use any environment variables, API keys, or secrets.
 
@@ -96,7 +87,7 @@ The player moves between maps through warp blocks with a fade transition. The in
     - High Low
     - (more if time allows)
 
-## Credits - PERIODIC UPDATES
+## Credits
 
 - **Sprout Lands** — a simple cute 16-bit pixel art farming asset pack with animals and farming, along with farming GUI asset pack with icons, buttons, character expresions, and many other tiles in pastel colors. Also came with sound effects.
   - Source: [Asset Pack](https://cupnooble.itch.io/sprout-lands-asset-pack) and [UI Expansion](https://cupnooble.itch.io/sprout-lands-ui-pack)
