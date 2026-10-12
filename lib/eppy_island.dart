@@ -1,11 +1,10 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:eppy_island/components/direction.dart';
 import 'package:eppy_island/components/level.dart';
 import 'package:eppy_island/components/player.dart';
 import 'package:eppy_island/components/screen_fade.dart';
-import 'package:eppy_island/models/item_catalog.dart';
+import 'package:eppy_island/models/items.dart';
 import 'package:eppy_island/models/player_profile.dart';
 import 'package:eppy_island/models/shop.dart';
 import 'package:eppy_island/services/save_service.dart';

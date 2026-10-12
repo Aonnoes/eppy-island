@@ -2,10 +2,75 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:eppy_island/components/blocks.dart';
-import 'package:eppy_island/components/direction.dart';
 import 'package:eppy_island/eppy_island.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
+
+/// The eight directions a character can face and move in, plus [none].
+///
+/// Each direction knows its own movement vector and how to be built from
+/// keyboard or joystick input, so nobody else needs a switch over it.
+enum Direction {
+  n(0, -1),
+  s(0, 1),
+  w(-1, 0),
+  e(1, 0),
+  nw(-1, -1),
+  ne(1, -1),
+  sw(-1, 1),
+  se(1, 1),
+  none(0, 0);
+
+  const Direction(this.dx, this.dy);
+
+  final double dx;
+  final double dy;
+
+  bool get isMoving => this != Direction.none;
+
+  /// Unit-length movement vector (zero vector for [none]).
+  Vector2 get vector {
+    final v = Vector2(dx, dy);
+    if (v.length2 > 0) v.normalize();
+    return v;
+  }
+
+  /// Suffix used in sprite sheet file names, e.g. "NW".
+  String get spriteSuffix => name.toUpperCase();
+
+  /// WASD input -> direction.
+  static Direction fromKeys(Set<LogicalKeyboardKey> keysPressed) {
+    final left = keysPressed.contains(LogicalKeyboardKey.keyA);
+    final right = keysPressed.contains(LogicalKeyboardKey.keyD);
+    final up = keysPressed.contains(LogicalKeyboardKey.keyW);
+    final down = keysPressed.contains(LogicalKeyboardKey.keyS);
+
+    if (left && up) return Direction.nw;
+    if (left && down) return Direction.sw;
+    if (right && up) return Direction.ne;
+    if (right && down) return Direction.se;
+    if (left) return Direction.w;
+    if (right) return Direction.e;
+    if (up) return Direction.n;
+    if (down) return Direction.s;
+    return Direction.none;
+  }
+
+  /// On-screen joystick input -> direction.
+  static Direction fromJoystick(JoystickDirection direction) {
+    return switch (direction) {
+      JoystickDirection.up => Direction.n,
+      JoystickDirection.down => Direction.s,
+      JoystickDirection.left => Direction.w,
+      JoystickDirection.right => Direction.e,
+      JoystickDirection.upLeft => Direction.nw,
+      JoystickDirection.upRight => Direction.ne,
+      JoystickDirection.downLeft => Direction.sw,
+      JoystickDirection.downRight => Direction.se,
+      _ => Direction.none,
+    };
+  }
+}
 
 class Player extends SpriteAnimationGroupComponent<Direction>
     with HasGameRef<EppyIsland>, KeyboardHandler {
@@ -26,7 +91,6 @@ class Player extends SpriteAnimationGroupComponent<Direction>
   /// Set to false to freeze the player (e.g. during a level transition).
   bool canMove = true;
 
-  Vector2 _velocity = Vector2.zero();
   List<CollisionBlock> _collisionBlocks = const [];
 
   /// Tells the player which blocks it must not walk through.
@@ -89,21 +153,19 @@ class Player extends SpriteAnimationGroupComponent<Direction>
   void _updateMovement(double dt) {
     if (!canMove) return;
 
-    if (direction.isMoving) {
-      current = direction;
-    }
+    if (direction.isMoving) current = direction;
 
-    _velocity = direction.vector;
+    final velocity = direction.vector;
 
     // Resolve movement one axis at a time to avoid corner-clipping/snagging.
-    position.x += _velocity.x * moveSpeed * dt;
+    position.x += velocity.x * moveSpeed * dt;
     for (final block in _collisionBlocks) {
-      block.resolveHorizontal(this, _velocity.x);
+      block.resolveHorizontal(this, velocity.x);
     }
 
-    position.y += _velocity.y * moveSpeed * dt;
+    position.y += velocity.y * moveSpeed * dt;
     for (final block in _collisionBlocks) {
-      block.resolveVertical(this, _velocity.y);
+      block.resolveVertical(this, velocity.y);
     }
   }
 }

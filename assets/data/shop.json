@@ -1,6 +1,6 @@
 {
   "slots": 9,
-  "refreshMinutes": 60,
+  "refreshMinutes": 2,
   "pool": [
     { "id": "carrot_seed", "weight": 12 },
     { "id": "radish_seed", "weight": 12 },

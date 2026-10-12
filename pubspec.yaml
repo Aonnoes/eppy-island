@@ -31,12 +31,14 @@ flutter:
   assets:
     - assets/images/
 
-
     - assets/images/hud/
     - assets/images/tilesets/
     - assets/images/characters/
     - assets/images/characters/Teemo/
 
     - assets/data/
-
     - assets/tiles/
+  fonts:
+        - family: PixelFont7
+          fonts:
+            - asset: assets/fonts/PixelFont7.ttf

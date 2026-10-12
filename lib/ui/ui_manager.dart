@@ -79,6 +79,11 @@ class UiManager extends PositionComponent with HasGameRef<EppyIsland> {
     _map = await TiledComponent.load(
       _mapFile,
       Vector2.all(16),
+      // No smoothing: keeps the pixel art crisp when the view is scaled up.
+      layerPaintFactory: (opacity) => Paint()
+        ..filterQuality = FilterQuality.none
+        ..isAntiAlias = false
+        ..color = Color.fromRGBO(255, 255, 255, opacity),
       useAtlas: false,
     );
     size = _map.size;
@@ -353,8 +358,8 @@ class UiManager extends PositionComponent with HasGameRef<EppyIsland> {
         position: o.uiPosition,
         size: o.uiSize,
         text: o.str('text'),
-        style: TextStyle(
-          fontSize: o.integer('size', 10).toDouble(),
+        style: uiTextStyle(
+          size: o.integer('size', 10).toDouble(),
           color: parseUiColor(o.str('color'), const Color(0xFFFFFFFF)),
         ),
         align: o.str('align', 'left'),

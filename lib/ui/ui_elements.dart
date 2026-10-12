@@ -12,6 +12,30 @@ import 'package:flutter/painting.dart';
 /// Where the UI sprites live, under assets/images/.
 const String uiImageDir = 'hud/';
 
+/// Font family registered in pubspec.yaml (flutter: fonts: - family: ...).
+const String uiFontFamily = 'PixelFont7';
+
+/// The pixel height the font was drawn at. Pixel fonts only render cleanly at
+/// this size or a whole multiple of it (14, 21, ...). Change this if the font
+/// turns out to have a different native size.
+const double uiFontNativeSize = 7;
+
+/// The one place text styles are built, so all game text uses the font.
+///
+/// [size] (e.g. the `size` property in Tiled) is snapped to the nearest whole
+/// multiple of [uiFontNativeSize], so text never lands between font pixels.
+TextStyle uiTextStyle({
+  double size = uiFontNativeSize,
+  Color color = const Color(0xFFFFFFFF),
+}) {
+  final multiple = (size / uiFontNativeSize).round().clamp(1, 100).toInt();
+  return TextStyle(
+    fontFamily: uiFontFamily,
+    fontSize: multiple * uiFontNativeSize,
+    color: color,
+  );
+}
+
 /// Typed reads of a Tiled object's custom properties, with defaults for when
 /// a property is missing from the map.
 extension UiProps on TiledObject {
@@ -88,6 +112,10 @@ class UiLabel extends TextComponent {
   final TextStyle _style;
   final double? _wrapWidth;
 
+  /// Where the anchor point should be. The component's real position is this,
+  /// nudged so the text's top-left corner lands on a whole pixel.
+  late final Vector2 _target = position.clone();
+
   static Vector2 _anchorPoint(Vector2 p, Vector2 s, String align, bool wrap) {
     final y = wrap ? p.y : p.y + s.y / 2;
     return switch (align) {
@@ -132,6 +160,7 @@ class UiLabel extends TextComponent {
     super.onMount();
     binding?.addListener(_sync);
     _sync();
+    _snapToPixels();
   }
 
   @override
@@ -142,7 +171,20 @@ class UiLabel extends TextComponent {
 
   void _sync() {
     final b = binding;
-    if (b != null) text = _wrapText('${b.value}', _style, _wrapWidth);
+    if (b != null) {
+      text = _wrapText('${b.value}', _style, _wrapWidth);
+      _snapToPixels();
+    }
+  }
+
+  /// Text is anchored by its centre or bottom, so an odd width or height
+  /// puts its top-left corner on a half pixel, which blurs pixel fonts.
+  /// Round the corner, then move the anchor point to match.
+  void _snapToPixels() {
+    final offset = Vector2(anchor.x * size.x, anchor.y * size.y);
+    final topLeft = _target - offset;
+    position =
+        Vector2(topLeft.x.roundToDouble(), topLeft.y.roundToDouble()) + offset;
   }
 }
 
@@ -225,7 +267,11 @@ class UiImage extends UiSprite {
 /// A plain coloured rectangle (`Box` in Tiled), for card backgrounds.
 class UiBox extends RectangleComponent {
   UiBox({required Color color, super.position, super.size})
-    : super(paint: Paint()..color = color);
+    : super(
+        paint: Paint()
+          ..isAntiAlias = false
+          ..color = color,
+      );
 }
 
 /// A button drawn with a colour and text, used when the button's sprites
@@ -248,14 +294,13 @@ class UiTextButton extends PositionComponent with TapCallbacks {
   /// Null means the button is disabled.
   final VoidCallback? onPressed;
 
-  final Paint _fill = Paint();
+  final Paint _fill = Paint()..isAntiAlias = false;
   final Paint _border = Paint()
     ..style = PaintingStyle.stroke
     ..strokeWidth = 1
+    ..isAntiAlias = false
     ..color = _borderColor;
-  final TextPaint _text = TextPaint(
-    style: const TextStyle(fontSize: 10, color: Color(0xFFFFFFFF)),
-  );
+  final TextPaint _text = TextPaint(style: uiTextStyle());
 
   bool _down = false;
 
@@ -315,29 +360,29 @@ class UiSlot extends UiSprite with TapCallbacks {
 
   final UiSprite _item = UiSprite();
   final TextComponent _count = TextComponent(
-    anchor: Anchor.bottomRight,
-    textRenderer: TextPaint(
-      style: const TextStyle(fontSize: 8, color: Color(0xFFFFFFFF)),
-    ),
+    textRenderer: TextPaint(style: uiTextStyle()),
   );
 
   final Paint _equippedPaint = Paint()
     ..style = PaintingStyle.stroke
     ..strokeWidth = 1
+    ..isAntiAlias = false
     ..color = const Color(0xFFFFD54F);
   final Paint _selectedPaint = Paint()
     ..style = PaintingStyle.stroke
     ..strokeWidth = 1
+    ..isAntiAlias = false
     ..color = const Color(0xFFFFFFFF);
 
-  final Paint _fallbackPaint = Paint()..color = const Color(0x55000000);
+  final Paint _fallbackPaint = Paint()
+    ..isAntiAlias = false
+    ..color = const Color(0x55000000);
 
   bool _equipped = false;
   bool _selected = false;
 
   @override
   Future<void> onLoad() async {
-    _count.position = Vector2(size.x - 3, size.y - 2);
     addAll([_item, _count]);
   }
 
@@ -394,6 +439,11 @@ class UiSlot extends UiSprite with TapCallbacks {
     _count.text = (stack != null && stack.quantity > 1)
         ? '${stack.quantity}'
         : '';
+    // Bottom-right corner, 3px in from the right and 2px up, on whole pixels.
+    _count.position = Vector2(
+      (size.x - 3 - _count.size.x).roundToDouble(),
+      (size.y - 2 - _count.size.y).roundToDouble(),
+    );
     _selected = selection.isSelected(kind, index);
     _equipped = source?.isEquipped(index) ?? false;
   }
@@ -403,7 +453,11 @@ class UiSlot extends UiSprite with TapCallbacks {
 /// underneath can be clicked.
 class UiBackdrop extends RectangleComponent with TapCallbacks {
   UiBackdrop({required super.size})
-    : super(paint: Paint()..color = const Color(0x99000000));
+    : super(
+        paint: Paint()
+          ..isAntiAlias = false
+          ..color = const Color(0x99000000),
+      );
 
   @override
   void onTapDown(TapDownEvent event) {}

@@ -1,10 +1,8 @@
 import 'dart:math' as math;
 
-import 'package:eppy_island/models/inventory.dart';
-import 'package:eppy_island/models/item.dart';
+import 'package:eppy_island/models/items.dart';
 import 'package:eppy_island/models/player_profile.dart';
 import 'package:eppy_island/models/shop.dart';
-import 'package:eppy_island/ui/slot_sources.dart';
 import 'package:eppy_island/ui/ui_contracts.dart';
 import 'package:flutter/foundation.dart';
 

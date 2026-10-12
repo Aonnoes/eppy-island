@@ -1,8 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:eppy_island/models/item.dart';
-import 'package:eppy_island/models/item_catalog.dart';
+import 'package:eppy_island/models/items.dart';
 import 'package:eppy_island/models/player_profile.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
