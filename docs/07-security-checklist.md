@@ -39,7 +39,7 @@ The application is fully local and does not use Firebase, Supabase, Firestore, S
 
 | # | Check | Yes / No / N/A | Evidence |
 | --- | --- | --- | --- |
-| 19 | Input is validated before it is written, not only styled as valid in the UI | **Yes** | User input is validated before it is stored or used by the game, preventing invalid values from being accepted as valid data. |
+| 19 | Input is validated before it is written, not only styled as valid in the UI | **Yes** | Values are checked in code before they are used, not only limited by the UI. Buying and selling check the quantity, coins, stock, and inventory room before anything changes (`Shop.buy`, `Shop.sell`, `Inventory.add`), and coins cannot go below zero. Loading a save limits item quantities to 1–99 and luck to 1–100, skips unknown item ids, and rejects a save with no `player` section. |
 | 20 | Nothing secret is recoverable from the built app, since a shipped binary can be unpacked | **Yes** | The final build contains no API secrets, passwords, tokens, private keys, or other confidential credentials. |
 
 ## Repository and privacy
@@ -49,9 +49,13 @@ The application is fully local and does not use Firebase, Supabase, Firestore, S
 | 21 | No student number, personal email, phone number or home address in the repository or in commit messages | **Yes** | The repository contains no student numbers, personal contact information, or home addresses. |
 | 22 | No classmate's personal data in the repository | **Yes** | No classmates' private or personally identifiable information is stored in the project. |
 | 23 | Dependencies come from pub.dev, and `build/` and `.dart_tool/` are gitignored | **Yes** | Project dependencies are managed through `pubspec.yaml`, while generated files and build artifacts are excluded from version control. |
-| 24 | Images, fonts and other assets are mine, licensed, or credited | **Yes** | Project assets are either created for the project, used under appropriate licensing, or credited in the project documentation. |
+| 24 | Images, fonts and other assets are mine, licensed, or credited | **Yes** | The art, fonts, and sound effects all come from the Sprout Lands asset packs by Cup Nooble, which are credited in the README. The assets keep their own licenses and are not covered by the project's MIT license. |
 | 25 | Repository visibility is deliberate, and I checked it after my last push | **Yes** | Repository visibility and contents were reviewed before final submission to ensure that only intended project files are publicly accessible. |
 
 ## Anything I found and fixed
 
-The security checklist confirmed that Eppy's Island does not depend on external accounts, private APIs, or a backend, which significantly reduces the amount of sensitive information that needs to be protected. I also ensured that credentials, personal information, generated files, and other private configuration are not included in the repository, while the game's saved data remains local to each player's device. Overall, the final project is designed to minimize the amount of sensitive data collected, stored, and exposed.
+Eppy Island does not use external accounts, private APIs, or a backend, so there is very little sensitive information to protect. The game's saved data stays on the player's own device in one JSON file (`eppy_island_save.json`).
+
+- **Found:** the live web demo cannot write the save file, because the game uses local files that browsers do not allow. The game handles this by starting from the default save, and the limitation is documented in the README and in `06-security-and-privacy.md`.
+- **Handled in code:** the save is written to a temporary file and renamed, so a crash cannot leave a half-written save. An unreadable save is kept as `.corrupt` instead of being deleted.
+- **Fixed:** the sound effects came with the Sprout Lands pack, and the README credits now say so.

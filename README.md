@@ -35,9 +35,9 @@ A silly and unserious dungeon-farming game where players venture underground to 
 | | |
 | --- | --- |
 | Framework | Flutter (Dart) + Flame |
-| State | Flame component state; no external state-management package |
-| Storage | None currently; game data is loaded from assets/Tiled maps |
-| Other packages | flame_tiled — loads and renders Tiled .tmx maps and their object layers |
+| State | Flame component state and Flutter `ChangeNotifier` / `ValueNotifier`; no external state-management package |
+| Storage | A local JSON save file (`eppy_island_save.json`) in the user's documents folder; game data is loaded from `assets/data` and Tiled maps |
+| Other packages | `flame_tiled` — loads and renders Tiled `.tmx` maps and their object layers; `path_provider` — finds the folder for the save file |
 
 ## Running it yourself
 
@@ -54,21 +54,24 @@ flutter create
 flutter run -d  chrome // linux // windows // macos
 ```
 
-### Environment variables - N/A || TODO
+Progress is saved to `eppy_island_save.json` when you run the game on a device. The live web demo cannot write that file, so it starts fresh each visit.
 
-| Variable | What it is | Where to get one |
-| --- | --- | --- |
-| `EXAMPLE_API_KEY` | ... | ... |
+### Environment variables - N/A
 
-## Privacy and secret - N/A || TODO
+The game does not use any environment variables, API keys, or secrets.
+
+## Privacy and secret
 
 - What personal data this app stores, if any, and where it goes.
-  - The app doesn't store any personal information and it doesn't have any way to.
+  - The only data saved is game progress (player name, coins, luck, inventory, equipped item, current map and position) in a local save file on your own device. Nothing is sent anywhere, and the game has no network code.
 - Where the secrets live
-  - The secrets live on my local computer and none of them leave it.
+  - The game has no secrets. Local machine files such as `android/local.properties` stay on my computer and are not committed.
 - Confirm that all sample data, screenshots and the video contain
+  - Only game content and the default player name, with no real personal information.
 
-## Project documentation - TODO
+See [Security and privacy](docs/06-security-and-privacy.md) for details.
+
+## Project documentation
 
 | Document | |
 | --- | --- |
@@ -77,32 +80,25 @@ flutter run -d  chrome // linux // windows // macos
 | [Design system](docs/03-design-system.md) | colors, type, spacing, components |
 | [Weekly reports](docs/04-weekly-reports.md) | what happened each week |
 | [Demo video](docs/05-demo-video.md) | the recording and what it shows |
-| [Security and privacy](docs/06-security-and-privacy.md) | the checklist, filled in |
+| [Security and privacy](docs/06-security-and-privacy.md) | what the game stores and the risks |
+| [Security checklist](docs/07-security-checklist.md) | the checklist, filled in |
+| [AI usage](docs/AI-USAGE.md) | where AI tools were used |
 
-## Status and what is next - PERIODIC UPDATES
+## Status and what is next
 
-The player moves and the framework for collisions work. The town map exists but there's no way to get there yet.
+The player moves between maps through warp blocks with a fade transition. The inventory, equipment, shop, and save system work, and the interface is built from a Tiled map. Farming and the dungeon games are not in yet.
 
-- Warps
-- User Interface
-- Player
-  - Statistics
-  - Money & Luck
-- Inventory System
-  - Equipments (Upgrades)
-  - Items (Sellable, Ingredients, Useables)
-- Shop System
-  - Buying
-  - Selling
-- Dungeon Games
-  - Rock-paper-scissors
-  - Roll the dice
-  - High Low
-  - (more if time allows)
+- Next
+  - Farming (plant seeds, grow and harvest crops)
+  - Dungeon games
+    - Rock-paper-scissors
+    - Roll the dice
+    - High Low
+    - (more if time allows)
 
 ## Credits - PERIODIC UPDATES
 
-- **Sprout Lands** — a simple cute 16-bit pixel art farming asset pack with animals and farming, along with farming GUI asset pack with icons, buttons, character expresions, and many other tiles in pastel colors.
+- **Sprout Lands** — a simple cute 16-bit pixel art farming asset pack with animals and farming, along with farming GUI asset pack with icons, buttons, character expresions, and many other tiles in pastel colors. Also came with sound effects.
   - Source: [Asset Pack](https://cupnooble.itch.io/sprout-lands-asset-pack) and [UI Expansion](https://cupnooble.itch.io/sprout-lands-ui-pack)
   - Artist: [Cup Nooble](https://itch.io/profile/cupnooble)
 
@@ -115,7 +111,7 @@ The player moves and the framework for collisions work. The town map exists but 
 
 If you used AI tools while building this, say so in a sentence or two and say
 where. Honest disclosure is the standard in this course and increasingly outside
-it.
+it. The longer version goes in [AI usage](docs/AI-USAGE.md).
 
 ## License
 
