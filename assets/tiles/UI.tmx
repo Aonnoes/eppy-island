@@ -45,7 +45,7 @@
    <property name="modal" type="bool" value="true"/>
    <property name="persistent" type="bool" value="false"/>
   </properties>
-  <object id="3" name="settings" type="Button" x="192" y="144" width="96" height="32">
+  <object id="3" name="settings" type="Button" x="192" y="131" width="96" height="32">
    <properties>
     <property name="action" value="open_screen"/>
     <property name="enabled" type="bool" value="false"/>
@@ -53,7 +53,7 @@
     <property name="target" value="Settings"/>
    </properties>
   </object>
-  <object id="4" name="resume" type="Button" x="192" y="112" width="96" height="32">
+  <object id="4" name="resume" type="Button" x="192" y="99" width="96" height="32">
    <properties>
     <property name="action" value="close_screen"/>
     <property name="enabled" type="bool" value="true"/>
@@ -61,7 +61,7 @@
     <property name="target" value=""/>
    </properties>
   </object>
-  <object id="5" name="exit" type="Button" x="192" y="176" width="96" height="32">
+  <object id="5" name="exit" type="Button" x="192" y="163" width="96" height="32">
    <properties>
     <property name="action" value="exit_game"/>
     <property name="enabled" type="bool" value="true"/>
@@ -329,12 +329,12 @@
     <property name="target" value=""/>
    </properties>
   </object>
-  <object id="316" name="equipped_bg" type="Box" x="200" y="156" width="272" height="28">
+  <object id="316" name="equipped_bg" type="Box" x="200" y="143" width="272" height="28">
    <properties>
     <property name="color" value="#99000000"/>
    </properties>
   </object>
-  <object id="317" name="equipped_label" type="Label" x="206" y="156" width="60" height="28">
+  <object id="317" name="equipped_label" type="Label" x="206" y="143" width="60" height="28">
    <properties>
     <property name="align" value="left"/>
     <property name="color" value="#ffffff"/>
@@ -342,7 +342,7 @@
     <property name="text" value="Wearing:"/>
    </properties>
   </object>
-  <object id="318" name="equipped_name" type="Label" x="270" y="156" width="196" height="28">
+  <object id="318" name="equipped_name" type="Label" x="270" y="143" width="196" height="28">
    <properties>
     <property name="align" value="left"/>
     <property name="bind" value="equipped_name"/>
@@ -451,12 +451,12 @@
     <property name="target" value=""/>
    </properties>
   </object>
-  <object id="319" name="restock_bg" type="Box" x="200" y="138" width="272" height="16">
+  <object id="319" name="restock_bg" type="Box" x="200" y="125" width="272" height="16">
    <properties>
     <property name="color" value="#99000000"/>
    </properties>
   </object>
-  <object id="320" name="restock" type="Label" x="206" y="138" width="262" height="16">
+  <object id="320" name="restock" type="Label" x="206" y="125" width="262" height="16">
    <properties>
     <property name="align" value="left"/>
     <property name="bind" value="restock"/>
@@ -573,23 +573,23 @@
    <property name="modal" type="bool" value="false"/>
    <property name="persistent" type="bool" value="false"/>
   </properties>
-  <object id="301" name="card_border" type="Box" x="200" y="204" width="272" height="80">
+  <object id="301" name="card_border" type="Box" x="200" y="191" width="272" height="80">
    <properties>
     <property name="color" value="#f063452c"/>
    </properties>
   </object>
-  <object id="302" name="card" type="Box" x="202" y="206" width="268" height="76">
+  <object id="302" name="card" type="Box" x="202" y="193" width="268" height="76">
    <properties>
     <property name="color" value="#f0e3c99a"/>
    </properties>
   </object>
-  <object id="303" name="item_icon" type="Image" x="208" y="212" width="32" height="32">
+  <object id="303" name="item_icon" type="Image" x="208" y="199" width="32" height="32">
    <properties>
     <property name="bind" value="item_sprite"/>
     <property name="sprite" value=""/>
    </properties>
   </object>
-  <object id="304" name="item_name" type="Label" x="248" y="212" width="216" height="12">
+  <object id="304" name="item_name" type="Label" x="248" y="199" width="216" height="12">
    <properties>
     <property name="align" value="left"/>
     <property name="bind" value="item_name"/>
@@ -598,7 +598,7 @@
     <property name="text" value=""/>
    </properties>
   </object>
-  <object id="305" name="item_effect" type="Label" x="248" y="226" width="216" height="10">
+  <object id="305" name="item_effect" type="Label" x="248" y="213" width="216" height="10">
    <properties>
     <property name="align" value="left"/>
     <property name="bind" value="item_effect"/>
@@ -607,7 +607,7 @@
     <property name="text" value=""/>
    </properties>
   </object>
-  <object id="306" name="item_description" type="Label" x="208" y="248" width="256" height="32">
+  <object id="306" name="item_description" type="Label" x="208" y="235" width="256" height="32">
    <properties>
     <property name="align" value="left"/>
     <property name="bind" value="item_description"/>
@@ -625,12 +625,12 @@
    <property name="modal" type="bool" value="false"/>
    <property name="persistent" type="bool" value="false"/>
   </properties>
-  <object id="307" name="message_bg" type="Box" x="200" y="186" width="272" height="16">
+  <object id="307" name="message_bg" type="Box" x="200" y="173" width="272" height="16">
    <properties>
     <property name="color" value="#99000000"/>
    </properties>
   </object>
-  <object id="308" name="message" type="Label" x="204" y="186" width="264" height="16">
+  <object id="308" name="message" type="Label" x="204" y="173" width="264" height="16">
    <properties>
     <property name="align" value="left"/>
     <property name="bind" value="message"/>
@@ -647,12 +647,12 @@
    <property name="modal" type="bool" value="false"/>
    <property name="persistent" type="bool" value="false"/>
   </properties>
-  <object id="309" name="trade_bg" type="Box" x="200" y="156" width="272" height="28">
+  <object id="309" name="trade_bg" type="Box" x="200" y="143" width="272" height="28">
    <properties>
     <property name="color" value="#99000000"/>
    </properties>
   </object>
-  <object id="310" name="qty_down" type="Button" x="206" y="159" width="24" height="22">
+  <object id="310" name="qty_down" type="Button" x="206" y="146" width="24" height="22">
    <properties>
     <property name="action" value="qty_down"/>
     <property name="enabled" type="bool" value="true"/>
@@ -661,7 +661,7 @@
     <property name="text" value="-"/>
    </properties>
   </object>
-  <object id="311" name="quantity" type="Label" x="232" y="159" width="32" height="22">
+  <object id="311" name="quantity" type="Label" x="232" y="146" width="32" height="22">
    <properties>
     <property name="align" value="center"/>
     <property name="bind" value="quantity"/>
@@ -670,7 +670,7 @@
     <property name="text" value=""/>
    </properties>
   </object>
-  <object id="312" name="qty_up" type="Button" x="266" y="159" width="24" height="22">
+  <object id="312" name="qty_up" type="Button" x="266" y="146" width="24" height="22">
    <properties>
     <property name="action" value="qty_up"/>
     <property name="enabled" type="bool" value="true"/>
@@ -679,12 +679,12 @@
     <property name="text" value="+"/>
    </properties>
   </object>
-  <object id="313" name="total_coin" type="Image" x="304" y="162" width="16" height="16">
+  <object id="313" name="total_coin" type="Image" x="304" y="149" width="16" height="16">
    <properties>
     <property name="sprite" value="coin"/>
    </properties>
   </object>
-  <object id="314" name="total_price" type="Label" x="324" y="159" width="56" height="22">
+  <object id="314" name="total_price" type="Label" x="324" y="146" width="56" height="22">
    <properties>
     <property name="align" value="left"/>
     <property name="bind" value="total_price"/>
@@ -693,7 +693,7 @@
     <property name="text" value=""/>
    </properties>
   </object>
-  <object id="315" name="confirm" type="Button" x="400" y="159" width="66" height="22">
+  <object id="315" name="confirm" type="Button" x="400" y="146" width="66" height="22">
    <properties>
     <property name="action" value="confirm"/>
     <property name="enabled" type="bool" value="true"/>
