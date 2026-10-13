@@ -159,16 +159,19 @@ class EppyIsland extends FlameGame
     KeyEvent event,
     Set<LogicalKeyboardKey> keysPressed,
   ) {
-    if (event is KeyDownEvent && (ui?.handleKey(event.logicalKey) ?? false)) {
-      return KeyEventResult.handled;
-    }
     // Action key: till / plant / water / harvest the plot in front of you.
+    // Checked before the UI hotkeys, so E always farms when no screen is open
+    // (the inventory is on Q; set it with the layer's "hotkey" in UI.tmx).
     if (event is KeyDownEvent &&
         (event.logicalKey == LogicalKeyboardKey.keyE ||
             event.logicalKey == LogicalKeyboardKey.space) &&
         !(ui?.hasOpenScreen ?? false) &&
         !_isTransitioning) {
+      debugPrint('Farm: action key pressed.');
       _currentLevel?.interactNearest();
+      return KeyEventResult.handled;
+    }
+    if (event is KeyDownEvent && (ui?.handleKey(event.logicalKey) ?? false)) {
       return KeyEventResult.handled;
     }
     return super.onKeyEvent(event, keysPressed);

@@ -158,7 +158,10 @@ class Level extends World with HasGameRef<EppyIsland> {
 
   void _buildPlots() {
     final layer = _map.tileMap.getLayer<ObjectGroup>(_farmLayer);
-    if (layer == null) return;
+    if (layer == null) {
+      debugPrint('Farm: $levelName has no "$_farmLayer" object layer.');
+      return;
+    }
 
     for (final object in layer.objects) {
       if (object.class_ != _plotClass) continue;
@@ -186,6 +189,7 @@ class Level extends World with HasGameRef<EppyIsland> {
         }
       }
     }
+    debugPrint('Farm: $levelName has ${_plots.length} plot(s).');
   }
 
   /// Works [plot] (tap or action key) if the player is close enough.
@@ -200,7 +204,10 @@ class Level extends World with HasGameRef<EppyIsland> {
 
   /// Works the plot closest to the player, if any is in reach.
   void interactNearest() {
-    if (game.isTransitioning || !player.canMove) return;
+    if (game.isTransitioning || !player.canMove) {
+      debugPrint('Farm: action ignored (transitioning or player frozen).');
+      return;
+    }
 
     PlotComponent? nearest;
     var best = _reach;
@@ -211,7 +218,14 @@ class Level extends World with HasGameRef<EppyIsland> {
         nearest = plot;
       }
     }
-    if (nearest != null) interactWith(nearest);
+    if (nearest == null) {
+      debugPrint(
+        'Farm: no plot within $_reach px of the player at ${player.center} '
+        '(${_plots.length} plots in this level).',
+      );
+      return;
+    }
+    interactWith(nearest);
   }
 
   /// Lets the player use warps again, after they have stepped off them first.

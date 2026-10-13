@@ -13,7 +13,7 @@ import 'package:flutter/services.dart';
 /// { "waterMinutes": 20,
 ///   "crops": [
 ///     { "id": "tomato", "seed": "tomato_seed", "harvest": "tomato_plant",
-///       "growMinutes": 40, "regrowMinutes": 15, "stages": 4, "amount": 1 }
+///       "growMinutes": 40, "regrowMinutes": 15, "stages": 3, "amount": 1 }
 /// ] }
 /// ```
 ///
@@ -68,7 +68,7 @@ class CropCatalog {
             harvest: harvest,
             growTime: grow,
             regrowTime: regrow,
-            stages: max(2, (map['stages'] as num?)?.toInt() ?? 4),
+            stages: max(2, (map['stages'] as num?)?.toInt() ?? Crop.defaultStages),
             amount: max(1, (map['amount'] as num?)?.toInt() ?? 1),
             sprite: map['sprite'] as String?,
           ),

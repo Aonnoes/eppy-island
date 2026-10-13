@@ -8,12 +8,15 @@ import 'package:flame/events.dart';
 import 'package:flutter/foundation.dart';
 
 /// One 16x16 square of farmland. It never blocks movement; it draws its soil
-/// (once tilled, darker when watered) and whatever is growing in it, all read
-/// from [EppyIsland.farm], and can be tapped.
+/// (once tilled) and whatever is growing in it, all read from
+/// [EppyIsland.farm], and can be tapped. A watered plot gets a thin blue
+/// outline.
 ///
 /// Sprites, all under `assets/images/crops/` and all optional:
-///   `<crop sprite>_<stage>.png`   the plant at each growth stage
-///   `soil_tilled.png`, `soil_watered.png`   the soil
+///   `<crop>_stage_1.png`    planted seed
+///   `<crop>_stage_2.png`    sprout
+///   `<crop>_stage_3.png`    ripe plant
+///   `soil_tilled.png`              the soil
 /// A plant sprite taller than the plot grows upwards from the plot's bottom
 /// edge. Anything missing is drawn as simple coloured shapes.
 class PlotComponent extends PositionComponent
@@ -24,7 +27,7 @@ class PlotComponent extends PositionComponent
     required super.size,
   });
 
-  static const String _imageDir = 'crops/';
+  static const String _soilTilled = 'crops/soil_tilled';
 
   /// Unique key used by the farm and the save file.
   final String plotKey;
@@ -41,7 +44,11 @@ class PlotComponent extends PositionComponent
     ..filterQuality = FilterQuality.none
     ..isAntiAlias = false;
   final Paint _dry = Paint()..color = const Color(0x998B5E3C);
-  final Paint _wet = Paint()..color = const Color(0xCC4A2F1A);
+  final Paint _waterOutline = Paint()
+    ..style = PaintingStyle.stroke
+    ..strokeWidth = 1
+    ..isAntiAlias = false
+    ..color = const Color(0xFF3FA9F5);
   final Paint _growing = Paint()..color = const Color(0xFF6DBE45);
   final Paint _ripe = Paint()..color = const Color(0xFFFFD54F);
 
@@ -88,12 +95,22 @@ class PlotComponent extends PositionComponent
     if (!_tilled) return;
 
     _drawSoil(canvas);
+    _drawPlant(canvas);
 
+    if (_watered) {
+      canvas.drawRect(
+        Rect.fromLTWH(0.5, 0.5, size.x - 1, size.y - 1),
+        _waterOutline,
+      );
+    }
+  }
+
+  void _drawPlant(Canvas canvas) {
     final crop = _crop;
     final stage = _stage;
     if (crop == null || stage == null) return;
 
-    final sprite = _spriteNamed('${crop.sprite}_$stage');
+    final sprite = _spriteAt(crop.stageSpritePath(stage));
     if (sprite != null) {
       final s = sprite.srcSize;
       sprite.render(
@@ -114,23 +131,24 @@ class PlotComponent extends PositionComponent
   }
 
   void _drawSoil(Canvas canvas) {
-    final sprite = _spriteNamed(_watered ? 'soil_watered' : 'soil_tilled');
+    final sprite = _spriteAt(_soilTilled);
     if (sprite != null) {
       sprite.render(canvas, size: size, overridePaint: _paint);
       return;
     }
     canvas.drawRect(
       Rect.fromLTWH(1, 1, size.x - 2, size.y - 2),
-      _watered ? _wet : _dry,
+      _dry,
     );
   }
 
-  Sprite? _spriteNamed(String name) {
-    return _sprites.putIfAbsent(name, () {
+  /// [path] is relative to assets/images/, without `.png`.
+  Sprite? _spriteAt(String path) {
+    return _sprites.putIfAbsent(path, () {
       try {
-        return Sprite(game.images.fromCache('$_imageDir$name.png'));
+        return Sprite(game.images.fromCache('$path.png'));
       } catch (_) {
-        debugPrint('Farm: no sprite $_imageDir$name.png (using a placeholder)');
+        debugPrint('Farm: no sprite $path.png (using a placeholder)');
         return null;
       }
     });

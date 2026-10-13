@@ -53,7 +53,8 @@ class Item {
   final String id;
   final String name;
 
-  /// File name (without .png) of the icon under assets/images/hud/.
+  /// Icon, without .png: a plain name is under assets/images/hud/, a path
+  /// like `crops/corn_seed` is under assets/images/.
   final String sprite;
   final String description;
 

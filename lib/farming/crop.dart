@@ -11,7 +11,7 @@ class Crop {
     required this.harvest,
     required this.growTime,
     this.regrowTime,
-    this.stages = 4,
+    this.stages = defaultStages,
     this.amount = 1,
     String? sprite,
   }) : sprite = sprite ?? id;
@@ -31,15 +31,23 @@ class Crop {
   /// after this much watered time. Null means a one-time crop.
   final Duration? regrowTime;
 
-  /// Number of pictures: `crops/<sprite>_0.png` .. `_<stages-1>.png`.
-  /// The last one is the ripe crop.
+  /// Number of growth pictures (see [stageSpritePath]). The last one is the
+  /// ripe crop. Every crop has 3, all its own: planted seed, sprout, ripe.
   final int stages;
+
+  /// Growth pictures every crop has: planted seed, sprout, ripe.
+  static const int defaultStages = 3;
 
   /// How many [harvest] items one harvest gives (before luck).
   final int amount;
 
-  /// Sprite name prefix under assets/images/crops/.
+  /// File name prefix under assets/images/crops/, e.g. `corn`.
   final String sprite;
+
+  /// Picture for a growth [stage] (0-based, as from [stageAfter]), as a path
+  /// under assets/images/. For corn: `crops/corn_stage_1` (planted seed),
+  /// `crops/corn_stage_2` (sprout), `crops/corn_stage_3` (ripe).
+  String stageSpritePath(int stage) => 'crops/${sprite}_stage_${stage + 1}';
 
   bool get regrows => regrowTime != null;
 

@@ -133,7 +133,7 @@
  <objectgroup id="5" name="Inventory">
   <properties>
    <property name="freeze_game" type="bool" value="true"/>
-   <property name="hotkey" value="E"/>
+   <property name="hotkey" value="Q"/>
    <property name="include" value="Profile,Details,Message"/>
    <property name="modal" type="bool" value="false"/>
    <property name="persistent" type="bool" value="false"/>

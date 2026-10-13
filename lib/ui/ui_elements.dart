@@ -58,19 +58,22 @@ extension UiProps on TiledObject {
 
 final Map<String, Sprite?> _spriteCache = {};
 
-/// Loads `hud/[name].png`, or returns null if it is missing. A missing
-/// sprite is logged once, so one missing image doesn't take the UI down.
+/// Loads `hud/[name].png`, or returns null if it is missing. A name with a
+/// folder in it (`crops/corn_seed`) is a path under assets/images/
+/// instead, which is how item icons reach the crop art. A missing sprite is
+/// logged once, so one missing image doesn't take the UI down.
 Sprite? loadUiSprite(EppyIsland game, String name) {
   if (name.isEmpty) return null;
   return _spriteCache.putIfAbsent(name, () {
     try {
-      final sprite = Sprite(game.images.fromCache('$uiImageDir$name.png'));
+      final path = name.contains('/') ? '$name.png' : '$uiImageDir$name.png';
+      final sprite = Sprite(game.images.fromCache(path));
       sprite.paint
         ..filterQuality = FilterQuality.none
         ..isAntiAlias = false;
       return sprite;
     } catch (_) {
-      debugPrint('UI: missing sprite "$name" ($uiImageDir$name.png)');
+      debugPrint('UI: missing sprite "$name"');
       return null;
     }
   });
