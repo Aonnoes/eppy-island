@@ -5,9 +5,9 @@
       "type": "seed",
       "name": "Corn Seed",
       "sprite": "corn_seed",
-      "buyPrice": 10,
-      "sellPrice": 5,
-      "effect": "Plant in tilled dirt",
+      "buyPrice": 15,
+      "sellPrice": 7,
+      "effect": "30 min to grow",
       "description": "A sturdy little seed that grows into golden corn."
     },
     {
@@ -16,19 +16,18 @@
       "name": "Corn",
       "sprite": "corn_plant",
       "buyPrice": 0,
-      "sellPrice": 25,
+      "sellPrice": 27,
       "effect": "A fresh crop",
       "description": "Golden, sweet, and surprisingly filling."
     },
-
     {
       "id": "sunflower_seed",
       "type": "seed",
       "name": "Sunflower Seed",
       "sprite": "sunflower_seed",
-      "buyPrice": 15,
-      "sellPrice": 7,
-      "effect": "Plant in tilled dirt",
+      "buyPrice": 20,
+      "sellPrice": 10,
+      "effect": "35 min to grow",
       "description": "A cheerful seed that grows toward the sun."
     },
     {
@@ -37,11 +36,10 @@
       "name": "Sunflower",
       "sprite": "sunflower",
       "buyPrice": 0,
-      "sellPrice": 35,
+      "sellPrice": 36,
       "effect": "A fresh crop",
       "description": "A bright flower with a sunny disposition."
     },
-
     {
       "id": "carrot_seed",
       "type": "seed",
@@ -49,7 +47,7 @@
       "sprite": "carrot_seed",
       "buyPrice": 15,
       "sellPrice": 7,
-      "effect": "Plant in tilled dirt",
+      "effect": "30 min to grow",
       "description": "A small seed for a crunchy underground crop."
     },
     {
@@ -58,11 +56,10 @@
       "name": "Carrot",
       "sprite": "carrot_plant",
       "buyPrice": 0,
-      "sellPrice": 35,
+      "sellPrice": 27,
       "effect": "A fresh crop",
       "description": "Bright orange, crisp, and naturally sweet."
     },
-
     {
       "id": "sweet_potato_seed",
       "type": "seed",
@@ -70,7 +67,7 @@
       "sprite": "sweet_potato_seed",
       "buyPrice": 20,
       "sellPrice": 10,
-      "effect": "Plant in tilled dirt",
+      "effect": "40 min to grow",
       "description": "A hearty seed that grows into a sweet root."
     },
     {
@@ -79,11 +76,10 @@
       "name": "Sweet Potato",
       "sprite": "sweet_potato",
       "buyPrice": 0,
-      "sellPrice": 50,
+      "sellPrice": 36,
       "effect": "A fresh crop",
       "description": "Sweet, filling, and easy to cook."
     },
-
     {
       "id": "cauliflower_seed",
       "type": "seed",
@@ -91,7 +87,7 @@
       "sprite": "cauliflower_seed",
       "buyPrice": 20,
       "sellPrice": 10,
-      "effect": "Plant in tilled dirt",
+      "effect": "45 min to grow",
       "description": "A slow-growing seed with a chunky harvest."
     },
     {
@@ -100,11 +96,10 @@
       "name": "Cauliflower",
       "sprite": "cauliflower_plant",
       "buyPrice": 0,
-      "sellPrice": 55,
+      "sellPrice": 36,
       "effect": "A fresh crop",
       "description": "A dense white vegetable with a mild flavor."
     },
-
     {
       "id": "potato_seed",
       "type": "seed",
@@ -112,7 +107,7 @@
       "sprite": "potato_seed",
       "buyPrice": 20,
       "sellPrice": 10,
-      "effect": "Plant in tilled dirt",
+      "effect": "40 min to grow",
       "description": "Grows underground. Patience pays off."
     },
     {
@@ -121,11 +116,10 @@
       "name": "Potato",
       "sprite": "potato",
       "buyPrice": 0,
-      "sellPrice": 55,
+      "sellPrice": 36,
       "effect": "A fresh crop",
       "description": "A humble farm staple."
     },
-
     {
       "id": "beet_seed",
       "type": "seed",
@@ -133,7 +127,7 @@
       "sprite": "beet_seed",
       "buyPrice": 20,
       "sellPrice": 10,
-      "effect": "Plant in tilled dirt",
+      "effect": "45 min to grow",
       "description": "A hardy seed that grows into a deep-red root."
     },
     {
@@ -142,19 +136,18 @@
       "name": "Beet",
       "sprite": "beet_plant",
       "buyPrice": 0,
-      "sellPrice": 60,
+      "sellPrice": 36,
       "effect": "A fresh crop",
       "description": "A sweet and earthy crimson root."
     },
-
     {
       "id": "watermelon_seed",
       "type": "seed",
       "name": "Watermelon Seed",
       "sprite": "watermelon_seed",
-      "buyPrice": 35,
-      "sellPrice": 17,
-      "effect": "Plant in tilled dirt",
+      "buyPrice": 45,
+      "sellPrice": 22,
+      "effect": "90 min to grow",
       "description": "Needs plenty of space to grow."
     },
     {
@@ -163,19 +156,18 @@
       "name": "Watermelon",
       "sprite": "watermelon",
       "buyPrice": 0,
-      "sellPrice": 120,
+      "sellPrice": 81,
       "effect": "A fresh crop",
       "description": "A huge juicy fruit packed with refreshing sweetness."
     },
-
     {
       "id": "plum_seed",
       "type": "seed",
       "name": "Plum Seed",
       "sprite": "plum_seed",
-      "buyPrice": 30,
-      "sellPrice": 15,
-      "effect": "Plant in tilled dirt",
+      "buyPrice": 40,
+      "sellPrice": 20,
+      "effect": "60 min to grow, regrows every 30 min",
       "description": "A small seed that grows sweet purple fruit."
     },
     {
@@ -184,11 +176,10 @@
       "name": "Plum",
       "sprite": "plum_plant",
       "buyPrice": 0,
-      "sellPrice": 80,
+      "sellPrice": 72,
       "effect": "A fresh crop",
       "description": "A soft purple fruit with a sweet, juicy center."
     },
-
     {
       "id": "eggplant_seed",
       "type": "seed",
@@ -196,7 +187,7 @@
       "sprite": "eggplant_seed",
       "buyPrice": 25,
       "sellPrice": 12,
-      "effect": "Plant in tilled dirt",
+      "effect": "40 min to grow, regrows every 18 min",
       "description": "A tiny seed that grows into a dark purple vegetable."
     },
     {
@@ -205,19 +196,18 @@
       "name": "Eggplant",
       "sprite": "eggplant",
       "buyPrice": 0,
-      "sellPrice": 65,
+      "sellPrice": 45,
       "effect": "A fresh crop",
       "description": "Smooth, purple, and slightly mysterious."
     },
-
     {
       "id": "blue_berry_seed",
       "type": "seed",
       "name": "Blue Berry Seed",
       "sprite": "blue_berry_seed",
-      "buyPrice": 45,
-      "sellPrice": 22,
-      "effect": "Plant in tilled dirt",
+      "buyPrice": 50,
+      "sellPrice": 25,
+      "effect": "75 min to grow, regrows every 35 min",
       "description": "A strange seed that produces clusters of blue berries."
     },
     {
@@ -226,19 +216,18 @@
       "name": "Blue Berry",
       "sprite": "blue_berry_plant",
       "buyPrice": 0,
-      "sellPrice": 110,
+      "sellPrice": 90,
       "effect": "A fresh crop",
       "description": "An unusually bright blue berry."
     },
-
     {
       "id": "blue_melon_seed",
       "type": "seed",
       "name": "Blue Melon Seed",
       "sprite": "blue_melon_seed",
-      "buyPrice": 60,
-      "sellPrice": 30,
-      "effect": "Plant in tilled dirt",
+      "buyPrice": 65,
+      "sellPrice": 32,
+      "effect": "130 min to grow",
       "description": "A rare seed that grows a strange blue melon."
     },
     {
@@ -247,19 +236,18 @@
       "name": "Blue Melon",
       "sprite": "blue_melon",
       "buyPrice": 0,
-      "sellPrice": 180,
+      "sellPrice": 117,
       "effect": "A fresh crop",
       "description": "A bizarre blue melon that looks almost magical."
     },
-
     {
       "id": "lettuce_seed",
       "type": "seed",
       "name": "Lettuce Seed",
       "sprite": "lettuce_seed",
-      "buyPrice": 20,
-      "sellPrice": 10,
-      "effect": "Plant in tilled dirt",
+      "buyPrice": 10,
+      "sellPrice": 5,
+      "effect": "20 min to grow",
       "description": "A simple seed for a leafy green crop."
     },
     {
@@ -268,19 +256,18 @@
       "name": "Lettuce",
       "sprite": "lettuce_plant",
       "buyPrice": 0,
-      "sellPrice": 45,
+      "sellPrice": 18,
       "effect": "A fresh crop",
       "description": "Fresh, leafy, and pleasantly crunchy."
     },
-
     {
       "id": "cucumber_seed",
       "type": "seed",
       "name": "Cucumber Seed",
       "sprite": "cucumber_seed",
-      "buyPrice": 25,
-      "sellPrice": 12,
-      "effect": "Plant in tilled dirt",
+      "buyPrice": 15,
+      "sellPrice": 7,
+      "effect": "25 min to grow, regrows every 12 min",
       "description": "A quick-growing seed for a crisp green vegetable."
     },
     {
@@ -289,11 +276,10 @@
       "name": "Cucumber",
       "sprite": "cucumber",
       "buyPrice": 0,
-      "sellPrice": 60,
+      "sellPrice": 27,
       "effect": "A fresh crop",
       "description": "Cool, crisp, and full of crunch."
     },
-
     {
       "id": "wheat_seed",
       "type": "seed",
@@ -301,7 +287,7 @@
       "sprite": "wheat_seed",
       "buyPrice": 10,
       "sellPrice": 5,
-      "effect": "Plant in tilled dirt",
+      "effect": "15 min to grow",
       "description": "A simple grain seed with a dependable harvest."
     },
     {
@@ -310,19 +296,18 @@
       "name": "Wheat",
       "sprite": "wheat_plant",
       "buyPrice": 0,
-      "sellPrice": 30,
+      "sellPrice": 9,
       "effect": "A fresh crop",
       "description": "Golden grain ready for harvest."
     },
-
     {
       "id": "pineapple_seed",
       "type": "seed",
       "name": "Pineapple Seed",
       "sprite": "pineapple_seed",
-      "buyPrice": 50,
-      "sellPrice": 25,
-      "effect": "Plant in tilled dirt",
+      "buyPrice": 80,
+      "sellPrice": 40,
+      "effect": "120 min to grow, regrows every 55 min",
       "description": "A rare seed that grows a spiky tropical fruit."
     },
     {
@@ -331,11 +316,10 @@
       "name": "Pineapple",
       "sprite": "pineapple",
       "buyPrice": 0,
-      "sellPrice": 160,
+      "sellPrice": 144,
       "effect": "A fresh crop",
       "description": "Spiky on the outside and sweet inside."
     },
-
     {
       "id": "tomato_seed",
       "type": "seed",
@@ -343,7 +327,7 @@
       "sprite": "tomato_seed",
       "buyPrice": 25,
       "sellPrice": 12,
-      "effect": "Plant in tilled dirt",
+      "effect": "40 min to grow, regrows every 15 min",
       "description": "A sunny little seed with a juicy harvest."
     },
     {
@@ -352,19 +336,18 @@
       "name": "Tomato",
       "sprite": "tomato_plant",
       "buyPrice": 0,
-      "sellPrice": 70,
+      "sellPrice": 45,
       "effect": "A fresh crop",
       "description": "Juicy, bright red, and always useful."
     },
-
     {
       "id": "pumpkin_seed",
       "type": "seed",
       "name": "Pumpkin Seed",
       "sprite": "pumpkin_seed",
-      "buyPrice": 40,
-      "sellPrice": 20,
-      "effect": "Plant in tilled dirt",
+      "buyPrice": 50,
+      "sellPrice": 25,
+      "effect": "100 min to grow",
       "description": "Needs plenty of room to spread."
     },
     {
@@ -373,19 +356,18 @@
       "name": "Pumpkin",
       "sprite": "pumpkin",
       "buyPrice": 0,
-      "sellPrice": 130,
+      "sellPrice": 90,
       "effect": "A fresh crop",
       "description": "Heavy, round, and wonderfully orange."
     },
-
     {
       "id": "radish_seed",
       "type": "seed",
       "name": "Radish Seed",
       "sprite": "radish_seed",
-      "buyPrice": 15,
-      "sellPrice": 7,
-      "effect": "Plant in tilled dirt",
+      "buyPrice": 10,
+      "sellPrice": 5,
+      "effect": "15 min to grow",
       "description": "A quick-growing seed with a peppery harvest."
     },
     {
@@ -394,19 +376,18 @@
       "name": "Radish",
       "sprite": "radish_plant",
       "buyPrice": 0,
-      "sellPrice": 40,
+      "sellPrice": 18,
       "effect": "A fresh crop",
       "description": "A crisp root with a sharp bite."
     },
-
     {
       "id": "mushroom_seed",
       "type": "seed",
-      "name": "Mushroom Spore",
+      "name": "Mushroom Seed",
       "sprite": "mushroom_seed",
-      "buyPrice": 30,
-      "sellPrice": 15,
-      "effect": "Plant in tilled dirt",
+      "buyPrice": 25,
+      "sellPrice": 12,
+      "effect": "50 min to grow",
       "description": "A strange spore that produces a curious mushroom."
     },
     {
@@ -415,11 +396,10 @@
       "name": "Mushroom",
       "sprite": "mushroom",
       "buyPrice": 0,
-      "sellPrice": 85,
+      "sellPrice": 45,
       "effect": "A fresh crop",
       "description": "A soft mushroom with a rather unusual look."
     },
-
     {
       "id": "raspberry_seed",
       "type": "seed",
@@ -427,7 +407,7 @@
       "sprite": "raspberry_seed",
       "buyPrice": 40,
       "sellPrice": 20,
-      "effect": "Plant in tilled dirt",
+      "effect": "60 min to grow, regrows every 28 min",
       "description": "A tiny seed that grows clusters of tart red berries."
     },
     {
@@ -436,19 +416,18 @@
       "name": "Raspberry",
       "sprite": "raspberry_plant",
       "buyPrice": 0,
-      "sellPrice": 100,
+      "sellPrice": 72,
       "effect": "A fresh crop",
       "description": "Bright red, sweet, and slightly tart."
     },
-
     {
       "id": "peach_seed",
       "type": "seed",
       "name": "Peach Seed",
       "sprite": "peach_seed",
-      "buyPrice": 35,
-      "sellPrice": 17,
-      "effect": "Plant in tilled dirt",
+      "buyPrice": 45,
+      "sellPrice": 22,
+      "effect": "70 min to grow, regrows every 32 min",
       "description": "A seed that grows soft and juicy peach fruit."
     },
     {
@@ -457,40 +436,38 @@
       "name": "Peach",
       "sprite": "peach",
       "buyPrice": 0,
-      "sellPrice": 90,
+      "sellPrice": 81,
       "effect": "A fresh crop",
       "description": "Soft, sweet, and delightfully juicy."
     },
-
     {
       "id": "grape_seed",
       "type": "seed",
       "name": "Grape Seed",
       "sprite": "grape_seed",
-      "buyPrice": 40,
-      "sellPrice": 20,
-      "effect": "Plant in tilled dirt",
+      "buyPrice": 45,
+      "sellPrice": 22,
+      "effect": "70 min to grow, regrows every 32 min",
       "description": "A seed that grows small clusters of juicy grapes."
     },
     {
       "id": "grape_plant",
       "type": "crop",
-      "name": "Grapes",
+      "name": "Grape",
       "sprite": "grape_plant",
       "buyPrice": 0,
-      "sellPrice": 105,
+      "sellPrice": 81,
       "effect": "A fresh crop",
       "description": "A bunch of juicy grapes ready to pick."
     },
-
     {
       "id": "blueberry_seed",
       "type": "seed",
       "name": "Blueberry Seed",
       "sprite": "blueberry_seed",
-      "buyPrice": 35,
-      "sellPrice": 17,
-      "effect": "Plant in tilled dirt",
+      "buyPrice": 40,
+      "sellPrice": 20,
+      "effect": "60 min to grow, regrows every 28 min",
       "description": "A seed that grows sweet little blue berries."
     },
     {
@@ -499,19 +476,18 @@
       "name": "Blueberry",
       "sprite": "blueberry",
       "buyPrice": 0,
-      "sellPrice": 85,
+      "sellPrice": 72,
       "effect": "A fresh crop",
       "description": "Small, sweet, and packed with flavor."
     },
-
     {
       "id": "starfruit_seed",
       "type": "seed",
       "name": "Starfruit Seed",
       "sprite": "starfruit_seed",
-      "buyPrice": 50,
-      "sellPrice": 25,
-      "effect": "Plant in tilled dirt",
+      "buyPrice": 60,
+      "sellPrice": 30,
+      "effect": "90 min to grow, regrows every 45 min",
       "description": "A rare seed with an unusual star-shaped harvest."
     },
     {
@@ -520,19 +496,18 @@
       "name": "Starfruit",
       "sprite": "starfruit_plant",
       "buyPrice": 0,
-      "sellPrice": 150,
+      "sellPrice": 108,
       "effect": "A fresh crop",
       "description": "A strange fruit with a star-shaped form."
     },
-
     {
       "id": "blue_starfruit_seed",
       "type": "seed",
       "name": "Blue Starfruit Seed",
       "sprite": "blue_starfruit_seed",
-      "buyPrice": 70,
-      "sellPrice": 35,
-      "effect": "Plant in tilled dirt",
+      "buyPrice": 100,
+      "sellPrice": 50,
+      "effect": "150 min to grow, regrows every 70 min",
       "description": "A mysterious seed that produces an unusual blue fruit."
     },
     {
@@ -541,40 +516,38 @@
       "name": "Blue Starfruit",
       "sprite": "blue_starfruit",
       "buyPrice": 0,
-      "sellPrice": 220,
+      "sellPrice": 180,
       "effect": "A fresh crop",
       "description": "An extremely unusual blue star-shaped fruit."
     },
-
     {
       "id": "pea_seed",
       "type": "seed",
       "name": "Pea Seed",
       "sprite": "pea_seed",
-      "buyPrice": 20,
-      "sellPrice": 10,
-      "effect": "Plant in tilled dirt",
+      "buyPrice": 15,
+      "sellPrice": 7,
+      "effect": "20 min to grow, regrows every 10 min",
       "description": "A small seed that grows into a green pod."
     },
     {
       "id": "pea_plant",
       "type": "crop",
-      "name": "Pea Pod",
+      "name": "Pea",
       "sprite": "pea_plant",
       "buyPrice": 0,
-      "sellPrice": 45,
+      "sellPrice": 14,
       "effect": "A fresh crop",
       "description": "A fresh green pod filled with tiny peas."
     },
-
     {
       "id": "broccoli_seed",
       "type": "seed",
       "name": "Broccoli Seed",
       "sprite": "broccoli_seed",
-      "buyPrice": 30,
-      "sellPrice": 15,
-      "effect": "Plant in tilled dirt",
+      "buyPrice": 40,
+      "sellPrice": 20,
+      "effect": "55 min to grow, regrows every 25 min",
       "description": "A sturdy seed that grows into a leafy green crop."
     },
     {
@@ -583,7 +556,7 @@
       "name": "Broccoli",
       "sprite": "broccoli",
       "buyPrice": 0,
-      "sellPrice": 75,
+      "sellPrice": 72,
       "effect": "A fresh crop",
       "description": "A green vegetable with a dense, leafy crown."
     }

@@ -1,6 +1,6 @@
-import 'package:eppy_island/models/items.dart';
-import 'package:eppy_island/models/player_profile.dart';
-import 'package:eppy_island/models/shop.dart';
+import 'package:eppy_island/items/item.dart';
+import 'package:eppy_island/profile/player_profile.dart';
+import 'package:eppy_island/shop/shop.dart';
 import 'package:flutter/foundation.dart';
 
 /// Where a grid of slots gets its items from.

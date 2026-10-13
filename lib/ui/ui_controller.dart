@@ -1,8 +1,10 @@
 import 'dart:math' as math;
 
-import 'package:eppy_island/models/items.dart';
-import 'package:eppy_island/models/player_profile.dart';
-import 'package:eppy_island/models/shop.dart';
+import 'package:eppy_island/farming/farm.dart';
+import 'package:eppy_island/items/item.dart';
+import 'package:eppy_island/profile/player_profile.dart';
+import 'package:eppy_island/items/inventory.dart';
+import 'package:eppy_island/shop/shop.dart';
 import 'package:eppy_island/ui/ui_contracts.dart';
 import 'package:flutter/foundation.dart';
 
@@ -15,11 +17,16 @@ import 'package:flutter/foundation.dart';
 ///   item_name, item_effect, item_description, item_sprite,
 ///   item_price (one), total_price (quantity x one), quantity, message,
 ///   restock (countdown to the shop's next restock),
+///   notice (short farming feedback, e.g. "Planted Corn Seed"),
+///   seed_name (the seed that will be planted next),
 ///   star1 .. star4 (sprite name for each luck star)
 ///
 /// Button actions handled here: qty_up, qty_down, confirm.
 class UiController implements UiDelegate {
-  UiController({required this.profile, required this.shop}) {
+  UiController({required this.profile, required this.shop, required this.farm}) {
+    farm.activeSeed.addListener(_updateSeedName);
+    profile.inventory.addListener(_updateSeedName);
+    _updateSeedName();
     profile.inventory.addListener(_revalidate);
     profile.coins.addListener(_revalidate);
     profile.equipped.addListener(_updateEquippedName);
@@ -38,6 +45,9 @@ class UiController implements UiDelegate {
 
   final PlayerProfile profile;
   final Shop shop;
+  final Farm farm;
+
+  final ValueNotifier<String> _seedName = ValueNotifier<String>('');
 
   @override
   final UiSelection selection = UiSelection();
@@ -72,6 +82,8 @@ class UiController implements UiDelegate {
     'quantity': _quantity,
     'message': _message,
     'restock': shop.restockText,
+    'notice': farm.notice,
+    'seed_name': _seedName,
     for (var i = 0; i < starCount; i++) 'star${i + 1}': _stars[i],
   };
 
@@ -83,6 +95,11 @@ class UiController implements UiDelegate {
     'equipment': InventorySlotSource(profile, accepts: (i) => i is Equipment),
     // Sell screen: anything the player owns.
     'sell': InventorySlotSource(profile, accepts: (_) => true),
+    // Seeds screen: owned seeds. Tapping one makes it the seed to plant.
+    'seed': InventorySlotSource(
+      profile,
+      accepts: (i) => farm.crops.forSeed(i) != null,
+    ),
     // Buy screen: the shop's stock.
     'buy': ShopSlotSource(shop),
   };
@@ -107,6 +124,14 @@ class UiController implements UiDelegate {
     selection.select(kind, index, stack.item);
 
     if (kind == 'equipment') _toggleEquip(stack.item);
+    if (kind == 'seed') {
+      farm.selectSeed(stack.item);
+      _message.value = 'Planting ${stack.item.name}';
+    }
+  }
+
+  void _updateSeedName() {
+    _seedName.value = farm.seedToPlant(profile)?.name ?? '';
   }
 
   @override

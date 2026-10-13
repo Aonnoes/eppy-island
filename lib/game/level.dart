@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:eppy_island/components/blocks.dart';
-import 'package:eppy_island/components/player.dart';
-import 'package:eppy_island/eppy_island.dart';
+import 'package:eppy_island/entities/blocks.dart';
+import 'package:eppy_island/entities/player.dart';
+import 'package:eppy_island/entities/plot_component.dart';
+import 'package:eppy_island/game/eppy_island.dart';
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/foundation.dart';
@@ -19,6 +20,15 @@ class Level extends World with HasGameRef<EppyIsland> {
   static const double _tileSize = 16;
   static const String _spawnLayer = 'Spawnpoints';
   static const String _collisionLayer = 'Collisions';
+
+  /// Object layer holding farmland. Draw a rectangle (class 'Plot') over any
+  /// area; it is split into 16x16 plots, so a 48x32 rectangle makes 3x2 plots.
+  static const String _farmLayer = 'Farmland';
+  static const String _plotClass = 'Plot';
+
+  /// How close (in pixels, centre to centre) the player must be to a plot to
+  /// work it.
+  static const double _reach = 20;
 
   /// Tiled object class for warp blocks. Set the custom properties
   /// 'targetLevel' (required) and 'targetSpawn' (optional) on the object.
@@ -38,6 +48,7 @@ class Level extends World with HasGameRef<EppyIsland> {
   late final TiledComponent _map;
   final List<CollisionBlock> _collisionBlocks = [];
   final List<WarpBlock> _warpBlocks = [];
+  final List<PlotComponent> _plots = [];
   bool _isWarping = false;
 
   /// Warps only fire once the player has stepped off every warp block since
@@ -51,6 +62,7 @@ class Level extends World with HasGameRef<EppyIsland> {
     _placeSpawnPoints();
     if (startPosition != null) player.position = startPosition!.clone();
     _buildCollisionBlocksAndWarps();
+    _buildPlots();
 
     player.bindCollisionBlocks(_collisionBlocks);
     add(player);
@@ -140,6 +152,66 @@ class Level extends World with HasGameRef<EppyIsland> {
         add(block);
       }
     }
+  }
+
+  // -------------------------------------------------------------------- farm
+
+  void _buildPlots() {
+    final layer = _map.tileMap.getLayer<ObjectGroup>(_farmLayer);
+    if (layer == null) return;
+
+    for (final object in layer.objects) {
+      if (object.class_ != _plotClass) continue;
+
+      // A Tiled "point" has no size: make it one plot on the tile it sits in.
+      final isPoint = object.width < 1 || object.height < 1;
+      final originX = isPoint ? (object.x / _tileSize).floor() * _tileSize : object.x;
+      final originY = isPoint ? (object.y / _tileSize).floor() * _tileSize : object.y;
+      final columns = isPoint ? 1 : (object.width / _tileSize).round();
+      final rows = isPoint ? 1 : (object.height / _tileSize).round();
+      for (var row = 0; row < rows; row++) {
+        for (var col = 0; col < columns; col++) {
+          final plot = PlotComponent(
+            // Stable across launches, so crops stay in the plot they were
+            // planted in. Includes the level so levels never share plots.
+            plotKey: '$levelName:${object.id}:$col,$row',
+            position: Vector2(
+              originX + col * _tileSize,
+              originY + row * _tileSize,
+            ),
+            size: Vector2.all(_tileSize),
+          )..priority = -1; // Under the player.
+          _plots.add(plot);
+          add(plot);
+        }
+      }
+    }
+  }
+
+  /// Works [plot] (tap or action key) if the player is close enough.
+  void interactWith(PlotComponent plot) {
+    if (game.isTransitioning || !player.canMove) return;
+    if (player.center.distanceTo(plot.center) > _reach) {
+      game.farm.say('Too far away');
+      return;
+    }
+    game.farm.interact(game.profile, plot.plotKey);
+  }
+
+  /// Works the plot closest to the player, if any is in reach.
+  void interactNearest() {
+    if (game.isTransitioning || !player.canMove) return;
+
+    PlotComponent? nearest;
+    var best = _reach;
+    for (final plot in _plots) {
+      final d = player.center.distanceTo(plot.center);
+      if (d <= best) {
+        best = d;
+        nearest = plot;
+      }
+    }
+    if (nearest != null) interactWith(nearest);
   }
 
   /// Lets the player use warps again, after they have stepped off them first.

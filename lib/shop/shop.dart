@@ -1,8 +1,11 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:eppy_island/models/items.dart';
-import 'package:eppy_island/models/player_profile.dart';
+import 'package:eppy_island/items/item.dart';
+import 'package:eppy_island/items/item_catalog.dart';
+import 'package:eppy_island/profile/player_profile.dart';
+import 'package:eppy_island/items/inventory.dart';
+import 'package:eppy_island/utils/time_format.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
@@ -110,7 +113,7 @@ class Shop extends ChangeNotifier {
     final period = local ~/ interval;
 
     restockText.value =
-        'Restocks in ${_format(Duration(milliseconds: (period + 1) * interval - local))}';
+        'Restocks in ${formatCountdown(Duration(milliseconds: (period + 1) * interval - local))}';
 
     if (period == _period) return false;
     _period = period;
@@ -139,14 +142,6 @@ class Shop extends ChangeNotifier {
       }
     }
     return picked;
-  }
-
-  static String _format(Duration d) {
-    final total = d.isNegative ? 0 : d.inSeconds;
-    final h = total ~/ 3600;
-    final m = ((total % 3600) ~/ 60).toString().padLeft(2, '0');
-    final s = (total % 60).toString().padLeft(2, '0');
-    return h > 0 ? '$h:$m:$s' : '$m:$s';
   }
 
   // ------------------------------------------------------------ transactions

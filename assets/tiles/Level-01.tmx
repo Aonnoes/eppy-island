@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="18" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="36">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="18" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="41">
  <tileset firstgid="1" source="Hills.tsx"/>
  <tileset firstgid="100" source="Water.tsx"/>
  <tileset firstgid="104" source="Fences.tsx"/>
@@ -146,5 +146,12 @@
     <property name="targetSpawn" value="home-house"/>
    </properties>
   </object>
+ </objectgroup>
+ <objectgroup id="14" name="Farmland">
+  <object id="36" type="Plot" x="192" y="224" width="16" height="16"/>
+  <object id="37" type="Plot" x="224" y="224" width="16" height="16"/>
+  <object id="38" type="Plot" x="256" y="224" width="16" height="16"/>
+  <object id="39" type="Plot" x="288" y="224" width="16" height="16"/>
+  <object id="40" type="Plot" x="320" y="224" width="16" height="16"/>
  </objectgroup>
 </map>

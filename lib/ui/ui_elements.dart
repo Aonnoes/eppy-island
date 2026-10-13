@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:eppy_island/eppy_island.dart';
+import 'package:eppy_island/game/eppy_island.dart';
 import 'package:eppy_island/ui/ui_contracts.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';

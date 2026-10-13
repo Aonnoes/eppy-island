@@ -1,5 +1,5 @@
-import 'package:eppy_island/components/screen_fade.dart';
-import 'package:eppy_island/eppy_island.dart';
+import 'package:eppy_island/game/screen_fade.dart';
+import 'package:eppy_island/game/eppy_island.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';

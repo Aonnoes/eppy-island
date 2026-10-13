@@ -1,0 +1,187 @@
+{
+  "waterMinutes": 20,
+  "crops": [
+    {
+      "id": "corn",
+      "seed": "corn_seed",
+      "harvest": "corn_plant",
+      "growMinutes": 30
+    },
+    {
+      "id": "sunflower",
+      "seed": "sunflower_seed",
+      "harvest": "sunflower",
+      "growMinutes": 35
+    },
+    {
+      "id": "carrot",
+      "seed": "carrot_seed",
+      "harvest": "carrot_plant",
+      "growMinutes": 30
+    },
+    {
+      "id": "sweet_potato",
+      "seed": "sweet_potato_seed",
+      "harvest": "sweet_potato",
+      "growMinutes": 40
+    },
+    {
+      "id": "cauliflower",
+      "seed": "cauliflower_seed",
+      "harvest": "cauliflower_plant",
+      "growMinutes": 45
+    },
+    {
+      "id": "potato",
+      "seed": "potato_seed",
+      "harvest": "potato",
+      "growMinutes": 40
+    },
+    {
+      "id": "beet",
+      "seed": "beet_seed",
+      "harvest": "beet_plant",
+      "growMinutes": 45
+    },
+    {
+      "id": "watermelon",
+      "seed": "watermelon_seed",
+      "harvest": "watermelon",
+      "growMinutes": 90
+    },
+    {
+      "id": "plum",
+      "seed": "plum_seed",
+      "harvest": "plum_plant",
+      "growMinutes": 60,
+      "regrowMinutes": 30
+    },
+    {
+      "id": "eggplant",
+      "seed": "eggplant_seed",
+      "harvest": "eggplant",
+      "growMinutes": 40,
+      "regrowMinutes": 18
+    },
+    {
+      "id": "blue_berry",
+      "seed": "blue_berry_seed",
+      "harvest": "blue_berry_plant",
+      "growMinutes": 75,
+      "regrowMinutes": 35
+    },
+    {
+      "id": "blue_melon",
+      "seed": "blue_melon_seed",
+      "harvest": "blue_melon",
+      "growMinutes": 130
+    },
+    {
+      "id": "lettuce",
+      "seed": "lettuce_seed",
+      "harvest": "lettuce_plant",
+      "growMinutes": 20
+    },
+    {
+      "id": "cucumber",
+      "seed": "cucumber_seed",
+      "harvest": "cucumber",
+      "growMinutes": 25,
+      "regrowMinutes": 12
+    },
+    {
+      "id": "wheat",
+      "seed": "wheat_seed",
+      "harvest": "wheat_plant",
+      "growMinutes": 15
+    },
+    {
+      "id": "pineapple",
+      "seed": "pineapple_seed",
+      "harvest": "pineapple",
+      "growMinutes": 120,
+      "regrowMinutes": 55
+    },
+    {
+      "id": "tomato",
+      "seed": "tomato_seed",
+      "harvest": "tomato_plant",
+      "growMinutes": 40,
+      "regrowMinutes": 15
+    },
+    {
+      "id": "pumpkin",
+      "seed": "pumpkin_seed",
+      "harvest": "pumpkin",
+      "growMinutes": 100
+    },
+    {
+      "id": "radish",
+      "seed": "radish_seed",
+      "harvest": "radish_plant",
+      "growMinutes": 15
+    },
+    {
+      "id": "mushroom",
+      "seed": "mushroom_seed",
+      "harvest": "mushroom",
+      "growMinutes": 50
+    },
+    {
+      "id": "raspberry",
+      "seed": "raspberry_seed",
+      "harvest": "raspberry_plant",
+      "growMinutes": 60,
+      "regrowMinutes": 28
+    },
+    {
+      "id": "peach",
+      "seed": "peach_seed",
+      "harvest": "peach",
+      "growMinutes": 70,
+      "regrowMinutes": 32
+    },
+    {
+      "id": "grape",
+      "seed": "grape_seed",
+      "harvest": "grape_plant",
+      "growMinutes": 70,
+      "regrowMinutes": 32
+    },
+    {
+      "id": "blueberry",
+      "seed": "blueberry_seed",
+      "harvest": "blueberry",
+      "growMinutes": 60,
+      "regrowMinutes": 28
+    },
+    {
+      "id": "starfruit",
+      "seed": "starfruit_seed",
+      "harvest": "starfruit_plant",
+      "growMinutes": 90,
+      "regrowMinutes": 45
+    },
+    {
+      "id": "blue_starfruit",
+      "seed": "blue_starfruit_seed",
+      "harvest": "blue_starfruit",
+      "growMinutes": 150,
+      "regrowMinutes": 70
+    },
+    {
+      "id": "pea",
+      "seed": "pea_seed",
+      "harvest": "pea_plant",
+      "growMinutes": 20,
+      "regrowMinutes": 10
+    },
+    {
+      "id": "broccoli",
+      "seed": "broccoli_seed",
+      "harvest": "broccoli",
+      "growMinutes": 55,
+      "regrowMinutes": 25
+    }
+  ]
+}

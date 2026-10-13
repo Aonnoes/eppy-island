@@ -1,13 +1,16 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:eppy_island/components/level.dart';
-import 'package:eppy_island/components/player.dart';
-import 'package:eppy_island/components/screen_fade.dart';
-import 'package:eppy_island/models/items.dart';
-import 'package:eppy_island/models/player_profile.dart';
-import 'package:eppy_island/models/shop.dart';
-import 'package:eppy_island/services/save_service.dart';
+import 'package:eppy_island/game/level.dart';
+import 'package:eppy_island/entities/player.dart';
+import 'package:eppy_island/game/screen_fade.dart';
+import 'package:eppy_island/farming/crop_catalog.dart';
+import 'package:eppy_island/farming/farm.dart';
+import 'package:eppy_island/items/item_catalog.dart';
+import 'package:eppy_island/profile/player_profile.dart';
+import 'package:eppy_island/shop/shop.dart';
+import 'package:eppy_island/save/save_service.dart';
+import 'package:eppy_island/save/save_data.dart';
 import 'package:eppy_island/ui/ui_controller.dart';
 import 'package:eppy_island/ui/ui_manager.dart';
 import 'package:flame/components.dart';
@@ -53,6 +56,12 @@ class EppyIsland extends FlameGame
   /// What the shop sells (assets/data/shop.json).
   late final Shop shop;
 
+  /// Every crop (assets/data/crops.json).
+  late final CropCatalog crops;
+
+  /// All farmland: tilled soil, planted crops, watering and harvesting.
+  late final Farm farm;
+
   late final CameraComponent cam;
   late final JoystickComponent _joystick;
 
@@ -78,8 +87,10 @@ class EppyIsland extends FlameGame
     // Data first: items, shop, then the player's save.
     final catalog = await ItemCatalog.load();
     shop = await Shop.load(catalog);
+    crops = await CropCatalog.load(catalog);
     final save = await _saves.load();
     profile = PlayerProfile.fromJson(save.player, catalog);
+    farm = Farm(crops: crops)..loadJson(save.farm, catalog);
 
     player = Player(character: profile.character);
     final world = Level(
@@ -102,7 +113,7 @@ class EppyIsland extends FlameGame
     // The UI lives on the viewport, so it stays fixed on screen and survives
     // level changes (only cam.world is swapped in loadLevel).
     final manager = UiManager(
-      delegate: UiController(profile: profile, shop: shop),
+      delegate: UiController(profile: profile, shop: shop, farm: farm),
     );
     ui = manager;
     cam.viewport.add(manager);
@@ -112,6 +123,7 @@ class EppyIsland extends FlameGame
     }
 
     profile.changes.addListener(_scheduleSave);
+    farm.changes.addListener(_scheduleSave);
     _loaded = true;
     return super.onLoad();
   }
@@ -150,6 +162,15 @@ class EppyIsland extends FlameGame
     if (event is KeyDownEvent && (ui?.handleKey(event.logicalKey) ?? false)) {
       return KeyEventResult.handled;
     }
+    // Action key: till / plant / water / harvest the plot in front of you.
+    if (event is KeyDownEvent &&
+        (event.logicalKey == LogicalKeyboardKey.keyE ||
+            event.logicalKey == LogicalKeyboardKey.space) &&
+        !(ui?.hasOpenScreen ?? false) &&
+        !_isTransitioning) {
+      _currentLevel?.interactNearest();
+      return KeyEventResult.handled;
+    }
     return super.onKeyEvent(event, keysPressed);
   }
 
@@ -169,6 +190,7 @@ class EppyIsland extends FlameGame
     await _saves.save(
       SaveData(
         player: profile.toJson(),
+        farm: farm.toJson(),
         level: _currentLevel?.levelName ?? SaveData.defaultLevel,
         x: player.x,
         y: player.y,

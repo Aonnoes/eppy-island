@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math' as math;
 import 'dart:ui';
 
-import 'package:eppy_island/eppy_island.dart';
+import 'package:eppy_island/game/eppy_island.dart';
 import 'package:eppy_island/ui/ui_contracts.dart';
 import 'package:eppy_island/ui/ui_elements.dart';
 import 'package:flame/components.dart';
