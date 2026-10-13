@@ -6,9 +6,12 @@
     "coins": 100,
     "luck": 1,
     "inventory": [
-      { "id": "wheat_seed", "quantity": 1 },
-      { "id": "carrot_seed", "quantity": 1 },
-      {"id": "watermelon", "quantity": 1}
+      { "id": "wheat_seed", "quantity": 3 },
+      { "id": "carrot_seed", "quantity": 3 },
+      {"id": "watermelon", "quantity": 10},
+      { "id": "steven_pickaxe", "quantity": 1 },
+      { "id": "lucky_diamond", "quantity": 1 },
+      {"id": "life_potion", "quantity": 3}
     ]
   },
   "farm": { "tilled": [], "plots": {} },

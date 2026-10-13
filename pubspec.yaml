@@ -37,6 +37,7 @@ flutter:
     - assets/images/characters/Teemo/
 
     - assets/images/crops/
+    - assets/images/equipments/
 
     - assets/data/
     - assets/tiles/

@@ -111,6 +111,24 @@ class PlayerProfile {
 
   void unequip() => equipped.value = null;
 
+  // ------------------------------------------------------------- consumables
+
+  /// Uses up one [item]. Returns false if the player has none.
+  bool consume(Consumable item) => inventory.remove(item, 1);
+
+  /// Luck for a dungeon run: the current [luck] (base plus worn equipment)
+  /// times the multiplier of every consumable in [active], kept between
+  /// [minLuck] and [maxLuck]. It is worked out on the spot and never saved, so
+  /// the multiplier lasts only as long as the caller keeps the consumable in
+  /// [active]. Each consumable in the list multiplies, so two potions give x4.
+  int runLuck([Iterable<Consumable> active = const []]) {
+    var value = luck.value.toDouble();
+    for (final item in active) {
+      value *= item.luckMultiplier;
+    }
+    return value.round().clamp(minLuck, maxLuck).toInt();
+  }
+
   void _updateLuck() {
     luck.value = (_baseLuck + (equipped.value?.luckBonus ?? 0))
         .clamp(minLuck, maxLuck)

@@ -16,7 +16,8 @@ class Item {
   });
 
   /// Reads one entry of items.json. `"type": "equipment"` makes an
-  /// [Equipment]; any other type is a plain item.
+  /// [Equipment], `"type": "consumable"` a [Consumable]; any other type is a
+  /// plain item.
   factory Item.fromJson(Map<String, dynamic> json) {
     final id = json['id'] as String;
     final name = json['name'] as String;
@@ -25,30 +26,50 @@ class Item {
     final buyPrice = (json['buyPrice'] as num?)?.toInt() ?? 0;
     final sellPrice = (json['sellPrice'] as num?)?.toInt() ?? 0;
 
-    if (json['type'] != 'equipment') {
-      return Item(
-        id: id,
-        name: name,
-        sprite: sprite,
-        description: description,
-        effectText: json['effect'] as String? ?? '',
-        buyPrice: buyPrice,
-        sellPrice: sellPrice,
-      );
+    switch (json['type']) {
+      case 'equipment':
+        final luck = (json['luck'] as num?)?.toInt() ?? 0;
+        return Equipment(
+          id: id,
+          name: name,
+          sprite: sprite,
+          description: description,
+          effectText:
+              json['effect'] as String? ?? (luck != 0 ? '+$luck luck' : ''),
+          buyPrice: buyPrice,
+          sellPrice: sellPrice,
+          luckBonus: luck,
+        );
+      case 'consumable':
+        final multiplier = (json['luckMultiplier'] as num?)?.toDouble() ?? 1;
+        return Consumable(
+          id: id,
+          name: name,
+          sprite: sprite,
+          description: description,
+          effectText:
+              json['effect'] as String? ??
+              (multiplier != 1 ? 'x${_trim(multiplier)} luck (dungeon)' : ''),
+          buyPrice: buyPrice,
+          sellPrice: sellPrice,
+          luckMultiplier: multiplier,
+        );
+      default:
+        return Item(
+          id: id,
+          name: name,
+          sprite: sprite,
+          description: description,
+          effectText: json['effect'] as String? ?? '',
+          buyPrice: buyPrice,
+          sellPrice: sellPrice,
+        );
     }
-
-    final luck = (json['luck'] as num?)?.toInt() ?? 0;
-    return Equipment(
-      id: id,
-      name: name,
-      sprite: sprite,
-      description: description,
-      effectText: json['effect'] as String? ?? (luck != 0 ? '+$luck luck' : ''),
-      buyPrice: buyPrice,
-      sellPrice: sellPrice,
-      luckBonus: luck,
-    );
   }
+
+  /// 2.0 -> "2", 1.5 -> "1.5".
+  static String _trim(double value) =>
+      value == value.roundToDouble() ? '${value.round()}' : '$value';
 
   final String id;
   final String name;
@@ -92,6 +113,26 @@ class Equipment extends Item {
   });
 
   final int luckBonus;
+}
+
+/// An item that is used up for a temporary effect. It is never worn.
+///
+/// [luckMultiplier] multiplies the player's luck for one dungeon run only (see
+/// PlayerProfile.runLuck); nothing about it is saved.
+@immutable
+class Consumable extends Item {
+  const Consumable({
+    required super.id,
+    required super.name,
+    required super.sprite,
+    super.description,
+    super.effectText,
+    super.buyPrice,
+    super.sellPrice,
+    this.luckMultiplier = 1,
+  });
+
+  final double luckMultiplier;
 }
 
 /// [quantity] of one [item], as held in an inventory slot.

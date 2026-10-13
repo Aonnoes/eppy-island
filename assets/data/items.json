@@ -559,6 +559,23 @@
       "sellPrice": 72,
       "effect": "A fresh crop",
       "description": "A green vegetable with a dense, leafy crown."
-    }
+    },
+    { "id": "steven_pickaxe",
+      "name": "Steven Pickaxe",
+      "type": "equipment",
+      "sprite": "equipments/steven_pickaxe",
+      "luck": 21
+    },
+    { "id": "lucky_diamond",
+      "name": "Lucky Diamond",
+      "type": "equipment",
+      "sprite": "equipments/lucky_diamond",
+      "luck": 64
+    },
+    { "id": "life_potion",
+      "name": "Life Potion",
+      "type": "consumable",
+      "sprite": "equipments/life_potion",
+      "luckMultiplier": 2 }
   ]
 }
