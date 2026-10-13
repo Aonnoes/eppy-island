@@ -1,24 +1,16 @@
 {
   "version": 1,
   "player": {
-    "username": "Teemo",
-    "userImage": "userimage",
+    "username": "Player",
     "character": "Teemo",
-    "coins": 20,
+    "coins": 100,
     "luck": 1,
-    "equipped": null,
     "inventory": [
-      {
-        "id": "wheat_seed",
-        "quantity": 3
-      },
-      {
-        "id": "wheat_plant",
-        "quantity": 5
-      }
+      { "id": "wheat_seed", "quantity": 1 },
+      { "id": "carrot_seed", "quantity": 1 },
+      {"id": "watermelon", "quantity": 1}
     ]
   },
-  "world": {
-    "level": "Level-01"
-  }
+  "farm": { "tilled": [], "plots": {} },
+  "world": { "level": "Level-01" }
 }
