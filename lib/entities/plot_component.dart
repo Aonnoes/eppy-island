@@ -9,8 +9,8 @@ import 'package:flutter/foundation.dart';
 
 /// One 16x16 square of farmland. It never blocks movement; it draws its soil
 /// (once tilled) and whatever is growing in it, all read from
-/// [EppyIsland.farm], and can be tapped. A watered plot gets a thin blue
-/// outline.
+/// [EppyIsland.farm], and can be tapped. Details about the plot the player
+/// stands on are drawn by PlotInfoLabel.
 ///
 /// Sprites, all under `assets/images/crops/` and all optional:
 ///   `<crop>_stage_1.png`    planted seed
@@ -35,7 +35,6 @@ class PlotComponent extends PositionComponent
   Crop? _crop;
   int? _stage;
   bool _tilled = false;
-  bool _watered = false;
   bool _ready = false;
   double _sinceCheck = 0;
 
@@ -44,11 +43,6 @@ class PlotComponent extends PositionComponent
     ..filterQuality = FilterQuality.none
     ..isAntiAlias = false;
   final Paint _dry = Paint()..color = const Color(0x998B5E3C);
-  final Paint _waterOutline = Paint()
-    ..style = PaintingStyle.stroke
-    ..strokeWidth = 1
-    ..isAntiAlias = false
-    ..color = const Color(0xFF3FA9F5);
   final Paint _growing = Paint()..color = const Color(0xFF6DBE45);
   final Paint _ripe = Paint()..color = const Color(0xFFFFD54F);
 
@@ -81,7 +75,6 @@ class PlotComponent extends PositionComponent
     _crop = farm.plantedAt(plotKey)?.crop;
     _stage = farm.stageOf(plotKey);
     _tilled = farm.isTilled(plotKey);
-    _watered = farm.isWatered(plotKey);
     _ready = farm.isReady(plotKey);
   }
 
@@ -96,13 +89,6 @@ class PlotComponent extends PositionComponent
 
     _drawSoil(canvas);
     _drawPlant(canvas);
-
-    if (_watered) {
-      canvas.drawRect(
-        Rect.fromLTWH(0.5, 0.5, size.x - 1, size.y - 1),
-        _waterOutline,
-      );
-    }
   }
 
   void _drawPlant(Canvas canvas) {

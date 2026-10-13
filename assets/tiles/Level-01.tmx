@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="18" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="41">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="18" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="68">
  <tileset firstgid="1" source="Hills.tsx"/>
  <tileset firstgid="100" source="Water.tsx"/>
  <tileset firstgid="104" source="Fences.tsx"/>
@@ -148,10 +148,21 @@
   </object>
  </objectgroup>
  <objectgroup id="14" name="Farmland">
-  <object id="36" type="Plot" x="192" y="224" width="16" height="16"/>
-  <object id="37" type="Plot" x="224" y="224" width="16" height="16"/>
-  <object id="38" type="Plot" x="256" y="224" width="16" height="16"/>
-  <object id="39" type="Plot" x="288" y="224" width="16" height="16"/>
-  <object id="40" type="Plot" x="320" y="224" width="16" height="16"/>
+  <object id="36" type="Plot" x="184" y="216" width="16" height="16"/>
+  <object id="53" type="Plot" x="184" y="232" width="16" height="16"/>
+  <object id="54" type="Plot" x="204" y="216" width="16" height="16"/>
+  <object id="55" type="Plot" x="204" y="232" width="16" height="16"/>
+  <object id="56" type="Plot" x="224" y="216" width="16" height="16"/>
+  <object id="57" type="Plot" x="224" y="232" width="16" height="16"/>
+  <object id="58" type="Plot" x="244" y="216" width="16" height="16"/>
+  <object id="59" type="Plot" x="244" y="232" width="16" height="16"/>
+  <object id="60" type="Plot" x="264" y="216" width="16" height="16"/>
+  <object id="61" type="Plot" x="264" y="232" width="16" height="16"/>
+  <object id="62" type="Plot" x="284" y="216" width="16" height="16"/>
+  <object id="63" type="Plot" x="284" y="232" width="16" height="16"/>
+  <object id="64" type="Plot" x="304" y="216" width="16" height="16"/>
+  <object id="65" type="Plot" x="304" y="232" width="16" height="16"/>
+  <object id="66" type="Plot" x="324" y="216" width="16" height="16"/>
+  <object id="67" type="Plot" x="324" y="232" width="16" height="16"/>
  </objectgroup>
 </map>

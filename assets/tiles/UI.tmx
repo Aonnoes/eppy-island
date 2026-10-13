@@ -143,14 +143,6 @@
     <property name="sprite" value="main_panel"/>
    </properties>
   </object>
-  <object id="20" name="previous" type="Button" x="32" y="96" width="32" height="32">
-   <properties>
-    <property name="action" value="switch_screen"/>
-    <property name="enabled" type="bool" value="false"/>
-    <property name="sprite" value="previous"/>
-    <property name="target" value=""/>
-   </properties>
-  </object>
   <object id="21" name="next" type="Button" x="144" y="96" width="32" height="32">
    <properties>
     <property name="action" value="switch_screen"/>
@@ -249,14 +241,6 @@
     <property name="enabled" type="bool" value="true"/>
     <property name="sprite" value="previous"/>
     <property name="target" value="Inventory"/>
-   </properties>
-  </object>
-  <object id="219" name="next" type="Button" x="144" y="96" width="32" height="32">
-   <properties>
-    <property name="action" value="switch_screen"/>
-    <property name="enabled" type="bool" value="true"/>
-    <property name="sprite" value="next"/>
-    <property name="target" value="Buy"/>
    </properties>
   </object>
   <object id="220" name="title" type="Label" x="64" y="96" width="80" height="32">
@@ -365,22 +349,6 @@
     <property name="sprite" value="main_panel"/>
    </properties>
   </object>
-  <object id="260" name="previous" type="Button" x="32" y="96" width="32" height="32">
-   <properties>
-    <property name="action" value="switch_screen"/>
-    <property name="enabled" type="bool" value="true"/>
-    <property name="sprite" value="previous"/>
-    <property name="target" value="Equipment"/>
-   </properties>
-  </object>
-  <object id="261" name="next" type="Button" x="144" y="96" width="32" height="32">
-   <properties>
-    <property name="action" value="switch_screen"/>
-    <property name="enabled" type="bool" value="true"/>
-    <property name="sprite" value="next"/>
-    <property name="target" value="Sell"/>
-   </properties>
-  </object>
   <object id="262" name="title" type="Label" x="64" y="96" width="80" height="32">
    <properties>
     <property name="align" value="center"/>
@@ -477,22 +445,6 @@
   <object id="287" name="panel" type="Panel" x="16" y="80" width="176" height="208">
    <properties>
     <property name="sprite" value="main_panel"/>
-   </properties>
-  </object>
-  <object id="288" name="previous" type="Button" x="32" y="96" width="32" height="32">
-   <properties>
-    <property name="action" value="switch_screen"/>
-    <property name="enabled" type="bool" value="true"/>
-    <property name="sprite" value="previous"/>
-    <property name="target" value="Buy"/>
-   </properties>
-  </object>
-  <object id="289" name="next" type="Button" x="144" y="96" width="32" height="32">
-   <properties>
-    <property name="action" value="switch_screen"/>
-    <property name="enabled" type="bool" value="false"/>
-    <property name="sprite" value="next"/>
-    <property name="target" value=""/>
    </properties>
   </object>
   <object id="290" name="title" type="Label" x="64" y="96" width="80" height="32">

@@ -59,3 +59,17 @@ class WarpBlock extends PositionComponent {
   final String targetLevel;
   final String? targetSpawn;
 }
+
+/// An invisible trigger block that opens the UI screen named [screen] (e.g.
+/// "Buy" or "Sell") when the player walks into it.
+///
+/// Like a [WarpBlock], a shop block never blocks movement.
+class ShopBlock extends PositionComponent {
+  ShopBlock({
+    required Vector2 position,
+    required Vector2 size,
+    required this.screen,
+  }) : super(position: position, size: size);
+
+  final String screen;
+}

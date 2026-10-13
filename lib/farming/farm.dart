@@ -65,6 +65,38 @@ class Farm extends ChangeNotifier {
     return p != null && p.crop.isReady(p.growthAt(_clock()));
   }
 
+  /// Lines describing a plot for the on-screen label: what is in it, its
+  /// state, and the time until the next thing the player needs to do.
+  List<String> describePlot(String plotKey) {
+    final planted = _planted[plotKey];
+
+    if (planted == null) {
+      return isTilled(plotKey)
+          ? ['Tilled soil', 'Empty', 'Next: plant a seed']
+          : ['Untilled soil', 'Next: till it'];
+    }
+
+    final now = _clock();
+    final crop = planted.crop;
+    final name = crop.harvest.name;
+    final grown = planted.growthAt(now);
+
+    if (crop.isReady(grown)) return [name, 'Ripe', 'Next: harvest now'];
+
+    final growLeft = crop.growTime - grown;
+    final waterLeft = planted.waterLeft(now);
+
+    // Dry plants do not grow, so the next job is watering right away.
+    if (waterLeft <= Duration.zero) {
+      return [name, 'Dry, not growing', 'Next: water now'];
+    }
+    // Watered: whichever comes first, ripening or the water running out.
+    if (growLeft <= waterLeft) {
+      return [name, 'Growing', 'Next: harvest in ${formatCountdown(growLeft)}'];
+    }
+    return [name, 'Growing', 'Next: water in ${formatCountdown(waterLeft)}'];
+  }
+
   // ------------------------------------------------------------------- seeds
 
   void selectSeed(Item item) {

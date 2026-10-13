@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:eppy_island/entities/blocks.dart';
 import 'package:eppy_island/entities/player.dart';
 import 'package:eppy_island/entities/plot_component.dart';
+import 'package:eppy_island/entities/plot_info_label.dart';
 import 'package:eppy_island/game/eppy_island.dart';
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
@@ -34,6 +35,14 @@ class Level extends World with HasGameRef<EppyIsland> {
   /// 'targetLevel' (required) and 'targetSpawn' (optional) on the object.
   static const String _warpClass = 'Warp';
 
+  /// Collision objects with these names are not solid: walking into one opens
+  /// the UI screen named here (see ShopBlock). Name them in Tiled's
+  /// 'Collisions' layer.
+  static const Map<String, String> _shopScreens = {
+    'buying': 'Buy',
+    'selling': 'Sell',
+  };
+
   final String levelName;
   final Player player;
 
@@ -48,6 +57,7 @@ class Level extends World with HasGameRef<EppyIsland> {
   late final TiledComponent _map;
   final List<CollisionBlock> _collisionBlocks = [];
   final List<WarpBlock> _warpBlocks = [];
+  final List<ShopBlock> _shopBlocks = [];
   final List<PlotComponent> _plots = [];
   bool _isWarping = false;
 
@@ -56,9 +66,14 @@ class Level extends World with HasGameRef<EppyIsland> {
   /// bounced straight back, or from silently disabling the warp.
   bool _warpsArmed = false;
 
+  /// Same idea for shops: after a shop screen is closed the player is still
+  /// standing on its block, so it only opens again once they step off first.
+  bool _shopsArmed = false;
+
   @override
   FutureOr<void> onLoad() async {
     await _loadMap();
+    _map.priority = -2; // Map at the very back, plots above it.
     _placeSpawnPoints();
     if (startPosition != null) player.position = startPosition!.clone();
     _buildCollisionBlocksAndWarps();
@@ -74,6 +89,7 @@ class Level extends World with HasGameRef<EppyIsland> {
   void update(double dt) {
     super.update(dt);
     _checkWarps();
+    _checkShops();
   }
 
   Future<void> _loadMap() async {
@@ -146,6 +162,10 @@ class Level extends World with HasGameRef<EppyIsland> {
         );
         _warpBlocks.add(warp);
         add(warp);
+      } else if (_shopScreens[object.name] case final screen?) {
+        final shop = ShopBlock(position: position, size: size, screen: screen);
+        _shopBlocks.add(shop);
+        add(shop);
       } else {
         final block = CollisionBlock(position: position, size: size);
         _collisionBlocks.add(block);
@@ -188,6 +208,9 @@ class Level extends World with HasGameRef<EppyIsland> {
           add(plot);
         }
       }
+    }
+    if (_plots.isNotEmpty) {
+      add(PlotInfoLabel(player: player, plots: _plots, mapSize: _map.size));
     }
     debugPrint('Farm: $levelName has ${_plots.length} plot(s).');
   }
@@ -255,6 +278,29 @@ class Level extends World with HasGameRef<EppyIsland> {
   WarpBlock? _warpUnderPlayer() {
     for (final warp in _warpBlocks) {
       if (checkCollision(player, warp)) return warp;
+    }
+    return null;
+  }
+
+  /// Opens the Buy / Sell screen when the player walks into its block.
+  void _checkShops() {
+    final shop = _shopUnderPlayer();
+    if (shop == null) {
+      _shopsArmed = true; // Player is clear of all shops.
+      return;
+    }
+
+    final ui = game.ui;
+    if (!_shopsArmed || game.isTransitioning || ui == null) return;
+    if (ui.hasOpenScreen) return;
+
+    _shopsArmed = false;
+    ui.open(shop.screen);
+  }
+
+  ShopBlock? _shopUnderPlayer() {
+    for (final shop in _shopBlocks) {
+      if (checkCollision(player, shop)) return shop;
     }
     return null;
   }
