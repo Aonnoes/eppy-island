@@ -36,6 +36,8 @@ flutter:
     - assets/images/characters/
     - assets/images/characters/Teemo/
 
+    - assets/images/crops/
+
     - assets/data/
     - assets/tiles/
   fonts:
