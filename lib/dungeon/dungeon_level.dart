@@ -29,7 +29,7 @@ import 'package:flutter/foundation.dart';
 ///                                            starts with
 ///   Label   bind | text, size, color, align, wrap
 ///             color_bind                     a colour that changes (the
-///                                            action label: yellow question,
+///                                            action label: brown question,
 ///                                            green win, red loss)
 ///   Button  action: consume, no or yes, and sprite: the picture's name, with
 ///           `_unpressed.png` and `_pressed.png` added, like UI.tmx. The

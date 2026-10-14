@@ -32,7 +32,7 @@ import 'package:flutter/foundation.dart';
 ///   action                     the one-word question above Yes / No, e.g.
 ///                              `HIGH?` while a round is being played
 ///   action_color               colour for the action label (`color_bind`):
-///                              yellow for a question, green for a win,
+///                              dark brown for a question, green for a win,
 ///                              red for a loss, white otherwise
 ///   consumable_sprite,
 ///   consumable_count           the equipped consumable and "x3"
@@ -65,7 +65,7 @@ class DungeonBindings {
     (_) => ValueNotifier('star_empty'),
   );
 
-  static const Color _yellow = Color(0xFFFFE04A);
+  static const Color _question = Color(0xFF3E2C1C);
   static const Color _green = Color(0xFF5DDC5D);
   static const Color _red = Color(0xFFFF5A5A);
   static const Color _white = Color(0xFFFFFFFF);
@@ -166,13 +166,13 @@ class DungeonBindings {
   static String _lifeBar(String side, int lives, int max) =>
       lives <= 0 ? 'life_0-$max' : '${side}_$lives-$max';
 
-  /// Questions (FIGHT?, HIGH?...) are yellow, a won round green, a lost one
+  /// Questions (FIGHT?, HIGH?...) are dark brown (#3E2C1C), a won round green, a lost one
   /// red. Everything else stays white.
   static Color _actionTint(Encounter encounter) {
     switch (encounter.phase) {
       case EncounterPhase.intro:
       case EncounterPhase.prompt:
-        return _yellow;
+        return _question;
       case EncounterPhase.result:
         return switch (encounter.lastOutcome) {
           Outcome.win => _green,
