@@ -5,6 +5,7 @@
     "character": "Teemo",
     "coins": 100,
     "luck": 1,
+    "consumable": "life_potion",
     "inventory": [
       { "id": "wheat_seed", "quantity": 3 },
       { "id": "carrot_seed", "quantity": 3 },
