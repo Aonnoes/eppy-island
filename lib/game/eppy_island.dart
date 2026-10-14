@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:eppy_island/dungeon/dungeon_level.dart';
+import 'package:eppy_island/dungeon/encounter.dart';
+import 'package:eppy_island/dungeon/enemy.dart';
 import 'package:eppy_island/game/level.dart';
 import 'package:eppy_island/entities/player.dart';
 import 'package:eppy_island/game/screen_fade.dart';
@@ -62,13 +65,34 @@ class EppyIsland extends FlameGame
   /// All farmland: tilled soil, planted crops, watering and harvesting.
   late final Farm farm;
 
+  /// Every dungeon enemy (assets/data/enemies.json).
+  late final EnemyCatalog enemies;
+
+  /// The dungeon encounter in progress, if any. It is one object for the
+  /// whole game; [DungeonLevel] shows it.
+  late final Encounter encounter;
+
   late final CameraComponent cam;
   late final JoystickComponent _joystick;
 
   /// The whole game UI, built from UI.tmx. Null until the game has loaded.
   UiManager? ui;
 
+  /// The overworld level the player is in. Null while in the dungeon.
   Level? _currentLevel;
+
+  /// The dungeon level on screen. Null in the overworld. While it is set there
+  /// is no player on screen: [player] is the one that walked in, kept for its
+  /// position and character.
+  DungeonLevel? _dungeon;
+
+  /// The overworld level the player is in, or left to enter the dungeon. This
+  /// is the level that gets saved and returned to.
+  String _levelName = SaveData.defaultLevel;
+
+  /// Where the player stood on the dungeon entrance.
+  Vector2? _returnPosition;
+
   bool _isTransitioning = false;
   bool _loaded = false;
   int _saveToken = 0; // Bumped to cancel a pending delayed save.
@@ -76,6 +100,9 @@ class EppyIsland extends FlameGame
 
   /// True while a level change (fade out, load, fade in) is in progress.
   bool get isTransitioning => _isTransitioning;
+
+  /// True while the dungeon level is the one on screen.
+  bool get isInDungeon => _dungeon != null;
 
   @override
   Color backgroundColor() => const Color(0xFF000000);
@@ -91,6 +118,9 @@ class EppyIsland extends FlameGame
     final save = await _saves.load();
     profile = PlayerProfile.fromJson(save.player, catalog);
     farm = Farm(crops: crops)..loadJson(save.farm, catalog);
+    enemies = await EnemyCatalog.load();
+    encounter = Encounter(catalog: enemies, profile: profile);
+    _levelName = save.level;
 
     player = Player(character: profile.character);
     final world = Level(
@@ -134,6 +164,7 @@ class EppyIsland extends FlameGame
       player.direction = Direction.fromJoystick(_joystick.direction);
     }
     if (_loaded) {
+      encounter.tick(dt);
       _shopClock += dt;
       if (_shopClock >= 1) {
         _shopClock = 0;
@@ -159,6 +190,26 @@ class EppyIsland extends FlameGame
     KeyEvent event,
     Set<LogicalKeyboardKey> keysPressed,
   ) {
+    // In the dungeon the only key that does anything is Space (to skip a
+    // reveal or leave a result). The menu hotkeys and the farming keys are
+    // ignored: the encounter menu is all there is to use.
+    if (_loaded && _dungeon != null) {
+      if (event is KeyDownEvent && event.logicalKey == LogicalKeyboardKey.space) {
+        encounter.advance();
+        return KeyEventResult.handled;
+      }
+      return super.onKeyEvent(event, keysPressed);
+    }
+
+    // Space on the dungeon entrance starts an encounter.
+    if (event is KeyDownEvent &&
+        event.logicalKey == LogicalKeyboardKey.space &&
+        !_isTransitioning &&
+        !(ui?.hasOpenScreen ?? false) &&
+        (_currentLevel?.tryEnterDungeon() ?? false)) {
+      return KeyEventResult.handled;
+    }
+
     // Action key: till / plant / water / harvest the plot in front of you.
     // Checked before the UI hotkeys, so E always farms when no screen is open
     // (the inventory is on Q; set it with the layer's "hotkey" in UI.tmx).
@@ -175,6 +226,64 @@ class EppyIsland extends FlameGame
       return KeyEventResult.handled;
     }
     return super.onKeyEvent(event, keysPressed);
+  }
+
+  // --------------------------------------------------------------- dungeon
+
+  /// Fades out of the overworld into the dungeon level [levelName] (a .tmx),
+  /// where an encounter starts. Returns false, and does nothing, if the player
+  /// can't go in right now.
+  ///
+  /// The dungeon ends the encounter itself, then calls [leaveDungeon].
+  bool enterDungeon(String levelName) {
+    if (!_loaded || _isTransitioning || _dungeon != null) return false;
+    if (!encounter.canStart) return false;
+
+    ui?.closeAll();
+    player.direction = Direction.none;
+    _returnPosition = player.position.clone();
+
+    unawaited(
+      _changeWorld(
+        name: levelName,
+        build: () async => DungeonLevel(levelName: levelName),
+        adopt: (world) {
+          _dungeon = world as DungeonLevel;
+          _currentLevel = null;
+          ui?.setHudVisible(false); // The dungeon is a screen of its own.
+        },
+      ),
+    );
+    return true;
+  }
+
+  /// Fades out of the dungeon and back to the overworld level the player came
+  /// from, standing on the entrance they used.
+  Future<void> leaveDungeon() async {
+    // The encounter can end while the fade into the dungeon is still going.
+    while (_isTransitioning) {
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    }
+
+    // Nothing else can be done on the dungeon screen, so a failed return is
+    // tried again rather than leaving the player stuck on it.
+    for (var attempt = 1; _dungeon != null && attempt <= 3; attempt++) {
+      await _changeWorld(
+        name: _levelName,
+        build: () async => Level(
+          levelName: _levelName,
+          player: Player(character: player.character),
+          startPosition: _returnPosition,
+        ),
+        adopt: (world) {
+          final level = world as Level;
+          player = level.player;
+          _currentLevel = level;
+          _dungeon = null;
+          ui?.setHudVisible(true);
+        },
+      );
+    }
   }
 
   // -------------------------------------------------------------------- save
@@ -194,7 +303,8 @@ class EppyIsland extends FlameGame
       SaveData(
         player: profile.toJson(),
         farm: farm.toJson(),
-        level: _currentLevel?.levelName ?? SaveData.defaultLevel,
+        // In the dungeon, save the overworld level the player will return to.
+        level: _levelName,
         x: player.x,
         y: player.y,
       ),
@@ -223,48 +333,70 @@ class EppyIsland extends FlameGame
   /// back in. If [spawnName] is given, the player starts at the spawn point
   /// with that name in the new level.
   Future<void> loadLevel(String levelName, {String? spawnName}) async {
-    if (_isTransitioning) return;
-    _isTransitioning = true;
-    debugPrint('loadLevel: $levelName (spawn: $spawnName)');
+    if (_dungeon != null) return;
 
-    final previousLevel = _currentLevel;
-    final previousPlayer = player;
-    Level? nextLevel;
+    await _changeWorld(
+      name: levelName,
+      // A fresh player per level; carry over the held direction so movement
+      // doesn't stop until the next key event.
+      build: () async => Level(
+        levelName: levelName,
+        player: Player(character: player.character)..direction = player.direction,
+        spawnName: spawnName,
+      ),
+      adopt: (world) {
+        final level = world as Level;
+        player = level.player;
+        _currentLevel = level;
+        _levelName = levelName;
+      },
+      onFailure: () => _currentLevel?.rearmWarps(),
+    );
+  }
+
+  /// Fades to black, builds the next world with [build], swaps it in (calling
+  /// [adopt] once it has loaded), then fades back in. Returns false if
+  /// another change is already running or this one failed; a failed change
+  /// leaves the current world where it is.
+  Future<bool> _changeWorld({
+    required String name,
+    required Future<World> Function() build,
+    required void Function(World next) adopt,
+    VoidCallback? onFailure,
+  }) async {
+    if (_isTransitioning) return false;
+    _isTransitioning = true;
+    debugPrint('Changing level: $name');
+
+    final previous = cam.world;
+    World? next;
 
     try {
       overlays.add(ScreenFade.overlayKey); // No-op if already showing.
-      previousPlayer.canMove = false;
+      player.canMove = false;
       await fade.fadeTo(1, duration: _fadeDuration);
 
-      // A fresh player per level; carry over the held direction so movement
-      // doesn't stop until the next key event.
-      final nextPlayer = Player(character: previousPlayer.character)
-        ..direction = previousPlayer.direction;
+      next = await build();
+      await add(next);
 
-      nextLevel = Level(
-        levelName: levelName,
-        player: nextPlayer,
-        spawnName: spawnName,
-      );
-
-      await add(nextLevel);
-
-      // Only switch over once the new level has loaded successfully.
-      player = nextPlayer;
-      cam.world = nextLevel;
-      _currentLevel = nextLevel;
-      previousLevel?.removeFromParent();
+      // Only switch over once the new world has loaded successfully.
+      adopt(next);
+      cam.world = next;
+      previous?.removeFromParent();
 
       await Future<void>.delayed(_blackHold);
       await fade.fadeTo(0, duration: _fadeDuration);
       _scheduleSave(); // Remember the new level.
+      return true;
     } catch (error, stackTrace) {
-      // Loading failed: stay in the current level and show the reason.
-      debugPrint('loadLevel failed for "$levelName": $error\n$stackTrace');
-      nextLevel?.removeFromParent();
-      previousLevel?.rearmWarps();
-      previousPlayer.canMove = true;
+      // Loading failed: stay where we were and show the reason.
+      debugPrint('Changing level failed for "$name": $error\n$stackTrace');
+      next?.removeFromParent();
+      if (_dungeon == null && encounter.isActive) encounter.end();
+      onFailure?.call();
+      player.canMove = true;
       await fade.fadeTo(0, duration: _fadeDuration);
+      return false;
     } finally {
       _isTransitioning = false;
     }

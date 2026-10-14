@@ -1,0 +1,31 @@
+{
+  "enemies": [
+    {
+      "id": "sauesta",
+      "name": "Savesta",
+      "portrait": "dungeon/savesta",
+      "minigame": "high_low",
+      "stars": 2,
+      "reward": 30,
+      "penalty": 10
+    },
+    {
+      "id": "pebbler",
+      "name": "Chesta",
+      "portrait": "dungeon/chesta",
+      "minigame": "rock_paper_scissors",
+      "stars": 1,
+      "reward": 20,
+      "penalty": 5
+    },
+    {
+      "id": "dicey",
+      "name": "Slowey",
+      "portrait": "dungeon/slowey",
+      "minigame": "dice",
+      "stars": 3,
+      "reward": 50,
+      "penalty": 20
+    }
+  ]
+}

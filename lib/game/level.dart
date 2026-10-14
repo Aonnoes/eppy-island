@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:eppy_island/dungeon/entrance_prompt.dart';
 import 'package:eppy_island/entities/blocks.dart';
 import 'package:eppy_island/entities/player.dart';
 import 'package:eppy_island/entities/plot_component.dart';
@@ -43,6 +44,12 @@ class Level extends World with HasGameRef<EppyIsland> {
     'selling': 'Sell',
   };
 
+  /// A collision object with this name marks the dungeon entrance. It is not
+  /// solid: standing on it shows the prompt, and Space enters the dungeon.
+  /// Give it a string property 'level' to pick another dungeon level than
+  /// [DungeonBlock.defaultLevel].
+  static const String _dungeonName = 'dungeon';
+
   final String levelName;
   final Player player;
 
@@ -58,6 +65,8 @@ class Level extends World with HasGameRef<EppyIsland> {
   final List<CollisionBlock> _collisionBlocks = [];
   final List<WarpBlock> _warpBlocks = [];
   final List<ShopBlock> _shopBlocks = [];
+  final List<DungeonBlock> _dungeonBlocks = [];
+  EntrancePrompt? _prompt;
   final List<PlotComponent> _plots = [];
   bool _isWarping = false;
 
@@ -70,6 +79,10 @@ class Level extends World with HasGameRef<EppyIsland> {
   /// standing on its block, so it only opens again once they step off first.
   bool _shopsArmed = false;
 
+  /// The entrance only works again after the player has stepped off it, so
+  /// coming back from the dungeon can't send them straight in again.
+  bool _dungeonArmed = false;
+
   @override
   FutureOr<void> onLoad() async {
     await _loadMap();
@@ -78,6 +91,7 @@ class Level extends World with HasGameRef<EppyIsland> {
     if (startPosition != null) player.position = startPosition!.clone();
     _buildCollisionBlocksAndWarps();
     _buildPlots();
+    _buildDungeonPrompt();
 
     player.bindCollisionBlocks(_collisionBlocks);
     add(player);
@@ -90,6 +104,7 @@ class Level extends World with HasGameRef<EppyIsland> {
     super.update(dt);
     _checkWarps();
     _checkShops();
+    _checkDungeon();
   }
 
   Future<void> _loadMap() async {
@@ -166,6 +181,16 @@ class Level extends World with HasGameRef<EppyIsland> {
         final shop = ShopBlock(position: position, size: size, screen: screen);
         _shopBlocks.add(shop);
         add(shop);
+      } else if (object.name == _dungeonName) {
+        final entrance = DungeonBlock(
+          position: position,
+          size: size,
+          level:
+              object.properties.getValue<String>('level') ??
+              DungeonBlock.defaultLevel,
+        );
+        _dungeonBlocks.add(entrance);
+        add(entrance);
       } else {
         final block = CollisionBlock(position: position, size: size);
         _collisionBlocks.add(block);
@@ -303,5 +328,51 @@ class Level extends World with HasGameRef<EppyIsland> {
       if (checkCollision(player, shop)) return shop;
     }
     return null;
+  }
+
+  // ----------------------------------------------------------------- dungeon
+
+  void _buildDungeonPrompt() {
+    if (_dungeonBlocks.isEmpty) return;
+    final prompt = EntrancePrompt(player: player, mapSize: _map.size);
+    _prompt = prompt;
+    add(prompt);
+  }
+
+  /// Shows the entrance prompt while the player is on the (armed) entrance.
+  void _checkDungeon() {
+    final prompt = _prompt;
+    if (prompt == null) return;
+
+    final onEntrance = _entranceUnderPlayer() != null;
+    if (!onEntrance) _dungeonArmed = true;
+
+    prompt.shown =
+        onEntrance &&
+        _dungeonArmed &&
+        !game.isTransitioning &&
+        game.encounter.canStart &&
+        !(game.ui?.hasOpenScreen ?? false);
+  }
+
+  DungeonBlock? _entranceUnderPlayer() {
+    for (final block in _dungeonBlocks) {
+      if (checkCollision(player, block)) return block;
+    }
+    return null;
+  }
+
+  /// Space: takes the player into the dungeon level if the entrance prompt is
+  /// showing. Returns true if it did, so the key press isn't also used for
+  /// farming.
+  bool tryEnterDungeon() {
+    final prompt = _prompt;
+    final entrance = _entranceUnderPlayer();
+    if (prompt == null || !prompt.shown || entrance == null) return false;
+    if (!game.enterDungeon(entrance.level)) return false;
+
+    _dungeonArmed = false;
+    prompt.shown = false;
+    return true;
   }
 }

@@ -64,6 +64,10 @@ class UiManager extends PositionComponent with HasGameRef<EppyIsland> {
   /// Hotkey label (upper case) -> screen name.
   final Map<String, String> _hotkeys = {};
 
+  /// Layers marked `persistent`, in map order (the HUD).
+  final List<String> _persistentNames = [];
+  bool _hudVisible = true;
+
   // ----------------------------------------------------------------- queries
 
   bool get hasOpenScreen => _stack.isNotEmpty;
@@ -101,8 +105,23 @@ class UiManager extends PositionComponent with HasGameRef<EppyIsland> {
       if (hotkey.isNotEmpty) _hotkeys[hotkey.toUpperCase()] = layer.name;
 
       if (layer.properties.getValue<bool>('persistent') ?? false) {
+        _persistentNames.add(layer.name);
         _persistentLayer.add(_buildScreen(layer));
       }
+    }
+  }
+
+  /// Shows or hides the always-on HUD (coins, luck...). The dungeon level is a
+  /// screen of its own, so it hides the HUD while the player is in it.
+  void setHudVisible(bool visible) {
+    if (visible == _hudVisible) return;
+    _hudVisible = visible;
+
+    _persistentLayer.removeAll(_persistentLayer.children.toList());
+    if (!visible) return;
+    for (final name in _persistentNames) {
+      final layer = _layer(name);
+      if (layer != null) _persistentLayer.add(_buildScreen(layer));
     }
   }
 

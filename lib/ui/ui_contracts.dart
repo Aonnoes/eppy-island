@@ -26,6 +26,7 @@ class InventorySlotSource implements SlotSource {
   late final Listenable changes = Listenable.merge([
     profile.inventory,
     profile.equipped,
+    profile.equippedConsumable,
   ]);
 
   List<ItemStack> get _visible => [
@@ -42,7 +43,9 @@ class InventorySlotSource implements SlotSource {
   @override
   bool isEquipped(int index) {
     final item = stackAt(index)?.item;
-    return item != null && item == profile.equipped.value;
+    return item != null &&
+        (item == profile.equipped.value ||
+            item == profile.equippedConsumable.value);
   }
 }
 

@@ -11,7 +11,7 @@
       {"id": "watermelon", "quantity": 10},
       { "id": "steven_pickaxe", "quantity": 1 },
       { "id": "lucky_diamond", "quantity": 1 },
-      {"id": "life_potion", "quantity": 3}
+      {"id": "life_potion", "quantity": 5}
     ]
   },
   "farm": { "tilled": [], "plots": {} },

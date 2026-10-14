@@ -89,10 +89,17 @@ class UiController implements UiDelegate {
 
   @override
   late final Map<String, SlotSource> slotSources = {
-    // Inventory screen: everything that isn't equipment.
-    'item': InventorySlotSource(profile, accepts: (i) => i is! Equipment),
-    // Equipment screen: owned equipment, with the equipped one highlighted.
-    'equipment': InventorySlotSource(profile, accepts: (i) => i is Equipment),
+    // Inventory screen: everything that isn't equipment or a consumable.
+    'item': InventorySlotSource(
+      profile,
+      accepts: (i) => i is! Equipment && i is! Consumable,
+    ),
+    // Equipment screen: owned equipment and consumables, with the worn
+    // equipment and the dungeon consumable highlighted.
+    'equipment': InventorySlotSource(
+      profile,
+      accepts: (i) => i is Equipment || i is Consumable,
+    ),
     // Sell screen: anything the player owns.
     'sell': InventorySlotSource(profile, accepts: (_) => true),
     // Seeds screen: owned seeds. Tapping one makes it the seed to plant.
@@ -123,7 +130,10 @@ class UiController implements UiDelegate {
     _message.value = '';
     selection.select(kind, index, stack.item);
 
-    if (kind == 'equipment') _toggleEquip(stack.item);
+    if (kind == 'equipment') {
+      _toggleEquip(stack.item);
+      _toggleConsumable(stack.item);
+    }
     if (kind == 'seed') {
       farm.selectSeed(stack.item);
       _message.value = 'Planting ${stack.item.name}';
@@ -158,6 +168,18 @@ class UiController implements UiDelegate {
       _message.value = 'Unequipped ${item.name}';
     } else if (profile.equip(item)) {
       _message.value = 'Equipped ${item.name}';
+    }
+  }
+
+  /// Tapping a consumable on the Equipment screen picks it as the dungeon item
+  /// (the one the Consume button uses); tapping it again puts it away.
+  void _toggleConsumable(Item item) {
+    if (item is! Consumable) return;
+    if (profile.equippedConsumable.value == item) {
+      profile.unequipConsumable();
+      _message.value = 'Unequipped ${item.name}';
+    } else if (profile.equipConsumable(item)) {
+      _message.value = 'Dungeon item: ${item.name}';
     }
   }
 

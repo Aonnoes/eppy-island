@@ -38,6 +38,7 @@ flutter:
 
     - assets/images/crops/
     - assets/images/equipments/
+    - assets/images/dungeon/
 
     - assets/data/
     - assets/tiles/

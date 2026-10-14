@@ -564,18 +564,23 @@
       "name": "Steven Pickaxe",
       "type": "equipment",
       "sprite": "equipments/steven_pickaxe",
-      "luck": 21
+      "luck": 21,
+      "description": "A trusty pickaxe that brings a little extra luck to every swing."
     },
     { "id": "lucky_diamond",
       "name": "Lucky Diamond",
       "type": "equipment",
       "sprite": "equipments/lucky_diamond",
-      "luck": 64
+      "luck": 64,
+      "description": "rare diamond radiating incredible luck for those who carry it."
     },
     { "id": "life_potion",
       "name": "Life Potion",
       "type": "consumable",
       "sprite": "equipments/life_potion",
-      "luckMultiplier": 2 }
+      "buyPrice": 60,
+      "sellPrice": 30,
+      "luckMultiplier": 2,
+      "description": "A mysterious potion that doubles your luck for a limited time."}
   ]
 }

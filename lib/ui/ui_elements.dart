@@ -101,6 +101,7 @@ class UiLabel extends TextComponent {
     required TextStyle style,
     required String align,
     this.binding,
+    this.colorBinding,
     bool wrap = false,
   }) : _style = style,
        _wrapWidth = wrap ? size.x : null,
@@ -112,6 +113,10 @@ class UiLabel extends TextComponent {
        );
 
   final ValueListenable<Object?>? binding;
+
+  /// If set and holding a [Color], the text is drawn in that colour instead
+  /// of the style's, and follows it as it changes.
+  final ValueListenable<Object?>? colorBinding;
   final TextStyle _style;
   final double? _wrapWidth;
 
@@ -134,26 +139,29 @@ class UiLabel extends TextComponent {
     _ => wrap ? Anchor.topCenter : Anchor.center,
   };
 
-  /// Inserts line breaks so no line is wider than [maxWidth].
+  /// Inserts line breaks so no line is wider than [maxWidth]. Line breaks
+  /// already in [text] are kept, and each paragraph is wrapped on its own.
   static String _wrapText(String text, TextStyle style, double? maxWidth) {
     if (maxWidth == null || text.isEmpty) return text;
 
     final painter = TextPainter(textDirection: TextDirection.ltr);
     final lines = <String>[];
-    var line = '';
-    for (final word in text.split(' ')) {
-      final candidate = line.isEmpty ? word : '$line $word';
-      painter
-        ..text = TextSpan(text: candidate, style: style)
-        ..layout();
-      if (painter.width > maxWidth && line.isNotEmpty) {
-        lines.add(line);
-        line = word;
-      } else {
-        line = candidate;
+    for (final paragraph in text.split('\n')) {
+      var line = '';
+      for (final word in paragraph.split(' ')) {
+        final candidate = line.isEmpty ? word : '$line $word';
+        painter
+          ..text = TextSpan(text: candidate, style: style)
+          ..layout();
+        if (painter.width > maxWidth && line.isNotEmpty) {
+          lines.add(line);
+          line = word;
+        } else {
+          line = candidate;
+        }
       }
+      lines.add(line);
     }
-    lines.add(line);
     painter.dispose();
     return lines.join('\n');
   }
@@ -162,14 +170,24 @@ class UiLabel extends TextComponent {
   void onMount() {
     super.onMount();
     binding?.addListener(_sync);
+    colorBinding?.addListener(_syncColor);
     _sync();
+    _syncColor();
     _snapToPixels();
   }
 
   @override
   void onRemove() {
     binding?.removeListener(_sync);
+    colorBinding?.removeListener(_syncColor);
     super.onRemove();
+  }
+
+  void _syncColor() {
+    final color = colorBinding?.value;
+    if (color is Color) {
+      textRenderer = TextPaint(style: _style.copyWith(color: color));
+    }
   }
 
   void _sync() {
@@ -263,6 +281,61 @@ class UiImage extends UiSprite {
     if (level != null) {
       final value = num.tryParse('${level.value}') ?? 0;
       opacity = value >= minLevel ? 1 : _dimmedOpacity;
+    }
+  }
+}
+
+/// A picture that stays hidden until [flash] changes, then shows for [hold]
+/// seconds and fades out over [fadeTime] (the dungeon's reaction boxes).
+class UiFlashImage extends UiImage {
+  UiFlashImage({
+    required super.loadSprite,
+    required super.spriteName,
+    required this.flash,
+    super.spriteBinding,
+    super.position,
+    super.size,
+  }) {
+    opacity = 0;
+  }
+
+  /// How long the picture is fully shown. This is its own timer: it keeps
+  /// running when the encounter moves on to the next round.
+  static const double hold = 1.5;
+  static const double fadeTime = 0.3;
+
+  final ValueListenable<Object?> flash;
+
+  double _age = double.infinity; // Seconds since the last flash.
+
+  @override
+  void onMount() {
+    super.onMount();
+    flash.addListener(_onFlash);
+  }
+
+  @override
+  void onRemove() {
+    flash.removeListener(_onFlash);
+    super.onRemove();
+  }
+
+  void _onFlash() {
+    _age = 0;
+    opacity = 1;
+  }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+    if (!_age.isFinite) return;
+
+    _age += dt;
+    if (_age >= hold + fadeTime) {
+      _age = double.infinity;
+      opacity = 0;
+    } else {
+      opacity = _age <= hold ? 1 : 1 - (_age - hold) / fadeTime;
     }
   }
 }

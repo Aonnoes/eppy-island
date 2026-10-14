@@ -73,3 +73,22 @@ class ShopBlock extends PositionComponent {
 
   final String screen;
 }
+
+/// An invisible trigger block marking the dungeon entrance. While the player
+/// overlaps it, the entrance prompt shows and Space takes the player to the
+/// dungeon level [level].
+///
+/// Like a [WarpBlock], it never blocks movement.
+class DungeonBlock extends PositionComponent {
+  DungeonBlock({
+    required Vector2 position,
+    required Vector2 size,
+    this.level = defaultLevel,
+  }) : super(position: position, size: size);
+
+  /// The level used when the entrance in Tiled has no 'level' property.
+  static const String defaultLevel = 'Level-04';
+
+  /// Name of the dungeon level (a .tmx) this entrance leads to.
+  final String level;
+}

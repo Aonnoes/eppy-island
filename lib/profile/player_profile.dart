@@ -44,6 +44,12 @@ class PlayerProfile {
       final item = catalog.byId(equippedId);
       if (item is Equipment) profile.equip(item);
     }
+
+    final consumableId = json['consumable'] as String?;
+    if (consumableId != null) {
+      final item = catalog.byId(consumableId);
+      if (item is Consumable) profile.equipConsumable(item);
+    }
     return profile;
   }
 
@@ -70,6 +76,11 @@ class PlayerProfile {
   final Inventory inventory = Inventory();
   final ValueNotifier<Equipment?> equipped = ValueNotifier<Equipment?>(null);
 
+  /// The consumable the dungeon's Consume button uses. Picked on the Items
+  /// screen, and cleared when the last one is used up or sold.
+  final ValueNotifier<Consumable?> equippedConsumable =
+      ValueNotifier<Consumable?>(null);
+
   int _baseLuck;
 
   /// Luck without equipment. This is what gets saved.
@@ -87,6 +98,7 @@ class PlayerProfile {
     luck,
     inventory,
     equipped,
+    equippedConsumable,
   ]);
 
   // ------------------------------------------------------------------- coins
@@ -110,6 +122,15 @@ class PlayerProfile {
   }
 
   void unequip() => equipped.value = null;
+
+  /// Picks [item] as the dungeon consumable. Fails if the player has none.
+  bool equipConsumable(Consumable item) {
+    if (inventory.countOf(item) < 1) return false;
+    equippedConsumable.value = item;
+    return true;
+  }
+
+  void unequipConsumable() => equippedConsumable.value = null;
 
   // ------------------------------------------------------------- consumables
 
@@ -135,10 +156,16 @@ class PlayerProfile {
         .toInt();
   }
 
-  /// Selling the worn item takes it off.
+  /// Selling the worn item takes it off, and so does using up (or selling)
+  /// the last of the dungeon consumable.
   void _dropEquippedIfGone() {
     final item = equipped.value;
     if (item != null && inventory.countOf(item) < 1) unequip();
+
+    final consumable = equippedConsumable.value;
+    if (consumable != null && inventory.countOf(consumable) < 1) {
+      unequipConsumable();
+    }
   }
 
   // -------------------------------------------------------------------- json
@@ -150,6 +177,7 @@ class PlayerProfile {
     'coins': coins.value,
     'luck': _baseLuck,
     'equipped': equipped.value?.id,
+    'consumable': equippedConsumable.value?.id,
     'inventory': inventory.toJson(),
   };
 }
