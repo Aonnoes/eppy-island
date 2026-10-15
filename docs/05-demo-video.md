@@ -2,7 +2,7 @@
 
 **File:** [Google Drive Link](https://drive.google.com/drive/folders/1qY8rVUI47kxJz_229kz58ZVaHKs4QB7L?usp=sharing) \
 **Length:** about 7 minutes \
-**Recorded on:** Fedora Linux 44 (Workstation Edition) x86_64 \
+**Recorded on:** Fedora Linux 44 (Workstation Edition) x86_64
 
 ## What it shows
 
