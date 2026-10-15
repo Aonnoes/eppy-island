@@ -145,22 +145,36 @@ The farm is your **safe income** and the dungeon is your **risky income**. Farmi
 | Storage | A local JSON save file (`eppy_island_save.json`) in the user's documents folder; game data is loaded from `assets/data` and Tiled maps |
 | Other packages | `flame_tiled` — loads and renders Tiled `.tmx` maps and their object layers; `path_provider` — finds the folder for the save file |
 
-## Running it yourself
+Running it yourself
 
-Requirement: Flutter
+### Requirements
 
-Follow the official Flutter installation guide:
-[Flutter Install Guide](https://docs.flutter.dev/install)
+- **Flutter SDK**, which includes the Dart SDK. Follow the [official Flutter installation guide](https://docs.flutter.dev/install), then run `flutter doctor` to check that your setup is ready.
+- **A supported run target:** Chrome for the web version, or a configured Linux, Windows or macOS desktop environment. Desktop targets may require additional tools for your operating system; see the [Flutter desktop setup guide](https://docs.flutter.dev/platform-integration/desktop).
 
-The game should be perfectly fine to run on any device once its done. If you want to try it out now, clone the repository or download the zip file, then run the commands:
+This project uses **Flame** as its game engine, along with `flame_tiled` for Tiled maps. Both are already listed in `pubspec.yaml`, so you do not need to install Flame separately. Running `flutter pub get` downloads Flame and the other project dependencies.
+
+### Setup and run
+
+Clone the repository or download and extract its ZIP file, then open a terminal in the project folder (the one containing `pubspec.yaml`). The repository does not include the generated web and desktop runner folders, so create them once:
 
 ```bash
+flutter create --platforms=web,linux,windows,macos .
 flutter pub get
-flutter create
-flutter run -d  chrome // linux // windows // macos
 ```
 
-Progress is saved to `eppy_island_save.json` when you run the game on a device. The live web demo cannot write that file, so it starts fresh each visit.
+Choose **one** of the following commands to run the game:
+
+```bash
+flutter run -d chrome   # Run as a web app in Chrome
+flutter run -d linux    # Run as a Linux desktop app
+flutter run -d windows  # Run as a Windows desktop app
+flutter run -d macos    # Run as a macOS desktop app
+```
+
+In these commands, `-d` means **device**: the word after it tells Flutter which target to launch the game on. Use only the command for your target. Chrome must be installed for the web version, and native desktop builds require the corresponding operating system and its Flutter development tools. You can run `flutter devices` to see the targets Flutter detects on your machine.
+
+Progress is saved to `eppy_island_save.json` when running on a supported native device. The live web demo cannot write that local save file, so it starts fresh each visit.
 
 ### Environment variables
 
@@ -252,11 +266,7 @@ The game is early, but the full loop can be played from start to finish: farm, s
 
 - Packages: see `pubspec.yaml`
 
-## AI use - TODO
-
-If you used AI tools while building this, say so in a sentence or two and say
-where. Honest disclosure is the standard in this course and increasingly outside
-it. The longer version goes in [AI usage](docs/AI-USAGE.md).
+I used ChatGPT and Claude throughout development to organize my ideas (including documentation and this disclosure), explain unfamiliar Dart/Flutter/Flame code, help debug and refactor existing code, and implement features such as farming and dungeon encounters. I reviewed and adapted their output, but AI contributed to both the code and writing; the fuller account, including mistakes and my own contributions, is in [AI usage](docs/AI-USAGE.md).
 
 ## License
 
