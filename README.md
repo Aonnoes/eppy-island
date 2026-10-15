@@ -3,7 +3,7 @@
 > silly game
 
 - **Live demo:** https://aonnoes.github.io/eppy-island/
-- **Demo video:**
+- **Demo video:** [Video](docs/05-demo-video.md)
 - **Course:** Applications Development and Emerging Technologies (6ADET), Holy Angel University
 - **Author:** Aaron Noel
 
