@@ -266,6 +266,8 @@ The game is early, but the full loop can be played from start to finish: farm, s
 
 - Packages: see `pubspec.yaml`
 
+## AI use
+
 I used ChatGPT and Claude throughout development to organize my ideas (including documentation and this disclosure), explain unfamiliar Dart/Flutter/Flame code, help debug and refactor existing code, and implement features such as farming and dungeon encounters. I reviewed and adapted their output, but AI contributed to both the code and writing; the fuller account, including mistakes and my own contributions, is in [AI usage](docs/AI-USAGE.md).
 
 ## License
